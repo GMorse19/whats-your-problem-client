@@ -8,6 +8,10 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+import Problems from '../Problem/Problems.js'
+import ProblemCreate from '../Problem/ProblemCreate.js'
+import ProblemShow from '../Problem/ProblemShow.js'
+import Home from '../Home/Home.js'
 
 class App extends Component {
   constructor () {
@@ -42,6 +46,9 @@ class App extends Component {
           />
         ))}
         <main className="container">
+          <Route user={user} exact path='/' render={() => (
+            <Home alert={this.alert} user={user} />
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
@@ -53,6 +60,15 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+          <Route user={user} exact path='/problems' render={() => (
+            <Problems alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/problem-create' render={() => (
+            <ProblemCreate alert={this.alert} user={user} />
+          )} />
+          <Route user={user} exact path='/problems/:id' render={() => (
+            <ProblemShow alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>
