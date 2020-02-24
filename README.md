@@ -14,7 +14,13 @@ For some students word problems can be a real drag, but are essential for a chil
 - As a user I would like to share/ print my word problem.
 - As a user I would like to have a space to work on my word problem.
 
+## Links
 
+[Deployed API](https://damp-escarpment-10974.herokuapp.com/)
+
+[Deployed Client](https://gmorse19.github.io/whats-your-problem-client/)
+
+[API Repo](https://github.com/GMorse19/whats-your-problem-api)
 
 ## [License](LICENSE)
 
