@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Problems from '../Problem/Problems.js'
 import ProblemCreate from '../Problem/ProblemCreate.js'
 import ProblemShow from '../Problem/ProblemShow.js'
+import ProblemUpdate from '../Problem/ProblemUpdate.js'
 import Home from '../Home/Home.js'
 
 class App extends Component {
@@ -66,6 +67,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/problem-create' render={() => (
             <ProblemCreate alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/problems/:id/update' render={() => (
+            <ProblemUpdate alert={this.alert} user={user} />
           )} />
           <Route user={user} exact path='/problems/:id' render={() => (
             <ProblemShow alert={this.alert} user={user} />
