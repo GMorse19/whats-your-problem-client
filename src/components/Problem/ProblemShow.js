@@ -8,7 +8,6 @@ import apiUrl from '../../apiConfig'
 const Problem = props => {
   const [problem, setProblem] = useState(null)
   const userId = props.user ? props.user_id : null
-
   useEffect(() => {
     axios({
       url: `${apiUrl}/problems/${props.match.params.id}`,
@@ -52,7 +51,7 @@ const Problem = props => {
           variant="primary"
           className="mr-2"
           problem={problem}
-          props={problem}>
+          props={props}>
           Update
         </Button>}
         {userId === problem.user_id && <Button

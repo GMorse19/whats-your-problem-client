@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
+import { withRouter } from 'react-router-dom'
 
 const Problems = props => {
   const [problems, setProblems] = useState([])
@@ -24,7 +25,19 @@ const Problems = props => {
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
-      {<Button className="box list inner-shadow" as={'a'} href={`#/problems/${problem.id}`}><p className="text-shadow">Problem ID : {problem.id}<br/>Category: {problem.category} <br/>by - {problem.user.email}</p></Button>}
+      {<Button
+        className="box list inner-shadow"
+        as={'a'}
+        href={`#/problems/${problem.id}`}>
+        <p
+          className="text-shadow">
+          Problem ID : {problem.id}
+          <br/>
+          Category: {problem.category}
+          <br/>
+          by - {problem.user.email}
+        </p>
+      </Button>}
     </div>
   ))
 
@@ -40,4 +53,4 @@ const Problems = props => {
   )
 }
 
-export default Problems
+export default withRouter(Problems)

@@ -5,8 +5,14 @@ import apiUrl from '../../apiConfig'
 import ProblemCreateForm from './ProblemCreateForm.js'
 
 const ProblemCreate = props => {
-  const [problem, setProblem] = useState({ name: '', content: '', hint: '', solution: '', category: '', answer: '', rating: '' })
-
+  const [problem, setProblem] = useState({
+    name: '',
+    content: '',
+    hint: '',
+    solution: '',
+    category: '',
+    answer: '',
+    rating: '' })
   const handleChange = event => {
     event.persist()
     setProblem({ ...problem, [event.target.name]: event.target.value })

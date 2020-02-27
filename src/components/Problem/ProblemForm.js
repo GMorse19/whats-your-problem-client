@@ -13,7 +13,7 @@ const ProblemForm = ({ props, problem, handleSubmit, handleChange, cancelPath })
           <Form.Label htmlFor="name">Name</Form.Label>
           <Form.Control
             type="text"
-            value={props.user.email}
+            value={problem.name}
             name="name"
             onChange={handleChange}
           />

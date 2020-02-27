@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
@@ -17,7 +17,17 @@ const ProblemUpdate = (props) => {
   })
   const [updated, setUpdated] = useState(false)
 
-  console.log(props)
+  useEffect(() => {
+    axios({
+      url: `${apiUrl}/problems/${props.match.params.id}`,
+      method: 'GET'
+    })
+      .then(res => setProblem(res.data.problem))
+      .catch(console.error)
+  }, [])
+
+  console.log(problem)
+  console.log(props.match.params)
 
   const handleChange = event => {
     event.persist()
