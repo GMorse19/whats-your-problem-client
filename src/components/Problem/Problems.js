@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import { withRouter } from 'react-router-dom'
 
+import './Problem.scss'
+
 const Problems = props => {
   const [problems, setProblems] = useState([])
   // const userId = props.user.id
@@ -31,11 +33,11 @@ const Problems = props => {
         href={`#/problems/${problem.id}`}>
         <p
           className="text-shadow">
-          Problem ID : {problem.id}
+          {problem.name}
           <br/>
           Category: {problem.category}
           <br/>
-          by - {problem.user.email}
+          Created by - {problem.user.email}
         </p>
       </Button>}
     </div>
@@ -43,10 +45,10 @@ const Problems = props => {
 
   return (
     <div className="">
-      <h1>Choose a problem to UPDATE or DELETE.</h1>
+      <h1 style={{ textAlign: 'center' }}>Choose a problem to UPDATE or DELETE.</h1>
       <Container>
         <Row className="justify-content-md-center">
-          <Col>{problemsJsx}</Col>
+          <Col className="box">{problemsJsx}</Col>
         </Row>
       </Container>
     </div>

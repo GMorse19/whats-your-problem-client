@@ -40,11 +40,11 @@ const Problem = props => {
   console.log(problem)
   return (
     <div className="problem-board">
-      <h2>NAME: {problem.name}</h2>
-      <h2>Content: {problem.content}</h2>
-      <h2>Category: {problem.category}</h2>
-      <h2>ID: {problem.id}</h2>
-      <h2>User: {problem.user.email}</h2>
+      <h1>{problem.name}</h1>
+      <h4>Content: {problem.content}</h4>
+      <h6>Category: {problem.category}</h6>
+      <h6>ID: {problem.id}</h6>
+      <h6>User: {problem.user.email}</h6>
       <div>
         {userId === problem.user_id && <Button
           href={`#problems/${props.match.params.id}/update`}
