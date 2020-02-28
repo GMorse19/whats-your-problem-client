@@ -108,7 +108,6 @@ const Problem = props => {
       <h6>Category: {problem.category}</h6>
       <h6>ID: {problem.id}</h6>
       <h6>User: {problem.user.email}</h6>
-      <h6>Answer: {problem.answer}</h6>
       <div>
         {userId === problem.user_id && <Button
           href={`#problems/${props.match.params.id}/update`}
