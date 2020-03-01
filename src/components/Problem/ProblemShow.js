@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
+import Frame from '../Calculator/Frame'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -72,70 +73,73 @@ const Problem = props => {
 
   console.log(problem)
   return (
-    <div className="problem-board">
-      <Modal className="modal-dialog" show={showWin} onHide={handleCloseWin}>
-        <Modal.Header closeButton>
-          <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Blah Blah</Modal.Body>
-        <Modal.Footer>
-          <Modal.Title>Good Job!</Modal.Title>
-          <Button variant="secondary" onClick={handleCloseWin}>
-            Close
-          </Button>
-          <Button variant="primary" as={'a'} href={'#/problems'}>
-            Try Another
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal className="modal-dialog" show={showLoss} onHide={handleCloseLoss}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Blah Blah</Modal.Body>
-        <Modal.Footer>
-          <Modal.Title>Sorry.</Modal.Title>
-          <Button variant="secondary" onClick={handleCloseLoss}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleCloseLoss}>
-            Try Again
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <h1>{problem.name}</h1>
-      <h4>Content: {problem.content}</h4>
-      <h6>Category: {problem.category}</h6>
-      <h6>ID: {problem.id}</h6>
-      <h6>User: {problem.user.email}</h6>
-      <div>
-        {userId === problem.user_id && <Button
-          href={`#problems/${props.match.params.id}/update`}
-          variant="primary"
-          className="mr-2"
-          problem={problem}
-          props={props}>
-          Update
-        </Button>}
-        {userId === problem.user_id && <Button
-          onClick={handleDelete}
-          className="btn btn-danger">
-          delete
-        </Button>}
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Label htmlFor="name">Place an answer below</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Answer Here..."
-              value={guess.answer}
-              name="answer"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">Submit</Button>
-        </Form>
+    <div>
+      <div className="problem-board">
+        <Modal className="modal-dialog" show={showWin} onHide={handleCloseWin}>
+          <Modal.Header closeButton>
+            <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Blah Blah</Modal.Body>
+          <Modal.Footer>
+            <Modal.Title>Good Job!</Modal.Title>
+            <Button variant="secondary" onClick={handleCloseWin}>
+              Close
+            </Button>
+            <Button variant="primary" as={'a'} href={'#/problems'}>
+              Try Another
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal className="modal-dialog" show={showLoss} onHide={handleCloseLoss}>
+          <Modal.Header closeButton>
+            <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Blah Blah</Modal.Body>
+          <Modal.Footer>
+            <Modal.Title>Sorry.</Modal.Title>
+            <Button variant="secondary" onClick={handleCloseLoss}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleCloseLoss}>
+              Try Again
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <h1>{problem.name}</h1>
+        <h4>Content: {problem.content}</h4>
+        <h6>Category: {problem.category}</h6>
+        <h6>ID: {problem.id}</h6>
+        <h6>User: {problem.user.email}</h6>
+        <div>
+          {userId === problem.user_id && <Button
+            href={`#problems/${props.match.params.id}/update`}
+            variant="primary"
+            className="mr-2"
+            problem={problem}
+            props={props}>
+            Update
+          </Button>}
+          {userId === problem.user_id && <Button
+            onClick={handleDelete}
+            className="btn btn-danger">
+            delete
+          </Button>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label htmlFor="name">Place an answer below</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Answer Here..."
+                value={guess.answer}
+                name="answer"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">Submit</Button>
+          </Form>
+        </div>
       </div>
+      <div><Frame /></div>
     </div>
   )
 }
