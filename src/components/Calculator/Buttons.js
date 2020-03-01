@@ -2,7 +2,7 @@ import React from 'react' // import react module
 import PropTypes from 'prop-types'
 
 // create our Button component as a functional component
-const Button = (props) => {
+const Buttons = (props) => {
   return (
     <input
       type="button"
@@ -14,11 +14,11 @@ const Button = (props) => {
 }
 
 // describe our expected props types
-Button.propTypes = {
+Buttons.propTypes = {
   type: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired
 }
 
 // export our button component.
-export default Button
+export default Buttons

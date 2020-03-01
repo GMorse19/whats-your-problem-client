@@ -4,48 +4,76 @@
 // https://codeburst.io/a-simple-calculator-app-using-react-and-node-42c9b0ea1df8
 import React from 'react'
 import Screen from './Screen'
-import Button from './Buttons'
+import Buttons from './Buttons'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+
+import './Calculator.scss'
 
 class Frame extends React.Component {
   constructor () {
     super()
     this.state = {
       question: '',
-      answer: ''
+      answer: '',
+      show: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
+  handleShow = () => this.setState({ show: true })
+  handleClose = () => this.setState({ show: false })
+
   render () {
+    console.log(this.show)
     return (
-      <div className="frame">
-        <div className="calculator-title">
-          R_N Calculator
-        </div>
-        <Screen question={this.state.question} answer={this.state.answer}/>
-        <div className="button-row">
-          <Button label={'1'} handleClick={this.handleClick} type='input' />
-          <Button label={'2'} handleClick={this.handleClick} type='input' />
-          <Button label={'3'} handleClick={this.handleClick} type='input' />
-          <Button label={'4'} handleClick={this.handleClick} type='input' />
-          <Button label={'-'} handleClick={this.handleClick} type='action' />
-          <Button label={'+'} handleClick={this.handleClick} type='action' />
-        </div>
-        <div className="button-row">
-          <Button label={'5'} handleClick={this.handleClick} type='input' />
-          <Button label={'6'} handleClick={this.handleClick} type='input' />
-          <Button label={'7'} handleClick={this.handleClick} type='input' />
-          <Button label={'8'} handleClick={this.handleClick} type='input' />
-          <Button label={'*'} handleClick={this.handleClick} type='action' />
-          <Button label={'/'} handleClick={this.handleClick} type='action' />
-        </div>
-        <div className="button-row">
-          <Button label={'9'} handleClick={this.handleClick} type='input' />
-          <Button label={'.'} handleClick={this.handleClick} type='input' />
-          <Button label={'0'} handleClick={this.handleClick} type='input' />
-          <Button label={'Cls'} handleClick={this.handleClick} type='action' />
-          <Button label={'='} handleClick={this.handleClick} type='action' />
-        </div>
+      <div>
+        <Modal className="modal-dialog" show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+            Calculator
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="frame">
+              <div className="calculator-title">
+              </div>
+              <Screen question={this.state.question} answer={this.state.answer}/>
+              <div className="button-row">
+                <Buttons label={'1'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'2'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'3'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'4'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'-'} handleClick={this.handleClick} type='action' />
+                <Buttons label={'+'} handleClick={this.handleClick} type='action' />
+              </div>
+              <div className="button-row">
+                <Buttons label={'5'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'6'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'7'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'8'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'*'} handleClick={this.handleClick} type='action' />
+                <Buttons label={'/'} handleClick={this.handleClick} type='action' />
+              </div>
+              <div className="button-row">
+                <Buttons label={'9'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'.'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'0'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'Cls'} handleClick={this.handleClick} type='action' />
+                <Buttons label={'='} handleClick={this.handleClick} type='action' />
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.Title></Modal.Title>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Button onClick={this.handleShow}>
+          Calculator
+        </Button>
       </div>
     )
   }
