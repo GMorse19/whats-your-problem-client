@@ -39,26 +39,33 @@ class Frame extends React.Component {
               <div className="calculator-title">
               </div>
               <Screen question={this.state.question} answer={this.state.answer}/>
-              <div className="button-row">
+              <div className="button-row keys">
                 <Buttons label={'1'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'2'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'3'} handleClick={this.handleClick} type='input' />
-                <Buttons label={'4'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'-'} handleClick={this.handleClick} type='action' />
-                <Buttons label={'+'} handleClick={this.handleClick} type='action' />
               </div>
-              <div className="button-row">
+              <div className="button-row keys">
+                <Buttons label={'4'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'5'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'6'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'+'} handleClick={this.handleClick} type='action' />
+              </div>
+              <div className="button-row keys">
                 <Buttons label={'7'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'8'} handleClick={this.handleClick} type='input' />
-                <Buttons label={'*'} handleClick={this.handleClick} type='action' />
-                <Buttons label={'/'} handleClick={this.handleClick} type='action' />
-              </div>
-              <div className="button-row">
                 <Buttons label={'9'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'*'} handleClick={this.handleClick} type='action' />
+              </div>
+              <div className="button-row keys">
                 <Buttons label={'.'} handleClick={this.handleClick} type='input' />
                 <Buttons label={'0'} handleClick={this.handleClick} type='input' />
+                <Buttons label={'#'} />
+                <Buttons label={'/'} handleClick={this.handleClick} type='action' />
+              </div>
+              <div className="button-row keys">
+                <Buttons label={' '} />
+                <Buttons label={' '} />
                 <Buttons label={'Cls'} handleClick={this.handleClick} type='action' />
                 <Buttons label={'='} handleClick={this.handleClick} type='action' />
               </div>

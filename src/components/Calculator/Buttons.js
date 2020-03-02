@@ -6,7 +6,7 @@ const Buttons = (props) => {
   return (
     <input
       type="button"
-      className={props.type === 'action' ? 'button action-button' : 'button input-button'}
+      className={props.type === 'action' ? 'button orange action-button' : 'button gray input-button'}
       onClick={props.handleClick}
       value={props.label}
     />

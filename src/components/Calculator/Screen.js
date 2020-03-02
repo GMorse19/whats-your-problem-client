@@ -2,12 +2,14 @@ import React from 'react' // Import react module
 import ScreenRow from './ScreenRow'
 import PropTypes from 'prop-types'
 
+import './Calculator.scss'
+
 // Create our screen component as a functional component.
 // It would display two screen rows, 1 for questions and the other for the answer
 // The value would be passed down from it's parent component as a prop
 const Screen = (props) => {
   return (
-    <div className="screen">
+    <div className="screen display">
       <ScreenRow value={props.question}/>
       <ScreenRow value={props.answer}/>
     </div>
