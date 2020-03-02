@@ -1,5 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
 .frame {
         background-color: #303030;
         height: 350px;
@@ -98,3 +105,8 @@
     p {
         line-height: 10px;
     }
+
+    .modal-90w {
+    width: 90vw;    /* Occupy the 90% of the screen width */
+    max-width: 90vw;
+}
