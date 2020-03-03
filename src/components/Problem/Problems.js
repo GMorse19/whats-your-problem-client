@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import Button from 'react-bootstrap/Button'
+
+// import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
-import { withRouter } from 'react-router-dom'
 
 import './Problem.scss'
 
@@ -27,28 +29,31 @@ const Problems = props => {
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
-      {<Button
-        className="box list inner-shadow"
+      {<Card
+        className="box"
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <p
-          className="text-shadow">
+          className=""
+          style={{ margin: '5px', textAlign: 'center' }}>
           {problem.name}
+          <br/>
           <br/>
           Category: {problem.category}
           <br/>
+          <br/>
           Created by - {problem.user.email}
         </p>
-      </Button>}
+      </Card>}
     </div>
   ))
 
   return (
     <div className="">
-      <h1 style={{ textAlign: 'center' }}>Choose a problem to UPDATE or DELETE.</h1>
+      <h1 style={{ textAlign: 'center' }}>Choose your problem!</h1>
       <Container>
         <Row className="justify-content-md-center">
-          <Col className="box">{problemsJsx}</Col>
+          <Col className="">{problemsJsx}</Col>
         </Row>
       </Container>
     </div>

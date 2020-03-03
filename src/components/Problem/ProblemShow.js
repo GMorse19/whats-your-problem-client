@@ -15,7 +15,8 @@ const Problem = props => {
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
 
-  const userId = props.user ? props.user_id : null
+  const userId = props.user ? props.user.id : null
+
   useEffect(() => {
     axios({
       url: `${apiUrl}/problems/${props.match.params.id}`,
@@ -109,7 +110,7 @@ const Problem = props => {
         <h6>Category: {problem.category}</h6>
         <h6>Created by: {problem.user.email}</h6>
         <div>
-          {userId === problem.user_id && <Button
+          {userId === problem.user.id && <Button
             href={`#problems/${props.match.params.id}/update`}
             variant="primary"
             className="mr-2"
@@ -117,7 +118,7 @@ const Problem = props => {
             props={props}>
             Update
           </Button>}
-          {userId === problem.user_id && <Button
+          {userId === problem.user.id && <Button
             onClick={handleDelete}
             className="btn btn-danger">
             delete
