@@ -13,6 +13,7 @@ const Problem = props => {
   const [guess, setGuess] = useState({ answer: '' })
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
+  const [show, setShow] = useState(false)
 
   const userId = props.user ? props.user_id : null
   useEffect(() => {
@@ -42,12 +43,9 @@ const Problem = props => {
   }
 
   const handleSubmit = event => {
-    console.log('loser')
-
     event.preventDefault()
 
     if (guess.answer === problem.answer) {
-      console.log('winner winner')
       handleShowWin()
     } else {
       handleShowLoss()
@@ -59,6 +57,8 @@ const Problem = props => {
     setGuess({ ...guess, [event.target.name]: event.target.value })
   }
 
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
   const handleShowWin = () => setShowWin(true)
   const handleCloseWin = () => {
     setShowWin(false)
@@ -71,7 +71,6 @@ const Problem = props => {
     return <p>Loading...</p>
   }
 
-  console.log(problem)
   return (
     <div>
       <div className="problem-board">
@@ -106,10 +105,9 @@ const Problem = props => {
           </Modal.Footer>
         </Modal>
         <h1>{problem.name}</h1>
-        <h4>Content: {problem.content}</h4>
+        <h4>{problem.content}</h4>
         <h6>Category: {problem.category}</h6>
-        <h6>ID: {problem.id}</h6>
-        <h6>User: {problem.user.email}</h6>
+        <h6>Created by: {problem.user.email}</h6>
         <div>
           {userId === problem.user_id && <Button
             href={`#problems/${props.match.params.id}/update`}
@@ -126,7 +124,7 @@ const Problem = props => {
           </Button>}
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label htmlFor="name">Place an answer below</Form.Label>
+              <Form.Label htmlFor="name">Place your answer below!</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter Answer Here..."
@@ -139,7 +137,20 @@ const Problem = props => {
           </Form>
         </div>
       </div>
-      <div><Frame /></div>
+      <Button
+        onClick={handleShow}
+        props={props}
+        problem={problem}
+      >
+        Work-Space
+      </Button>
+      {show && <div>
+        <Frame
+          props={props}
+          problem={problem}
+          handleClose={handleClose}
+        />
+      </div>}
     </div>
   )
 }

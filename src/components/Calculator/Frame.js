@@ -2,7 +2,7 @@
 // This base of this calculator was created by Olaniran Azeez Olawale
 // You can find it at this link
 // https://codeburst.io/a-simple-calculator-app-using-react-and-node-42c9b0ea1df8
-import React from 'react'
+import React, { Component } from 'react'
 import Screen from './Screen'
 import Buttons from './Buttons'
 import Modal from 'react-bootstrap/Modal'
@@ -15,28 +15,24 @@ import WorkSpace from '../WorkSpace/WorkSpace'
 
 import './Calculator.scss'
 
-class Frame extends React.Component {
-  constructor () {
-    super()
+class Frame extends Component {
+  constructor (props) {
+    super(props)
     this.state = {
       question: '',
       answer: '',
-      show: false
+      show: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleShow = () => this.setState({ show: true })
-  handleClose = () => this.setState({ show: false })
-
   render () {
-    console.log(this.show)
     return (
       <div>
-        <Modal style={{ top: '30vh' }} dialogClassName="modal-90w" show={this.state.show} onHide={this.handleClose}>
+        <Modal dialogClassName="modal-90w" show={this.state.show} onHide={this.props.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
-            Calculator
+              {this.props.problem.content}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -70,12 +66,12 @@ class Frame extends React.Component {
                       <div className="button-row keys">
                         <Buttons label={'.'} handleClick={this.handleClick} type='input' />
                         <Buttons label={'0'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'#'} />
+                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
                         <Buttons label={'/'} handleClick={this.handleClick} type='action' />
                       </div>
                       <div className="button-row keys">
-                        <Buttons label={' '} />
-                        <Buttons label={' '} />
+                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
+                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
                         <Buttons label={'Cls'} handleClick={this.handleClick} type='action' />
                         <Buttons label={'='} handleClick={this.handleClick} type='action' />
                       </div>
@@ -87,14 +83,14 @@ class Frame extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Modal.Title></Modal.Title>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button
+              variant="secondary"
+              onClick={this.props.handleClose}
+            >
               Close
             </Button>
           </Modal.Footer>
         </Modal>
-        <Button onClick={this.handleShow}>
-          Calculator
-        </Button>
       </div>
     )
   }
