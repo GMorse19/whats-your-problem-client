@@ -13,6 +13,7 @@ import ProblemCreate from '../Problem/ProblemCreate.js'
 import ProblemShow from '../Problem/ProblemShow.js'
 import ProblemUpdate from '../Problem/ProblemUpdate.js'
 import Home from '../Home/Home.js'
+import Generator from '../Generator/Generator'
 
 class App extends Component {
   constructor () {
@@ -73,6 +74,9 @@ class App extends Component {
           )} />
           <Route user={user} exact path='/problems/:id' render={() => (
             <ProblemShow alert={this.alert} user={user} />
+          )} />
+          <Route user={user} path='/generator' render={() => (
+            <Generator alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>
