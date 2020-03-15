@@ -10,30 +10,30 @@ const GeneratorForm = ({ props, generator, answer, handleSubmit, handleChange, c
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label htmlFor="attr1">Attr1</Form.Label>
+          <Form.Label htmlFor="attr1">Name</Form.Label>
           <Form.Control
             type="text"
-            value={generator.attr1}
-            name="attr1"
+            value={generator.name}
+            name="name"
             onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="attr2">Pick a Noun</Form.Label>
+          <Form.Label htmlFor="attr2">Pets name</Form.Label>
           <Form.Control
             required
             type="text"
-            value={generator.attr2}
-            name="attr2"
+            value={generator.pet}
+            name="pet"
             onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="animal">Pick an animal</Form.Label>
+          <Form.Label htmlFor="animal">Pick a location</Form.Label>
           <Form.Control
             type="text"
-            value={generator.animal}
-            name="animal"
+            value={generator.location}
+            name="location"
             onChange={handleChange}
           />
         </Form.Group>
