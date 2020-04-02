@@ -20,12 +20,13 @@ const GeneratorCreate = props => {
   const handleSubmit = event => {
     event.preventDefault()
     console.log('handle submit!!' + generator.name)
+    const action = ['has', 'hides', 'saves', 'finds']
     const nouns = ['bird', 'clock', 'boy', 'plastic',
       'duck', 'teacher', 'old lady', 'professor',
-      'hamster', 'dog']
+      'hamster', 'dog', 'egg', 'witch', 'barn', 'rooster', 'butt', 'nose', 'finger']
     const verbs = ['kick', 'run', 'fly', 'dodge',
       'slice', 'roll', 'die', 'breathe', 'sleep',
-      'kill']
+      'kill', 'pick', 'burn', 'slide', 'jump']
     const adjectives = ['beautiful', 'lazy', 'professional',
       'lovely', 'dumb', 'rough', 'soft', 'hot', 'vibrating',
       'slimy']
@@ -42,7 +43,7 @@ const GeneratorCreate = props => {
     const rando = function (arr) {
       return arr[Math.floor(Math.random() * arr.length)]
     }
-    const content = generator.name + ' earns $' +
+    const content = generator.name + ' ' + rando(action) + ' ' +
         number + ' an hour by ' + mainVerb + 'ing ' + mainNoun + 's' +
         '. He/She ' + rando(verbs) + 's ' + rando(nouns) + 's ' + rando([1, 2, 6, 10]) + ' ' + rando(adjectives) +
         ' ' + rando(nouns) +
