@@ -13,6 +13,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
           <Form.Label htmlFor="name">Name</Form.Label>
           <Form.Control
             type="text"
+            autoComplete='off'
             placeholder="Enter Name Here..."
             value={problem.name}
             name="name"
@@ -24,6 +25,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
           <Form.Control
             required
             type="text"
+            autoComplete='off'
             placeholder="Enter Content Here..."
             value={problem.content}
             name="content"
@@ -67,6 +69,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
           <br/>
           <Form.Label>Or create your own category here.</Form.Label>
           <Form.Control
+            autoComplete='off'
             placeholder="Create Category Here..."
             value={problem.category}
             name="category"
@@ -76,6 +79,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
         <Form.Group>
           <Form.Label htmlFor="name">Hint</Form.Label>
           <Form.Control
+            autoComplete='off'
             type="text"
             placeholder="Enter Hint Here..."
             value={problem.hint}
@@ -86,6 +90,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
         <Form.Group>
           <Form.Label htmlFor="name">Solution</Form.Label>
           <Form.Control
+            autoComplete='off'
             type="text"
             placeholder="Enter Solution Here..."
             value={problem.solution}
@@ -97,6 +102,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
           <Form.Label htmlFor="name">Answer</Form.Label>
           <Form.Control
             required
+            autoComplete='off'
             type="text"
             placeholder="Enter Answer Here..."
             value={problem.answer}
