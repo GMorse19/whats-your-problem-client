@@ -29,7 +29,7 @@ const Problems = props => {
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
-      {<div
+      {<a
         className="box"
         as={'a'}
         href={`#/problems/${problem.id}`}>
@@ -44,7 +44,7 @@ const Problems = props => {
           <br/>
           Created by - {problem.user.email}
         </p>
-      </div>}
+      </a>}
     </div>
   ))
 

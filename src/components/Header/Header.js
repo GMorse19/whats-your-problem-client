@@ -25,7 +25,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar fixed="top" style={{ backgroundColor: '#c2760b' }} variant="dark" expand="md">
     <Navbar.Brand href="#">
       Whats Your Problem?
     </Navbar.Brand>
