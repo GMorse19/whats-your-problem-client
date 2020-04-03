@@ -1,5 +1,5 @@
 /* eslint no-eval: 0 */
-// This base of this calculator was created by Olaniran Azeez Olawale
+// The base of this calculator was created by Olaniran Azeez Olawale
 // You can find it at this link
 // https://codeburst.io/a-simple-calculator-app-using-react-and-node-42c9b0ea1df8
 import React, { Component } from 'react'
@@ -30,12 +30,12 @@ class Frame extends Component {
     return (
       <div>
         <Modal dialogClassName="modal-90w" show={this.state.show} onHide={this.props.handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header style={{ backgroundColor: '#c2760b' }} closeButton>
             <Modal.Title>
               {this.props.problem.content}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body style={{ backgroundColor: '#edbe6d' }}>
             <Container>
               <Row className="justify-content-md-center">
                 <Col className="box"><WorkSpace /></Col>
@@ -81,7 +81,7 @@ class Frame extends Component {
               </Row>
             </Container>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
             <Modal.Title></Modal.Title>
             <Button
               variant="secondary"

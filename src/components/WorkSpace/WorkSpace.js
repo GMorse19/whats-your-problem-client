@@ -35,7 +35,7 @@ class WorkSpace extends Component {
               />
             </Form.Group>
           </Form>
-          <Button style={{ width: '220px', marginBottom: '10px' }} type="submit" onClick={this.handleSubmit}>CLEAR</Button>
+          <Button style={{ backgroundColor: '#FF9933', border: 'none', width: '220px', marginBottom: '10px' }} type="submit" onClick={this.handleSubmit}>CLEAR</Button>
         </Container>
       </div>
     )

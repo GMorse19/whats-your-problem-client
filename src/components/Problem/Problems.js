@@ -29,13 +29,13 @@ const Problems = props => {
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
-      {<div
+      {<a
         className="box"
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <p
           className="popup"
-          style={{ margin: '5px', textAlign: 'center' }}>
+          style={{ color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b' }}>
           {problem.name}
           <br/>
           <br/>
@@ -44,7 +44,7 @@ const Problems = props => {
           <br/>
           Created by - {problem.user.email}
         </p>
-      </div>}
+      </a>}
     </div>
   ))
 
