@@ -128,6 +128,7 @@ const Problem = props => {
               <Form.Label htmlFor="name">Place your answer below!</Form.Label>
               <Form.Control
                 type="text"
+                autoComplete='off'
                 placeholder="Enter Answer Here..."
                 value={guess.answer}
                 name="answer"
