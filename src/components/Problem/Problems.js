@@ -35,7 +35,7 @@ const Problems = props => {
         href={`#/problems/${problem.id}`}>
         <p
           className="popup"
-          style={{ margin: '5px', textAlign: 'center' }}>
+          style={{ color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b' }}>
           {problem.name}
           <br/>
           <br/>
