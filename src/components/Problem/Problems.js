@@ -4,7 +4,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 // import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+// import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
@@ -29,12 +29,12 @@ const Problems = props => {
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
-      {<Card
+      {<div
         className="box"
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <p
-          className=""
+          className="popup"
           style={{ margin: '5px', textAlign: 'center' }}>
           {problem.name}
           <br/>
@@ -44,7 +44,7 @@ const Problems = props => {
           <br/>
           Created by - {problem.user.email}
         </p>
-      </Card>}
+      </div>}
     </div>
   ))
 
