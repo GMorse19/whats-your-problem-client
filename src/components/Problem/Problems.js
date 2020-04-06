@@ -30,30 +30,32 @@ const Problems = props => {
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
       {<a
+        style={{ textDecoration: 'none' }}
         className="box"
         as={'a'}
         href={`#/problems/${problem.id}`}>
-        <p
-          className="popup"
-          style={{ color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b' }}>
-          {problem.name}
-          <br/>
-          <br/>
-          Category: {problem.category}
-          <br/>
-          <br/>
-          Created by - {problem.user.email}
-        </p>
+        <Col>
+          <p
+            className="popup"
+            style={{ wordWrap: 'break-word', color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b', overflowY: 'scroll' }}>
+            <h2 style={{ fontFamily: 'Righteous', overflow: 'hidden' }}>{problem.name}</h2>
+            <br/>
+              Created by - {problem.user.email}
+            <br/>
+            <br/>
+            <h3 style={{ fontFamily: 'Pacifico' }}>{problem.category}</h3>
+          </p>
+        </Col>
       </a>}
     </div>
   ))
 
   return (
     <div className="">
-      <h1 style={{ textAlign: 'center' }}>Choose your problem!</h1>
+      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Our Problems.</h1>
       <Container>
         <Row className="justify-content-md-center">
-          <Col className="">{problemsJsx}</Col>
+          {problemsJsx}
         </Row>
       </Container>
     </div>
