@@ -76,3 +76,23 @@
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
+
+.shadow {
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+.question {
+  margin: 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+  background-color: #c2760b;
+  border-radius: 15px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 500px) {
+  .form-field {
+    width: 50vw;
+  }
+}
