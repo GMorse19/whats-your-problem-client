@@ -35,7 +35,7 @@ const Problems = props => {
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <Col>
-          <p
+          <div
             className="popup"
             style={{ wordWrap: 'break-word', color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b', overflowY: 'scroll' }}>
             <h2 style={{ fontFamily: 'Righteous', overflow: 'hidden' }}>{problem.name}</h2>
@@ -44,7 +44,7 @@ const Problems = props => {
             <br/>
             <br/>
             <h3 style={{ fontFamily: 'Pacifico' }}>{problem.category}</h3>
-          </p>
+          </div>
         </Col>
       </a>}
     </div>
