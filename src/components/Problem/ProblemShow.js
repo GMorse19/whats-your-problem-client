@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
@@ -75,11 +77,11 @@ const Problem = props => {
   return (
     <div>
       <div className="problem-board">
-        <Modal className="modal-dialog" show={showWin} onHide={handleCloseWin}>
+        <Modal dialogClassName="modal-50w" show={showWin} onHide={handleCloseWin}>
           <Modal.Header closeButton>
             <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Blah Blah</Modal.Body>
+          <Modal.Body>You are on a roll! Try another</Modal.Body>
           <Modal.Footer>
             <Modal.Title>Good Job!</Modal.Title>
             <Button variant="secondary" onClick={handleCloseWin}>
@@ -90,13 +92,13 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal className="modal-dialog" show={showLoss} onHide={handleCloseLoss}>
+        <Modal dialogClassName="modal-50w" show={showLoss} onHide={handleCloseLoss}>
           <Modal.Header closeButton>
             <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Blah Blah</Modal.Body>
+          <Modal.Body>You got this. Try again!</Modal.Body>
           <Modal.Footer>
-            <Modal.Title>Sorry.</Modal.Title>
+            <Modal.Title>Sorry. Better luck next time!</Modal.Title>
             <Button variant="secondary" onClick={handleCloseLoss}>
               Close
             </Button>
@@ -105,10 +107,12 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <h1>{problem.name}</h1>
-        <h4>{problem.content}</h4>
-        <h6>Category: {problem.category}</h6>
+        <h1 style={{ fontFamily: 'Righteous' }}>{problem.name}</h1>
         <h6>Created by: {problem.user.email}</h6>
+        <h6>Category: {problem.category}</h6>
+        <div className='question'>
+          <h2 style={{ fontSize: '70px' }}>{problem.content}</h2>
+        </div>
         <div>
           {userId === problem.user.id && <Button
             href={`#problems/${props.match.params.id}/update`}
@@ -123,26 +127,40 @@ const Problem = props => {
             className="btn btn-danger">
             delete
           </Button>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label htmlFor="name">Place your answer below!</Form.Label>
-              <Form.Control
-                type="text"
-                autoComplete='off'
-                placeholder="Enter Answer Here..."
-                value={guess.answer}
-                name="answer"
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
-          </Form>
+          <div className='form-field' style={{ float: 'right' }}>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group as={Row} style={{ alignItems: 'center' }}>
+                <Col>
+                  <Form.Control
+                    className='shadow'
+                    type="text"
+                    autoComplete='off'
+                    placeholder="Enter Answer Here..."
+                    value={guess.answer}
+                    name="answer"
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Button
+                  className='shadow'
+                  column="true"
+                  sm={2}
+                  style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none' }}
+                  variant="primary"
+                  type="submit">
+                  Submit
+                </Button>
+              </Form.Group>
+            </Form>
+          </div>
         </div>
       </div>
       <Button
+        className='shadow'
         onClick={handleShow}
         props={props}
         problem={problem}
+        style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none' }}
       >
         Work-Space
       </Button>
