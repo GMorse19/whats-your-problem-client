@@ -53,6 +53,7 @@ const Problem = props => {
     } else {
       handleShowLoss()
     }
+    setGuess({ answer: '' })
   }
 
   const handleChange = event => {
@@ -96,9 +97,9 @@ const Problem = props => {
           <Modal.Header closeButton>
             <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
           </Modal.Header>
-          <Modal.Body>You got this. Try again!</Modal.Body>
+          <Modal.Body>Sorry. Better luck next time!</Modal.Body>
           <Modal.Footer>
-            <Modal.Title>Sorry. Better luck next time!</Modal.Title>
+            <Modal.Title>You can do it!</Modal.Title>
             <Button variant="secondary" onClick={handleCloseLoss}>
               Close
             </Button>
@@ -107,11 +108,11 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <h1 style={{ fontFamily: 'Righteous' }}>{problem.name}</h1>
+        <h1 style={{ fontFamily: 'Righteous', fontSize: '60px' }}>{problem.name}</h1>
         <h6>Created by: {problem.user.email}</h6>
         <h6>Category: {problem.category}</h6>
         <div className='question'>
-          <h2 style={{ fontSize: '70px' }}>{problem.content}</h2>
+          <h2 style={{ fontSize: '40px', padding: '100px' }}>{problem.content}</h2>
         </div>
         <div>
           {userId === problem.user.id && <Button
