@@ -86,9 +86,11 @@
   overflow: hidden;
   overflow-y: scroll;
   height: 400px;
-  background-color: #c2760b;
-  border-radius: 15px;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  background-color: rgba(194, 118, 11, .40);
+  box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  border-top: none;
 }
 
 @media screen and (max-width: 500px) {
