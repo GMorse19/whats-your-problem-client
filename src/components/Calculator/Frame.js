@@ -21,16 +21,58 @@ class Frame extends Component {
     this.state = {
       question: '',
       answer: '',
-      show: true
+      show: true,
+      showHint: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
+  hint = () => {
+    this.setState({ showHint: true })
+  }
+
+  handleCloseHint = () => {
+    this.setState({ showHint: false })
+  }
+
   render () {
+    if (!this.props.problem.hint) {
+      this.props.problem.hint = 'Sorry, there is no hint for you!'
+    }
     return (
       <div>
-        <Modal dialogClassName="modal-90w" show={this.state.show} onHide={this.props.handleClose}>
-          <Modal.Header style={{ backgroundColor: '#c2760b' }} closeButton>
+        {this.state.showHint && <Modal
+          dialogClassName="modal-30w"
+          style={{ marginTop: '30vh' }}
+          show={this.state.showHint}
+          onHide={this.handleCloseHint}
+        >
+          <Modal.Header
+            style={{ backgroundColor: '#c2760b' }}
+            closeButton
+          >
+            <Modal.Title>
+              Sometimes we all need a little help.
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ backgroundColor: '#edbe6d' }}>
+            {this.props.problem.hint}
+          </Modal.Body>
+          <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
+            You can do it!
+          </Modal.Footer>
+        </Modal>}
+
+        <Modal
+          dialogClassName="modal-90w"
+          style={{ marginTop: '10vh', paddingBottom: '70px' }}
+          show={this.state.show}
+          onHide={this.props.handleClose}
+        >
+          <Modal.Header
+            style={{ backgroundColor: '#c2760b' }}
+            closeButton
+          >
             <Modal.Title>
               {this.props.problem.content}
             </Modal.Title>
@@ -83,6 +125,12 @@ class Frame extends Component {
           </Modal.Body>
           <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
             <Modal.Title></Modal.Title>
+            <Button
+              variant="success"
+              onClick={this.hint}
+            >
+              Hint
+            </Button>
             <Button
               variant="secondary"
               onClick={this.props.handleClose}
