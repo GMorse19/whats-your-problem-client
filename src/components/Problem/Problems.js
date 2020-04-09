@@ -50,6 +50,13 @@ const Problems = props => {
     </div>
   ))
 
+  if (!problems) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <h1>Loading...</h1>
+      </div>)
+  }
+
   return (
     <div className="">
       <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Our Problems.</h1>
