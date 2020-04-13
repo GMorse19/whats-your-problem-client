@@ -14,8 +14,8 @@ const Home = () => {
           <Col className="box">
             <img
               style={{ justifyContent: 'center' }}
-              className="box"
-              src="WYP.png"
+              className="logo"
+              src="WYP-logo3.png"
             />
           </Col>
         </Row>
