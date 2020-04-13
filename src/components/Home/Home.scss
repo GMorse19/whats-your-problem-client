@@ -1,14 +1,13 @@
-// @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
-// body {
-//   height: 100%;
-//   position: relative;
-//   // text-align: center;
-//   padding-top: 5rem;
-//   background-image: url('/HomePage.jpg');
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   background-position: center;
-//   background-attachment: fixed;
-//   margin-bottom: 100px;
-// }
+.logo {
+  position: relative;
+  margin-top: 10vh;
+}
+
+@media screen and (max-width: 500px) {
+  .logo{
+    width: 350px;
+    margin-top: 20vh;
+  }
+}
