@@ -81,6 +81,11 @@
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
 }
 
+.problem-title {
+  font-family: Righteous;
+  font-size: 60px;
+}
+
 .question {
   margin: 20px;
   overflow: hidden;
@@ -93,8 +98,30 @@
   border-top: none;
 }
 
+.question::-webkit-scrollbar {
+  display: none;
+}
+
+.question-content {
+  font-size: 40px;
+  padding: 100px;
+}
+
 @media screen and (max-width: 500px) {
   .form-field {
     width: 50vw;
+  }
+
+  .problem-title {
+    font-size: 30px;
+  }
+
+  .question {
+    height: 40vh;
+  }
+
+  .question-content {
+    font-size: 20px;
+    padding: 20px;
   }
 }
