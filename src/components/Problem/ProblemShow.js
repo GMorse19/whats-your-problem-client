@@ -108,11 +108,13 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <h1 style={{ fontFamily: 'Righteous', fontSize: '60px' }}>{problem.name}</h1>
-        <h6>Created by: {problem.user.email}</h6>
-        <h6>Category: {problem.category}</h6>
+        <h1 className='problem-title'>{problem.name}</h1>
+        <p>Created by: {problem.user.email}</p>
+        <p>Category: {problem.category}</p>
         <div className='question'>
-          <h2 style={{ fontSize: '40px', padding: '100px' }}>{problem.content}</h2>
+          <div className='question2'>
+            <h2 className='question-content'>{problem.content}</h2>
+          </div>
         </div>
         <div>
           {userId === problem.user.id && <Button
