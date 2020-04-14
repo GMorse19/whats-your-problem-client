@@ -5,6 +5,7 @@ import apiUrl from '../../apiConfig'
 
 // import Button from 'react-bootstrap/Button'
 // import Card from 'react-bootstrap/Card'
+import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
@@ -23,9 +24,33 @@ const Problems = props => {
       .then(response => {
         setProblems(response.data.problems)
       })
-      .then(() => props.alert({ heading: 'Success', message: 'You got Problems', variant: 'success' }))
       .catch(console.error)
   }, [])
+
+  const division = <Image
+    src='division.png'
+    width={ 250 }
+  />
+
+  const addition = <Image
+    src='addition.png'
+    width={ 250 }
+  />
+
+  const subtraction = <Image
+    src='subtraction.png'
+    width={ 250 }
+  />
+
+  const times = <Image
+    src='times.png'
+    width={ 250 }
+  />
+
+  const other = <Image
+    src='symbols.png'
+    width={ 250 }
+  />
 
   const problemsJsx = problems.map(problem => (
     <div key={problem.id}>
@@ -35,15 +60,27 @@ const Problems = props => {
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <Col>
-          <div
-            className="popup"
-            style={{ wordWrap: 'break-word', color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b', overflowY: 'scroll' }}>
-            <h2 style={{ fontFamily: 'Righteous', overflow: 'hidden' }}>{problem.name}</h2>
-            <br/>
-              Created by - {problem.user.email}
-            <br/>
-            <br/>
-            <h3 style={{ fontFamily: 'Pacifico' }}>{problem.category}</h3>
+          <div className="popup problems-list">
+            <div className='category-image'>
+              {(problem.category === 'division') && division}
+              {(problem.category === 'addition') && addition}
+              {(problem.category === 'subtraction') && subtraction}
+              {(problem.category === 'multiplication') && times}
+              {(problem.category !== 'division') &&
+              (problem.category !== 'addition') &&
+              (problem.category !== 'subtraction') &&
+              (problem.category !== 'multiplication') &&
+              other}
+            </div>
+            <div className='title-box'>
+              <h2 className='title'>
+                {problem.name}
+              </h2>
+            </div>
+            <div className='problem-info'>
+              <p>Creator: {problem.user.email}</p>
+              <p>Category: {problem.category}</p>
+            </div>
           </div>
         </Col>
       </a>}
@@ -59,7 +96,7 @@ const Problems = props => {
 
   return (
     <div className="">
-      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Our Problems.</h1>
+      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
         <Row className="justify-content-md-center">
           {problemsJsx}

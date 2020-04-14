@@ -1,80 +1,85 @@
 @import '~bootstrap/scss/bootstrap';
 
-  .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px;
+  // .box {
+  //   // display: flex;
+  //   // align-items: center;
+  //   // justify-content: center;
+  //   margin: 5px;
+  // }
+
+  .category-image {
+    height: 250px;
   }
 
   .problem-board {
     text-align: center;
   }
 
-  .homepage {
-    padding: 20px 20px;
-  }
-
-  .directory-menu {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .menu-item {
-    height: 240px;
-    width: 240px;
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    margin: 0 7.5px 15px;
-
-    &:first-child {
-      margin-right: 7.5px;
-    }
-
-    &:last-child {
-      margin-left: 7.5px;
-    }
-
-    .content {
-      height: 90px;
-      padding: 0 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid black;
-
-      .title {
-        font-weight: bold;
-        margin-bottom: 6px;
-        margin-top: 6px;
-        font-size: 22px;
-        color: #4a4a4a;
-      }
-
-      .subtitle {
-        font-weight: lighter;
-        font-size: 16px;
-        color: #4a4a4a;
-      }
-    }
-  }
+  // .homepage {
+  //   padding: 20px 20px;
+  // }
+  //
+  // .directory-menu {
+  //   width: 100%;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   justify-content: space-between;
+  // }
+  //
+  // .menu-item {
+  //   height: 240px;
+  //   width: 240px;
+  //   flex: 1 1 auto;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   border: 1px solid black;
+  //   margin: 0 7.5px 15px;
+  //
+  //   &:first-child {
+  //     margin-right: 7.5px;
+  //   }
+  //
+  //   &:last-child {
+  //     margin-left: 7.5px;
+  //   }
+  //
+  //   .content {
+  //     height: 90px;
+  //     padding: 0 25px;
+  //     display: flex;
+  //     flex-direction: column;
+  //     align-items: center;
+  //     justify-content: center;
+  //     border: 1px solid black;
+  //
+  //     .title {
+  //       font-weight: bold;
+  //       margin-bottom: 6px;
+  //       margin-top: 6px;
+  //       font-size: 22px;
+  //       color: #4a4a4a;
+  //     }
+  //
+  //     .subtitle {
+  //       font-weight: lighter;
+  //       font-size: 16px;
+  //       color: #4a4a4a;
+  //     }
+  //   }
+  // }
 
   .popup {
   z-index: 10;
   background-color: #FFF;
+  border-style: double;
   left: 50%;
   top: 50%;
-  width: 260px;
-  height: 260px;
+  width: 300px;
+  height: 450px;
   padding: 1rem;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .shadow {
@@ -84,6 +89,12 @@
 .problem-title {
   font-family: Righteous;
   font-size: 60px;
+}
+
+.problem-info {
+  float: right;
+  width: 200px;
+  text-align: right;
 }
 
 .question {
@@ -107,13 +118,43 @@
   padding: 100px;
 }
 
+.problems-list {
+  word-wrap: break-word;
+  color: black;
+  margin: 5px;
+  text-align: center;
+  background-color: rgba(193, 117, 11, 0.5);
+  overflow: hidden;
+  // overflow-y: scroll;
+}
+
+// .problems-list::-webkit-scrollbar {
+//   display: none;
+// }
+
+.title {
+  font-family: Righteous;
+  overflow-y: hidden;
+  font-size: 25px;
+}
+
+.title::-webkit-scrollbar {
+  display: none;
+}
+
+.title-box {
+  height: 90px;
+  overflow-y: scroll;
+  margin-bottom: 5px;
+}
+
+.title-box::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 500px) {
   .form-field {
     width: 50vw;
-  }
-
-  .problem-title {
-    font-size: 30px;
   }
 
   .question {
