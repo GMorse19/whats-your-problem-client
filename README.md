@@ -1,6 +1,12 @@
 # What's Your Problem?
 
-For some students word problems can be a real drag, but are essential for a childs critical thinking abilities. "What's Your Problem?" is designed to help students become more excited about solving word problems.
+For some students word problems can be a real drag, but they are essential for a childs critical thinking abilities. "What's Your Problem?" is designed to help students become more excited about solving word problems.
+
+![Image](ProblemShow.png)
+
+![Image](WorkSpace.png)
+
+![Image](Problems.png)
 
 ## User stories
 
