@@ -23,7 +23,6 @@ const Problems = props => {
       .then(response => {
         setProblems(response.data.problems)
       })
-      .then(() => props.alert({ heading: 'Success', message: 'You got Problems', variant: 'success' }))
       .catch(console.error)
   }, [])
 
@@ -35,15 +34,16 @@ const Problems = props => {
         as={'a'}
         href={`#/problems/${problem.id}`}>
         <Col>
-          <div
-            className="popup"
-            style={{ wordWrap: 'break-word', color: 'black', margin: '5px', textAlign: 'center', backgroundColor: '#c2760b', overflowY: 'scroll' }}>
-            <h2 style={{ fontFamily: 'Righteous', overflow: 'hidden' }}>{problem.name}</h2>
-            <br/>
-              Created by - {problem.user.email}
-            <br/>
-            <br/>
-            <h3 style={{ fontFamily: 'Pacifico' }}>{problem.category}</h3>
+          <div className="popup problems-list">
+            <div className='title-box'>
+              <h2 className='title'>
+                {problem.name}
+              </h2>
+            </div>
+            <div className='problem-info'>
+              <p>Creator: {problem.user.email}</p>
+              <p>Category: {problem.category}</p>
+            </div>
           </div>
         </Col>
       </a>}
@@ -59,7 +59,7 @@ const Problems = props => {
 
   return (
     <div className="">
-      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Our Problems.</h1>
+      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
         <Row className="justify-content-md-center">
           {problemsJsx}
