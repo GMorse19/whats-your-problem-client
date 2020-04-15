@@ -73,7 +73,7 @@ class Frame extends Component {
             style={{ backgroundColor: '#c2760b' }}
             closeButton
           >
-            <Modal.Title>
+            <Modal.Title className='calc-problem-content'>
               {this.props.problem.content}
             </Modal.Title>
           </Modal.Header>
