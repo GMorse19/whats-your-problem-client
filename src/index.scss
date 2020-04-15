@@ -17,3 +17,7 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-width: 500px) {
+  background-image: url('./HomePage-mobile.jpg');
+}
