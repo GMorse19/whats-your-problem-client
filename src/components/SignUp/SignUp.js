@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
+import './Signup.scss'
 
 class SignUp extends Component {
   constructor () {
@@ -51,18 +53,20 @@ class SignUp extends Component {
     const { email, password, passwordConfirmation } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+      <div className="popup2">
+        <div className="mt-3 p-4">
           <h3>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
-            <Form.Group controlId="email">
+            <Form.Group controlId="email" className="mt-4">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 required
+                autoComplete='off'
+                className="account-info"
                 type="email"
                 name="email"
                 value={email}
-                placeholder="Enter email"
+                placeholder="Email"
                 onChange={this.handleChange}
                 maxLength="35"
               />
@@ -71,6 +75,7 @@ class SignUp extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
+                className="account-info password"
                 name="password"
                 value={password}
                 type="password"
@@ -83,6 +88,7 @@ class SignUp extends Component {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 required
+                className="account-info password"
                 name="passwordConfirmation"
                 value={passwordConfirmation}
                 type="password"
@@ -90,9 +96,12 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <Link to='/' className="cancel-button" onClick={this.closeWindow}>
+              Cancel
+            </Link>
             <Button
-              variant="primary"
               type="submit"
+              className='submit-button'
             >
               Submit
             </Button>

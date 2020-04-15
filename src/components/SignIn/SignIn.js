@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
+import './Signin.scss'
 
 class SignIn extends Component {
   constructor () {
@@ -49,18 +51,20 @@ class SignIn extends Component {
     const { email, password } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Sign In</h3>
+      <div className="popup2">
+        <div className="mt-3 p-4">
+          <h3 className="">Sign In</h3>
           <Form onSubmit={this.onSignIn}>
-            <Form.Group controlId="email">
+            <Form.Group controlId="email" className="mt-4">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 required
+                autoComplete='off'
+                className="account-info"
                 type="email"
                 name="email"
                 value={email}
-                placeholder="Enter email"
+                placeholder="Email"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -68,6 +72,7 @@ class SignIn extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
+                className="account-info password"
                 name="password"
                 value={password}
                 type="password"
@@ -75,9 +80,12 @@ class SignIn extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <Link to='/' className="cancel-button" onClick={this.closeWindow}>
+              Cancel
+            </Link>
             <Button
-              variant="primary"
               type="submit"
+              className='submit-button'
             >
               Submit
             </Button>
