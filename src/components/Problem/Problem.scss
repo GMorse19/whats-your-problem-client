@@ -151,10 +151,24 @@
 .title-box::-webkit-scrollbar {
   display: none;
 }
+@media screen and (max-width: 1000px) {
+  .problem-title {
+    font-size: 40px;
+  }
+
+  .question-content {
+    font-size: 35px;
+    padding: 30px;
+  }
+}
 
 @media screen and (max-width: 500px) {
   .form-field {
     width: 50vw;
+  }
+
+  .problem-title {
+    font-size: 30px;
   }
 
   .question {

@@ -117,19 +117,21 @@ const Problem = props => {
           </div>
         </div>
         <div>
-          {userId === problem.user.id && <Button
-            href={`#problems/${props.match.params.id}/update`}
-            variant="primary"
-            className="mr-2"
-            problem={problem}
-            props={props}>
-            Update
-          </Button>}
-          {userId === problem.user.id && <Button
-            onClick={handleDelete}
-            className="btn btn-danger">
-            delete
-          </Button>}
+          <div className='delete-update'>
+            {userId === problem.user.id && <Button
+              href={`#problems/${props.match.params.id}/update`}
+              variant="primary"
+              className="mr-2"
+              problem={problem}
+              props={props}>
+              Update
+            </Button>}
+            {userId === problem.user.id && <Button
+              onClick={handleDelete}
+              className="btn btn-danger">
+              delete
+            </Button>}
+          </div>
           <div className='form-field' style={{ float: 'right' }}>
             <Form onSubmit={handleSubmit}>
               <Form.Group as={Row} style={{ alignItems: 'center' }}>
@@ -138,7 +140,7 @@ const Problem = props => {
                     className='shadow'
                     type="text"
                     autoComplete='off'
-                    placeholder="Enter Answer Here..."
+                    placeholder="Answer..."
                     value={guess.answer}
                     name="answer"
                     onChange={handleChange}
