@@ -78,8 +78,12 @@ const Problems = props => {
               </h2>
             </div>
             <div className='problem-info'>
-              <p>Creator: {problem.user.email}</p>
-              <p>Category: {problem.category}</p>
+              <div className='user-email'>
+                <p>- {problem.user.email}</p>
+              </div>
+              <div className='problem-category'>
+                <p>{problem.category}</p>
+              </div>
             </div>
           </div>
         </Col>
@@ -98,7 +102,7 @@ const Problems = props => {
     <div className="">
       <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-center">
           {problemsJsx}
         </Row>
       </Container>
