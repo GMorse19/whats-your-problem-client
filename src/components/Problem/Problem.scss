@@ -91,9 +91,18 @@
   font-size: 60px;
 }
 
+.problem-category {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .problem-info {
   float: right;
-  width: 200px;
+  width: 150px;
   text-align: right;
 }
 
@@ -151,6 +160,20 @@
 .title-box::-webkit-scrollbar {
   display: none;
 }
+
+.user-email {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  // .user-email::-webkit-scrollbar {
+  //   display: none;
+  // }
+}
+
+.user-email::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 1000px) {
   .problem-title {
     font-size: 40px;
