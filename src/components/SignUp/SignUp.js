@@ -64,6 +64,7 @@ class SignUp extends Component {
                 value={email}
                 placeholder="Enter email"
                 onChange={this.handleChange}
+                maxLength="35"
               />
             </Form.Group>
             <Form.Group controlId="password">
@@ -75,6 +76,7 @@ class SignUp extends Component {
                 type="password"
                 placeholder="Password"
                 onChange={this.handleChange}
+                maxLength="20"
               />
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">

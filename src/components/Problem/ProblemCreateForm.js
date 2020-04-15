@@ -18,6 +18,7 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
             value={problem.name}
             name="name"
             onChange={handleChange}
+            maxLength="33"
           />
         </Form.Group>
         <Form.Group>
@@ -66,12 +67,11 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
             name="category"
             onChange={handleChange}
           />
-          <br/>
-          <Form.Label>Or create your own category here.</Form.Label>
-          <Form.Control
-            autoComplete='off'
-            placeholder="Create Category Here..."
-            value={problem.category}
+          <Form.Check
+            type="radio"
+            label="Other"
+            value="other"
+            checked={problem.category === 'other'}
             name="category"
             onChange={handleChange}
           />
