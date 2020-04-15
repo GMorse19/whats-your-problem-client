@@ -64,7 +64,7 @@ class Frame extends Component {
         </Modal>}
 
         <Modal
-          dialogClassName="modal-90w"
+          dialogClassName="modal-80w"
           style={{ marginTop: '10vh', paddingBottom: '70px' }}
           show={this.state.show}
           onHide={this.props.handleClose}
