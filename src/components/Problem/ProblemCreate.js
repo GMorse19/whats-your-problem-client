@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import apiUrl from '../../apiConfig'
 import ProblemCreateForm from './ProblemCreateForm.js'
 
+import './ProblemCreate.scss'
+
 const ProblemCreate = props => {
   const [problem, setProblem] = useState({
     name: '',
