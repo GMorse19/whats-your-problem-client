@@ -24,6 +24,10 @@
   };
 }
 
+.input::-webkit-input-placeholder {
+    color: #915808 !important;
+}
+
 .account-info.password {
   :focus {
     border-top-right-radius: 0px !important;

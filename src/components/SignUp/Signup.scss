@@ -1,3 +1,4 @@
+
 // h1 {
 //   font-size: 23px;
 //   font-weight: 300;
@@ -31,6 +32,9 @@
   }
 }
 
+.input::-webkit-input-placeholder {
+    color: #915808 !important;
+}
 // .close-window-blue {
 //   background-color: #FFF;
 //   border: none;

@@ -30,11 +30,6 @@ class SignIn extends Component {
 
     signIn(this.state)
       .then(res => setUser(res.data.user))
-      .then(() => alert({
-        heading: 'Sign In Success',
-        message: messages.signInSuccess,
-        variant: 'success'
-      }))
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error)
@@ -60,7 +55,7 @@ class SignIn extends Component {
               <Form.Control
                 required
                 autoComplete='off'
-                className="account-info"
+                className="account-info input"
                 type="email"
                 name="email"
                 value={email}
@@ -72,7 +67,7 @@ class SignIn extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
-                className="account-info password"
+                className="account-info password input"
                 name="password"
                 value={password}
                 type="password"

@@ -62,7 +62,7 @@ class SignUp extends Component {
               <Form.Control
                 required
                 autoComplete='off'
-                className="account-info"
+                className="account-info input"
                 type="email"
                 name="email"
                 value={email}
@@ -75,7 +75,7 @@ class SignUp extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
-                className="account-info password"
+                className="account-info password input"
                 name="password"
                 value={password}
                 type="password"
@@ -88,7 +88,7 @@ class SignUp extends Component {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 required
-                className="account-info password"
+                className="account-info password input"
                 name="passwordConfirmation"
                 value={passwordConfirmation}
                 type="password"
