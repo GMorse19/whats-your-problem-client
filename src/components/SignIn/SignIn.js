@@ -15,6 +15,7 @@ class SignIn extends Component {
 
     this.state = {
       email: '',
+      username: '',
       password: ''
     }
   }
@@ -43,7 +44,7 @@ class SignIn extends Component {
   }
 
   render () {
-    const { email, password } = this.state
+    const { email, password, username } = this.state
 
     return (
       <div className="popup2">
@@ -53,13 +54,23 @@ class SignIn extends Component {
             <Form.Group controlId="email" className="mt-4">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                required
                 autoComplete='off'
                 className="account-info input"
                 type="email"
                 name="email"
                 value={email}
                 placeholder="Email"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                className="account-info username input"
+                name="username"
+                value={username}
+                type="username"
+                placeholder="Username"
                 onChange={this.handleChange}
               />
             </Form.Group>
