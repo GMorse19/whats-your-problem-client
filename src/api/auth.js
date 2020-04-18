@@ -55,3 +55,20 @@ export const changePassword = (passwords, user) => {
     }
   })
 }
+
+export const updateUser = (credentials, user) => {
+  return axios({
+    url: apiUrl + '/update-user',
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      credentials: {
+        password: credentials.password,
+        email: credentials.email,
+        username: credentials.username
+      }
+    }
+  })
+}

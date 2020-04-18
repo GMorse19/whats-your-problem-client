@@ -7,6 +7,7 @@ import './Header.scss'
 const authenticatedOptions = (
   <Fragment>
     <Nav.Link style={{ color: '#000' }} href="#change-password">Change Password</Nav.Link>
+    <Nav.Link style={{ color: '#000' }} href="#update-user">Change Profile</Nav.Link>
     <Nav.Link style={{ color: '#000' }} href="#sign-out">Sign Out</Nav.Link>
     <Nav.Link style={{ color: '#000' }} href="#problem-create">Problem Create</Nav.Link>
   </Fragment>
