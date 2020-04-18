@@ -7,6 +7,8 @@ import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import './ChangePassword.scss'
+
 class ChangePassword extends Component {
   constructor () {
     super()
@@ -48,14 +50,15 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+      <div className="popup2">
+        <div className="mt-3 p-4">
           <h3>Change Password</h3>
           <Form onSubmit={this.onChangePassword}>
-            <Form.Group controlId="oldPassword">
+            <Form.Group controlId="oldPassword" className="mt-4">
               <Form.Label>Old password</Form.Label>
               <Form.Control
                 required
+                className="account-info password input"
                 name="oldPassword"
                 value={oldPassword}
                 type="password"
@@ -67,6 +70,7 @@ class ChangePassword extends Component {
               <Form.Label>New Password</Form.Label>
               <Form.Control
                 required
+                className="account-info password input"
                 name="newPassword"
                 value={newPassword}
                 type="password"
@@ -75,8 +79,8 @@ class ChangePassword extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
               type="submit"
+              className='submit-button'
             >
               Submit
             </Button>
