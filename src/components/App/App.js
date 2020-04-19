@@ -10,6 +10,7 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+import UpdateUser from '../UpdateUser/UpdateUser'
 import Problems from '../Problem/Problems.js'
 import ProblemCreate from '../Problem/ProblemCreate.js'
 import ProblemShow from '../Problem/ProblemShow.js'
@@ -64,6 +65,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/update-user' render={() => (
+            <UpdateUser alert={this.alert} user={user} setUser={this.setUser}/>
           )} />
           <Route user={user} exact path='/problems' render={() => (
             <Problems alert={this.alert} user={user} />
