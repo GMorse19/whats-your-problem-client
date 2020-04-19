@@ -22,8 +22,7 @@ export const signIn = credentials => {
     method: 'POST',
     data: {
       credentials: {
-        email: credentials.email,
-        username: credentials.username,
+        identifier: credentials.identifier,
         password: credentials.password
       }
     }
@@ -51,6 +50,23 @@ export const changePassword = (passwords, user) => {
       passwords: {
         old: passwords.oldPassword,
         new: passwords.newPassword
+      }
+    }
+  })
+}
+
+export const updateUser = (credentials, user) => {
+  return axios({
+    url: apiUrl + '/update-user',
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      credentials: {
+        password: credentials.password,
+        email: credentials.email,
+        username: credentials.username
       }
     }
   })
