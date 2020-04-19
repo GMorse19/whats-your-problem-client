@@ -14,8 +14,7 @@ class SignIn extends Component {
     super()
 
     this.state = {
-      email: '',
-      username: '',
+      identifier: '',
       password: ''
     }
   }
@@ -34,7 +33,7 @@ class SignIn extends Component {
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '' })
+        this.setState({ identifier: '', password: '' })
         alert({
           heading: 'Sign In Failed',
           message: messages.signInFailure,
@@ -44,33 +43,22 @@ class SignIn extends Component {
   }
 
   render () {
-    const { email, password, username } = this.state
+    const { identifier, password } = this.state
 
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
           <h3 className="">Sign In</h3>
           <Form onSubmit={this.onSignIn}>
-            <Form.Group controlId="email" className="mt-4">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group controlId="identifier" className="mt-4">
+              <Form.Label>use email or username</Form.Label>
               <Form.Control
                 autoComplete='off'
                 className="account-info input"
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Email"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                className="account-info username input"
-                name="username"
-                value={username}
-                type="username"
-                placeholder="Username"
+                type="identifier"
+                name="identifier"
+                value={identifier}
+                placeholder="Login"
                 onChange={this.handleChange}
               />
             </Form.Group>

@@ -10,8 +10,8 @@ import Button from 'react-bootstrap/Button'
 import './UpdateUser.scss'
 
 class ChangePassword extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       password: '',
@@ -53,7 +53,7 @@ class ChangePassword extends Component {
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
-          <h3>Change Password</h3>
+          <h3>Update Profile</h3>
           <Form onSubmit={this.onUpdateUser}>
             <Form.Group controlId="password" className="mt-4">
               <Form.Label>Password</Form.Label>
