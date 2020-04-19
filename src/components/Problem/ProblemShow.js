@@ -61,6 +61,28 @@ const Problem = props => {
     setGuess({ ...guess, [event.target.name]: event.target.value })
   }
 
+  const handleLike = event => {
+    console.log('handleLike')
+    axios({
+      url: `${apiUrl}/problems/${problem.id}/like`,
+      method: 'PUT',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      }
+    })
+  }
+
+  const handleUnlike = event => {
+    console.log('handleUnlike')
+    axios({
+      url: `${apiUrl}/problems/${problem.id}/unlike`,
+      method: 'PUT',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      }
+    })
+  }
+
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
   const handleShowWin = () => setShowWin(true)
@@ -74,7 +96,8 @@ const Problem = props => {
   if (!problem) {
     return <p>Loading...</p>
   }
-
+  console.log('ID: ' + problem.id)
+  console.log(problem.votes_for)
   return (
     <div>
       <div className="problem-board">
@@ -169,6 +192,8 @@ const Problem = props => {
       >
         Work-Space
       </Button>
+      <Button onClick={handleLike}>Like</Button>
+      <Button onClick={handleUnlike}>Un Like</Button>
       {show && <div>
         <Frame
           props={props}
