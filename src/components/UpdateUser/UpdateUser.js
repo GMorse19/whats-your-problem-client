@@ -9,14 +9,14 @@ import Button from 'react-bootstrap/Button'
 
 import './UpdateUser.scss'
 
-class ChangePassword extends Component {
+class UpdateUser extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       password: '',
-      email: '',
-      username: ''
+      email: this.props.user.email,
+      username: this.props.user.username
     }
   }
 
@@ -27,12 +27,18 @@ class ChangePassword extends Component {
   onUpdateUser = event => {
     event.preventDefault()
 
-    const { alert, history, user } = this.props
+    const { alert, history, user, setUser } = this.props
 
     updateUser(this.state, user)
+      .then(() => setUser({
+        id: user.id,
+        email: this.state.email,
+        username: this.state.username,
+        token: user.token
+      }))
       .then(() => alert({
         heading: 'Change User Success',
-        message: messages.changePasswordSuccess,
+        message: messages.changeUserSuccess,
         variant: 'success'
       }))
       .then(() => history.push('/'))
@@ -41,7 +47,7 @@ class ChangePassword extends Component {
         this.setState({ password: '', email: '', username: '' })
         alert({
           heading: 'Update User Failed',
-          message: messages.changePasswordFailure,
+          message: messages.changeUserFailure,
           variant: 'danger'
         })
       })
@@ -67,7 +73,7 @@ class ChangePassword extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Group controlId="email">
+            <Form.Group controlId="username">
               <Form.Label>New Email</Form.Label>
               <Form.Control
                 required
@@ -104,4 +110,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default withRouter(ChangePassword)
+export default withRouter(UpdateUser)
