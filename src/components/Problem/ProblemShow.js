@@ -12,16 +12,15 @@ import Frame from '../Calculator/Frame'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
-  // const [flag, setFlag] = useState(null)
   const [guess, setGuess] = useState({ answer: '' })
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
+  // const [user, setUser] = useState(props.user)
   const [liked, setLiked] = useState(false)
 
   const userId = props.user ? props.user.id : null
   console.log('UserId: ' + userId)
-  console.log('props.user: ' + props.user.votes[0].votable_id)
 
   useEffect(() => {
     axios({
@@ -66,8 +65,8 @@ const Problem = props => {
   }
 
   const handleLike = event => {
-    console.log('handleLike')
     setLiked(true)
+    like = true
     axios({
       url: `${apiUrl}/problems/${problem.id}/like`,
       method: 'PUT',
@@ -75,10 +74,15 @@ const Problem = props => {
         'Authorization': `Token token=${props.user.token}`
       }
     })
+    // .then(response => {
+    //   props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
+    //   setUser(user)
+    // })
   }
 
   const handleUnlike = event => {
     setLiked(false)
+    like = false
     axios({
       url: `${apiUrl}/problems/${problem.id}/unlike`,
       method: 'PUT',
@@ -86,6 +90,10 @@ const Problem = props => {
         'Authorization': `Token token=${props.user.token}`
       }
     })
+    // .then(response => {
+    //   props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
+    //   props.history.push('/')
+    // })
   }
 
   const handleShow = () => setShow(true)
@@ -102,29 +110,22 @@ const Problem = props => {
     return <p>Loading...</p>
   }
 
-  if (props.user.votes) {
+  let like = false
+
+  if (!props.user) {
+    console.log('no user')
+  } else {
     for (let i = 0; i < props.user.votes.length; i++) {
       if (problem.id === props.user.votes[i].votable_id) {
         console.log(props.user.votes[i].vote_flag)
         if (props.user.votes[i].vote_flag === true) {
-          console.log(liked)
+          like = true
         }
+        console.log('You liked this problem: ' + like)
       }
     }
   }
 
-  // if (userId === problem.voter_id) {
-  //   setFlag()
-  // }
-
-  // const checkVotable = props.user.votes.map(vote => (
-  //   <div key={vote.id}>
-  //     {<p>{vote.votable_id}</p>}
-  //   </div>
-  // ))
-
-  console.log('ID: ' + problem.id)
-  console.log(problem.votes_for)
   return (
     <div>
       <div className="problem-board">
@@ -219,8 +220,8 @@ const Problem = props => {
       >
         Work-Space
       </Button>
-      {!liked && <Button onClick={handleLike}>Like</Button>}
-      {liked && <Button onClick={handleUnlike}>Un Like</Button>}
+      {props.user && !liked && <Button onClick={handleLike}>Like</Button>}
+      {props.user && liked && <Button onClick={handleUnlike}>Un Like</Button>}
       {show && <div>
         <Frame
           props={props}

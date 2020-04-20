@@ -26,9 +26,6 @@ const ProblemUpdate = (props) => {
       .catch(console.error)
   }, [])
 
-  console.log(problem)
-  console.log(props.match.params)
-
   const handleChange = event => {
     event.persist()
     setProblem(problem => ({ ...problem, [event.target.name]: event.target.value }))
