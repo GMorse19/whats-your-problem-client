@@ -34,6 +34,7 @@ class UpdateUser extends Component {
         id: user.id,
         email: this.state.email,
         username: this.state.username,
+        votes: user.votes,
         token: user.token
       }))
       .then(() => alert({

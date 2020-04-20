@@ -12,12 +12,16 @@ import Frame from '../Calculator/Frame'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
+  // const [flag, setFlag] = useState(null)
   const [guess, setGuess] = useState({ answer: '' })
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
+  const [liked, setLiked] = useState(false)
 
   const userId = props.user ? props.user.id : null
+  console.log('UserId: ' + userId)
+  console.log('props.user: ' + props.user.votes[0].votable_id)
 
   useEffect(() => {
     axios({
@@ -63,6 +67,7 @@ const Problem = props => {
 
   const handleLike = event => {
     console.log('handleLike')
+    setLiked(true)
     axios({
       url: `${apiUrl}/problems/${problem.id}/like`,
       method: 'PUT',
@@ -73,7 +78,7 @@ const Problem = props => {
   }
 
   const handleUnlike = event => {
-    console.log('handleUnlike')
+    setLiked(false)
     axios({
       url: `${apiUrl}/problems/${problem.id}/unlike`,
       method: 'PUT',
@@ -96,6 +101,28 @@ const Problem = props => {
   if (!problem) {
     return <p>Loading...</p>
   }
+
+  if (props.user.votes) {
+    for (let i = 0; i < props.user.votes.length; i++) {
+      if (problem.id === props.user.votes[i].votable_id) {
+        console.log(props.user.votes[i].vote_flag)
+        if (props.user.votes[i].vote_flag === true) {
+          console.log(liked)
+        }
+      }
+    }
+  }
+
+  // if (userId === problem.voter_id) {
+  //   setFlag()
+  // }
+
+  // const checkVotable = props.user.votes.map(vote => (
+  //   <div key={vote.id}>
+  //     {<p>{vote.votable_id}</p>}
+  //   </div>
+  // ))
+
   console.log('ID: ' + problem.id)
   console.log(problem.votes_for)
   return (
@@ -192,8 +219,8 @@ const Problem = props => {
       >
         Work-Space
       </Button>
-      <Button onClick={handleLike}>Like</Button>
-      <Button onClick={handleUnlike}>Un Like</Button>
+      {!liked && <Button onClick={handleLike}>Like</Button>}
+      {liked && <Button onClick={handleUnlike}>Un Like</Button>}
       {show && <div>
         <Frame
           props={props}
