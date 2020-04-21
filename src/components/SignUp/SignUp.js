@@ -16,6 +16,7 @@ class SignUp extends Component {
     this.state = {
       email: '',
       username: '',
+      identifier: '',
       password: '',
       passwordConfirmation: ''
     }
@@ -27,7 +28,7 @@ class SignUp extends Component {
 
   onSignUp = event => {
     event.preventDefault()
-
+    this.setState({ identifier: this.state.email })
     const { alert, history, setUser } = this.props
 
     signUp(this.state)

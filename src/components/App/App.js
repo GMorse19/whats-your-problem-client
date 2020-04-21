@@ -38,7 +38,6 @@ class App extends Component {
 
   render () {
     const { alerts, user } = this.state
-    console.log(user)
     return (
       <Fragment>
         <Header user={user} />
