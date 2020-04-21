@@ -12,6 +12,7 @@ import Frame from '../Calculator/Frame'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
+  const [flag, setFlag] = useState(null)
   const [guess, setGuess] = useState({ answer: '' })
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
@@ -27,6 +28,20 @@ const Problem = props => {
       .then(res => setProblem(res.data.problem))
       .catch(console.error)
   }, [])
+
+  if (props.user) {
+    useEffect(() => {
+      axios({
+        url: `${apiUrl}/problems/${props.match.params.id}/likes`,
+        method: 'GET',
+        headers: {
+          'Authorization': `Token token=${props.user.token}`
+        }
+      })
+        .then(res => setFlag(res.data[0]))
+        .catch(console.error)
+    }, [])
+  }
 
   const handleDelete = event => {
     axios({
@@ -59,6 +74,28 @@ const Problem = props => {
   const handleChange = event => {
     event.persist()
     setGuess({ ...guess, [event.target.name]: event.target.value })
+  }
+
+  const handleLike = event => {
+    setFlag(true)
+    axios({
+      url: `${apiUrl}/problems/${problem.id}/like`,
+      method: 'PUT',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      }
+    })
+  }
+
+  const handleUnlike = event => {
+    setFlag(false)
+    axios({
+      url: `${apiUrl}/problems/${problem.id}/unlike`,
+      method: 'PUT',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      }
+    })
   }
 
   const handleShow = () => setShow(true)
@@ -169,6 +206,8 @@ const Problem = props => {
       >
         Work-Space
       </Button>
+      {props.user && !flag && <Button onClick={handleLike}>Like</Button>}
+      {props.user && flag && <Button onClick={handleUnlike}>Un Like</Button>}
       {show && <div>
         <Frame
           props={props}
