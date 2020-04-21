@@ -12,15 +12,13 @@ import Frame from '../Calculator/Frame'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
+  const [flag, setFlag] = useState(null)
   const [guess, setGuess] = useState({ answer: '' })
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
-  // const [user, setUser] = useState(props.user)
-  const [liked, setLiked] = useState(false)
 
   const userId = props.user ? props.user.id : null
-  console.log('UserId: ' + userId)
 
   useEffect(() => {
     axios({
@@ -30,6 +28,20 @@ const Problem = props => {
       .then(res => setProblem(res.data.problem))
       .catch(console.error)
   }, [])
+
+  if (props.user) {
+    useEffect(() => {
+      axios({
+        url: `${apiUrl}/problems/${props.match.params.id}/likes`,
+        method: 'GET',
+        headers: {
+          'Authorization': `Token token=${props.user.token}`
+        }
+      })
+        .then(res => setFlag(res.data[0]))
+        .catch(console.error)
+    }, [])
+  }
 
   const handleDelete = event => {
     axios({
@@ -65,8 +77,7 @@ const Problem = props => {
   }
 
   const handleLike = event => {
-    setLiked(true)
-    like = true
+    setFlag(true)
     axios({
       url: `${apiUrl}/problems/${problem.id}/like`,
       method: 'PUT',
@@ -74,15 +85,10 @@ const Problem = props => {
         'Authorization': `Token token=${props.user.token}`
       }
     })
-    // .then(response => {
-    //   props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
-    //   setUser(user)
-    // })
   }
 
   const handleUnlike = event => {
-    setLiked(false)
-    like = false
+    setFlag(false)
     axios({
       url: `${apiUrl}/problems/${problem.id}/unlike`,
       method: 'PUT',
@@ -90,10 +96,6 @@ const Problem = props => {
         'Authorization': `Token token=${props.user.token}`
       }
     })
-    // .then(response => {
-    //   props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
-    //   props.history.push('/')
-    // })
   }
 
   const handleShow = () => setShow(true)
@@ -108,22 +110,6 @@ const Problem = props => {
 
   if (!problem) {
     return <p>Loading...</p>
-  }
-
-  let like = false
-
-  if (!props.user) {
-    console.log('no user')
-  } else {
-    for (let i = 0; i < props.user.votes.length; i++) {
-      if (problem.id === props.user.votes[i].votable_id) {
-        console.log(props.user.votes[i].vote_flag)
-        if (props.user.votes[i].vote_flag === true) {
-          like = true
-        }
-        console.log('You liked this problem: ' + like)
-      }
-    }
   }
 
   return (
@@ -220,8 +206,8 @@ const Problem = props => {
       >
         Work-Space
       </Button>
-      {props.user && !liked && <Button onClick={handleLike}>Like</Button>}
-      {props.user && liked && <Button onClick={handleUnlike}>Un Like</Button>}
+      {props.user && !flag && <Button onClick={handleLike}>Like</Button>}
+      {props.user && flag && <Button onClick={handleUnlike}>Un Like</Button>}
       {show && <div>
         <Frame
           props={props}
