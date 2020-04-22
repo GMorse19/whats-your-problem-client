@@ -9,6 +9,7 @@ import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
+import Share from '../Share/Share'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -17,6 +18,7 @@ const Problem = props => {
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
+  const [share, setShare] = useState(false)
 
   const userId = props.user ? props.user.id : null
 
@@ -66,7 +68,7 @@ const Problem = props => {
     if (guess.answer === problem.answer) {
       handleShowWin()
     } else {
-      handleShowLoss()
+      handleLoss()
     }
     setGuess({ answer: '' })
   }
@@ -98,15 +100,14 @@ const Problem = props => {
     })
   }
 
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleShare = () => setShare(prevState => (!prevState))
+  const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(true)
   const handleCloseWin = () => {
     setShowWin(false)
     setGuess({ answer: '' })
   }
-  const handleShowLoss = () => setShowLoss(true)
-  const handleCloseLoss = () => setShowLoss(false)
+  const handleLoss = () => setShowLoss(prevState => (!prevState))
 
   if (!problem) {
     return <p>Loading...</p>
@@ -130,17 +131,17 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal dialogClassName="modal-50w" show={showLoss} onHide={handleCloseLoss}>
+        <Modal dialogClassName="modal-50w" show={showLoss} onHide={handleLoss}>
           <Modal.Header closeButton>
             <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
           </Modal.Header>
           <Modal.Body>Sorry. Better luck next time!</Modal.Body>
           <Modal.Footer>
             <Modal.Title>You can do it!</Modal.Title>
-            <Button variant="secondary" onClick={handleCloseLoss}>
+            <Button variant="secondary" onClick={handleLoss}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleCloseLoss}>
+            <Button variant="primary" onClick={handleLoss}>
               Try Again
             </Button>
           </Modal.Footer>
@@ -192,11 +193,13 @@ const Problem = props => {
                   type="submit">
                   Submit
                 </Button>
+                <Button onClick={handleShare}>Share</Button>
               </Form.Group>
             </Form>
           </div>
         </div>
       </div>
+
       <Button
         className='shadow'
         onClick={handleShow}
@@ -206,15 +209,24 @@ const Problem = props => {
       >
         Work-Space
       </Button>
+
       {props.user && !flag && <Button onClick={handleLike}>Like</Button>}
       {props.user && flag && <Button onClick={handleUnlike}>Un Like</Button>}
+
+      {share && <div>
+        <Share
+          handleClose={handleShare}
+        />
+      </div>}
+
       {show && <div>
         <Frame
           props={props}
           problem={problem}
-          handleClose={handleClose}
+          handleClose={handleShow}
         />
       </div>}
+
     </div>
   )
 }
