@@ -105,6 +105,16 @@ const Problem = props => {
     style={{ width: '20px' }}
   />
 
+  const emptyHeart = <img
+    src='empty-heart.png'
+    style={{ width: '20px' }}
+  />
+
+  const redHeart = <img
+    src='red-heart.png'
+    style={{ width: '20px' }}
+  />
+
   const handleShare = () => setShare(prevState => (!prevState))
   const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(true)
@@ -155,12 +165,34 @@ const Problem = props => {
           onClick={handleShare}
           style={{ margin: '10px', float: 'right', background: 'none', border: 'none' }}
         >{image}</Button>
-        <h1 className='problem-title'>{problem.name}</h1>
-        <p>Created by: {problem.user.email}</p>
-        <p>Category: {problem.category}</p>
-        <div className='question'>
-          <div className='question2'>
-            <h2 className='question-content'>{problem.content}</h2>
+
+        {props.user &&
+          !flag &&
+          <Button
+            style={{
+              background: 'none',
+              border: 'none',
+              float: 'right',
+              marginTop: '15px' }}
+            onClick={handleLike}>{emptyHeart}</Button>}
+        {props.user &&
+          flag &&
+          <Button
+            style={{
+              background: 'none',
+              border: 'none',
+              float: 'right',
+              marginTop: '15px' }}
+            onClick={handleUnlike}>{redHeart}</Button>}
+
+        <div>
+          <h1 className='problem-title'>{problem.name}</h1>
+          <p>Created by: {problem.user.email}</p>
+          <p>Category: {problem.category}</p>
+          <div className='question'>
+            <div className='question2'>
+              <h2 className='question-content'>{problem.content}</h2>
+            </div>
           </div>
         </div>
         <div>
@@ -217,9 +249,6 @@ const Problem = props => {
       >
         Work-Space
       </Button>
-
-      {props.user && !flag && <Button onClick={handleLike}>Like</Button>}
-      {props.user && flag && <Button onClick={handleUnlike}>Un Like</Button>}
 
       {share && <div>
         <Share
