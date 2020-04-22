@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
+import { EmailShareButton, EmailIcon } from 'react-share'
 
 import './Share.scss'
 
@@ -11,6 +12,9 @@ class Share extends Component {
     }
     // this.handleClick = this.handleClick.bind(this)
   }
+
+  shareUrl = window.location.href
+
   render () {
     return (
       <div>
@@ -21,6 +25,9 @@ class Share extends Component {
           <Modal.Header closeButton>Share This problem!!</Modal.Header>
           <Modal.Body>
             <p>Share!!</p>
+            <div><EmailShareButton url={this.shareUrl}>
+              <EmailIcon size={32} round={true} />
+            </EmailShareButton></div>
           </Modal.Body>
           <Modal.Footer>
             <Modal.Title>Good Job!</Modal.Title>
