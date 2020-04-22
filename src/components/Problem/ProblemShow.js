@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import { Tooltip } from '@material-ui/core'
+import Zoom from '@material-ui/core/Zoom'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
@@ -174,7 +176,7 @@ const Problem = props => {
         </div>
         <div>
           <div className='delete-update'>
-            {userId === problem.user.id && <Button
+            {(userId === problem.user.id || userId === 1) && <Button
               href={`#problems/${props.match.params.id}/update`}
               variant="primary"
               className="mr-2"
@@ -182,7 +184,7 @@ const Problem = props => {
               props={props}>
               Update
             </Button>}
-            {userId === problem.user.id && <Button
+            {(userId === problem.user.id || userId === 1) && <Button
               onClick={handleDelete}
               className="btn btn-danger">
               delete
@@ -227,25 +229,28 @@ const Problem = props => {
           Work-Space
         </Button>
 
-        <Button
-          onClick={handleShare}
-          style={{ margin: '10px', background: 'none', border: 'none' }}
-        >{image}</Button>
+        <Tooltip title='share' arrow leaveDelay={200} TransitionComponent={Zoom}>
+          <Button
+            onClick={handleShare}
+            style={{ margin: '10px', background: 'none', border: 'none' }}
+          >{image}</Button></Tooltip>
 
         {props.user &&
       !flag &&
-      <Button
-        style={{
-          background: 'none',
-          border: 'none' }}
-        onClick={handleLike}>{emptyHeart}</Button>}
+      <Tooltip title='like' enterDelay={500} arrow>
+        <Button
+          style={{
+            background: 'none',
+            border: 'none' }}
+          onClick={handleLike}>{emptyHeart}</Button></Tooltip>}
         {props.user &&
       flag &&
-      <Button
-        style={{
-          background: 'none',
-          border: 'none' }}
-        onClick={handleUnlike}>{redHeart}</Button>}
+      <Tooltip title='unlike' enterDelay={500} arrow>
+        <Button
+          style={{
+            background: 'none',
+            border: 'none' }}
+          onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
       </div>
 
       {share && <div>
