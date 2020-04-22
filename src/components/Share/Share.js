@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import { EmailShareButton, EmailIcon } from 'react-share'
+import ShareButton from './ShareButtons'
 
 import './Share.scss'
 
@@ -10,7 +10,6 @@ class Share extends Component {
     this.state = {
       show: true
     }
-    // this.handleClick = this.handleClick.bind(this)
   }
 
   shareUrl = window.location.href
@@ -22,15 +21,14 @@ class Share extends Component {
           show={this.state.show}
           onHide={this.props.handleClose}
         >
-          <Modal.Header closeButton>Share This problem!!</Modal.Header>
-          <Modal.Body>
-            <p>Share!!</p>
-            <div><EmailShareButton url={this.shareUrl}>
-              <EmailIcon size={32} round={true} />
-            </EmailShareButton></div>
+          <Modal.Header style={{ backgroundColor: '#c2760b' }} closeButton>Share this problem with your friends!</Modal.Header>
+          <Modal.Body style={{ textAlign: 'center', backgroundColor: '#edbe6d' }}>
+            <ShareButton
+              shareUrl={this.shareUrl}
+            />
           </Modal.Body>
-          <Modal.Footer>
-            <Modal.Title>Good Job!</Modal.Title>
+          <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
+            <Modal.Title></Modal.Title>
           </Modal.Footer>
         </Modal>
       </div>

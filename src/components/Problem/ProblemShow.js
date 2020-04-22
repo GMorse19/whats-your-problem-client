@@ -100,6 +100,11 @@ const Problem = props => {
     })
   }
 
+  const image = <img
+    src='share-icon.png'
+    style={{ width: '20px' }}
+  />
+
   const handleShare = () => setShare(prevState => (!prevState))
   const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(true)
@@ -146,6 +151,10 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
+        <Button
+          onClick={handleShare}
+          style={{ margin: '10px', float: 'right', background: 'none', border: 'none' }}
+        >{image}</Button>
         <h1 className='problem-title'>{problem.name}</h1>
         <p>Created by: {problem.user.email}</p>
         <p>Category: {problem.category}</p>
@@ -193,7 +202,6 @@ const Problem = props => {
                   type="submit">
                   Submit
                 </Button>
-                <Button onClick={handleShare}>Share</Button>
               </Form.Group>
             </Form>
           </div>
