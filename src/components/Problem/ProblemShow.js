@@ -107,12 +107,12 @@ const Problem = props => {
 
   const emptyHeart = <img
     src='empty-heart.png'
-    style={{ width: '20px' }}
+    style={{ width: '30px' }}
   />
 
   const redHeart = <img
     src='red-heart.png'
-    style={{ width: '20px' }}
+    style={{ width: '30px' }}
   />
 
   const handleShare = () => setShare(prevState => (!prevState))
@@ -161,29 +161,6 @@ const Problem = props => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Button
-          onClick={handleShare}
-          style={{ margin: '10px', float: 'right', background: 'none', border: 'none' }}
-        >{image}</Button>
-
-        {props.user &&
-          !flag &&
-          <Button
-            style={{
-              background: 'none',
-              border: 'none',
-              float: 'right',
-              marginTop: '15px' }}
-            onClick={handleLike}>{emptyHeart}</Button>}
-        {props.user &&
-          flag &&
-          <Button
-            style={{
-              background: 'none',
-              border: 'none',
-              float: 'right',
-              marginTop: '15px' }}
-            onClick={handleUnlike}>{redHeart}</Button>}
 
         <div>
           <h1 className='problem-title'>{problem.name}</h1>
@@ -211,7 +188,7 @@ const Problem = props => {
               delete
             </Button>}
           </div>
-          <div className='form-field' style={{ float: 'right' }}>
+          <div className='form-field' style={{ float: 'right', width: '200px' }}>
             <Form onSubmit={handleSubmit}>
               <Form.Group as={Row} style={{ alignItems: 'center' }}>
                 <Col>
@@ -239,16 +216,37 @@ const Problem = props => {
           </div>
         </div>
       </div>
+      <div style={{ float: 'left' }}>
+        <Button
+          className='shadow'
+          onClick={handleShow}
+          props={props}
+          problem={problem}
+          style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none', float: 'left' }}
+        >
+          Work-Space
+        </Button>
 
+        <Button
+          onClick={handleShare}
+          style={{ margin: '10px', background: 'none', border: 'none' }}
+        >{image}</Button>
+
+        {props.user &&
+      !flag &&
       <Button
-        className='shadow'
-        onClick={handleShow}
-        props={props}
-        problem={problem}
-        style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none' }}
-      >
-        Work-Space
-      </Button>
+        style={{
+          background: 'none',
+          border: 'none' }}
+        onClick={handleLike}>{emptyHeart}</Button>}
+        {props.user &&
+      flag &&
+      <Button
+        style={{
+          background: 'none',
+          border: 'none' }}
+        onClick={handleUnlike}>{redHeart}</Button>}
+      </div>
 
       {share && <div>
         <Share
