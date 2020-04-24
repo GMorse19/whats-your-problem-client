@@ -257,6 +257,7 @@ const Problem = props => {
       </div>
       <div><Print
         props={props}
+        user={problem.user.email}
         content={problem.content}
         title={problem.name}
       /></div>

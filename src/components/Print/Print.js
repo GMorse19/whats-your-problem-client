@@ -1,23 +1,34 @@
 import React, { useRef } from 'react'
 import ReactToPrint from 'react-to-print'
-// import ComponentToPrint from './ComponentToPrint'
+
+import Button from 'react-bootstrap/Button'
 
 class ComponentToPrint extends React.Component {
   constructor (props) {
     super()
-    console.log(props)
+
     this.state = {
       title: props.title,
-      content: props.content
+      content: props.content,
+      user: props.user
     }
   }
 
   render () {
-    console.log(this.state.title)
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <h1>{this.state.title}</h1>
-        <h6>{this.state.content}</h6>
+        <br />
+        <h3>{this.state.content}</h3>
+        <br />
+        <div style={{ float: 'right' }}>
+          <p>
+            Created by: {this.state.user}
+          </p>
+          <p>
+            https://gmorse19.github.io/whats-your-problem-client/
+          </p>
+        </div>
       </div>
     )
   }
@@ -28,10 +39,20 @@ const Example = (props) => {
   return (
     <div>
       <ReactToPrint
-        trigger={() => <button>Print this out!</button>}
+        trigger={() => <Button
+          style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none', float: 'left' }}
+        >
+          Print
+        </Button>}
         content={() => componentRef.current}
       />
-      <ComponentToPrint title={props.title} content={props.content} ref={componentRef} />
+      <div style={{ display: 'none' }}>
+        <ComponentToPrint
+          title={props.title}
+          user={props.user}
+          content={props.content}
+          ref={componentRef} />
+      </div>
     </div>
   )
 }
