@@ -13,6 +13,9 @@ import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
 
+// import ComponentToPrint from '../Print/Print'
+import Print from '../Print/Print'
+
 const Problem = props => {
   const [problem, setProblem] = useState(null)
   const [flag, setFlag] = useState(null)
@@ -252,6 +255,12 @@ const Problem = props => {
             border: 'none' }}
           onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
       </div>
+      <div><Print
+        props={props}
+        user={problem.user.email}
+        content={problem.content}
+        title={problem.name}
+      /></div>
 
       {share && <div>
         <Share
