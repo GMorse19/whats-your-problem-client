@@ -17,16 +17,16 @@ class ComponentToPrint extends React.Component {
   render () {
     return (
       <div style={{ textAlign: 'center' }}>
-        <h1>{this.state.title}</h1>
+        <h1 style={{ fontFamily: 'Righteous' }}>Whats Your Problem?</h1>
+        <p>https://gmorse19.github.io/whats-your-problem-client/</p>
+        <hr />
+        <h2>{this.state.title}</h2>
         <br />
         <h3>{this.state.content}</h3>
         <br />
         <div style={{ float: 'right' }}>
           <p>
             Created by: {this.state.user}
-          </p>
-          <p>
-            https://gmorse19.github.io/whats-your-problem-client/
           </p>
         </div>
       </div>
