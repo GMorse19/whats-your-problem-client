@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import './ProblemCreate.scss'
+import './ProblemUpdate.scss'
 
 const ProblemForm = ({ props, problem, handleSubmit, handleChange, cancelPath }) => (
 
