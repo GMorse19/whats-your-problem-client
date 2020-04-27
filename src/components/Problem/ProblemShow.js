@@ -13,7 +13,6 @@ import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
 
-// import ComponentToPrint from '../Print/Print'
 import Print from '../Print/Print'
 
 const Problem = props => {

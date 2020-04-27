@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect, withRouter, Prompt } from 'react-router-dom'
 import axios from 'axios'
 
-import apiUrl from '../../apiConfig'
+import apiUrl from '../../../apiConfig'
 import ProblemForm from './ProblemForm'
 
 const ProblemUpdate = (props) => {
+  const [prompt, setPrompt] = useState(false)
   const [problem, setProblem] = useState({
     name: '',
     content: '',
@@ -32,6 +33,7 @@ const ProblemUpdate = (props) => {
   }
 
   const handleSubmit = event => {
+    setPrompt(true)
     event.preventDefault()
 
     axios({
@@ -55,13 +57,19 @@ const ProblemUpdate = (props) => {
   }
 
   return (
-    <ProblemForm
-      props={props}
-      problem={problem}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      cancelPath={`#home/${props.match.params.id}`}
-    />
+    <div>
+      <Prompt
+        when={!prompt}
+        message="Are you sure you want to leave?"
+      />
+      <ProblemForm
+        props={props}
+        problem={problem}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        cancelPath={`#home/${props.match.params.id}`}
+      />
+    </div>
   )
 }
 

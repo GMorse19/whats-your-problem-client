@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { withRouter, Prompt } from 'react-router-dom'
-import apiUrl from '../../apiConfig'
+import apiUrl from '../../../apiConfig'
 import ProblemCreateForm from './ProblemCreateForm.js'
 
 import './ProblemCreate.scss'

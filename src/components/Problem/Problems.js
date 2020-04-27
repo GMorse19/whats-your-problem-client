@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-// import Button from 'react-bootstrap/Button'
-// import Card from 'react-bootstrap/Card'
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -14,7 +12,6 @@ import './Problem.scss'
 
 const Problems = props => {
   const [problems, setProblems] = useState([])
-  // const userId = props.user.id
 
   useEffect(() => {
     axios({
