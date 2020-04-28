@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 import './ProblemUpdate.scss'
 
-const ProblemForm = ({ props, problem, handleSubmit, handleChange, cancelPath }) => (
+const ProblemForm = ({ props, problem, handleDelete, handleSubmit, handleChange, cancelPath }) => (
 
   <div className='review-form'>
     <div className="review-scroll">
@@ -137,6 +137,11 @@ const ProblemForm = ({ props, problem, handleSubmit, handleChange, cancelPath })
         </Link>
         <Button className='submit-button' type="submit">Submit</Button>
       </Form>
+      <Button
+        onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) handleDelete(e) }}
+        className="btn btn-danger">
+        delete
+      </Button>
     </div>
   </div>
 )

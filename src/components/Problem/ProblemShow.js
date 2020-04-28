@@ -49,22 +49,22 @@ const Problem = props => {
     }, [])
   }
 
-  const handleDelete = event => {
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-      .then(() => {
-        props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
-        props.history.push('/problems')
-      })
-      .catch(() => {
-        props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
-      })
-  }
+  // const handleDelete = event => {
+  //   axios({
+  //     url: `${apiUrl}/problems/${props.match.params.id}`,
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Authorization': `Token token=${props.user.token}`
+  //     }
+  //   })
+  //     .then(() => {
+  //       props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
+  //       props.history.push('/problems')
+  //     })
+  //     .catch(() => {
+  //       props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
+  //     })
+  // }
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -185,11 +185,6 @@ const Problem = props => {
               problem={problem}
               props={props}>
               Update
-            </Button>}
-            {(userId === problem.user.id || userId === 1) && <Button
-              onClick={handleDelete}
-              className="btn btn-danger">
-              delete
             </Button>}
           </div>
           <div className='form-field' style={{ float: 'right', width: '200px' }}>
