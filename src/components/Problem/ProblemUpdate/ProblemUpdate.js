@@ -32,6 +32,24 @@ const ProblemUpdate = (props) => {
     setProblem(problem => ({ ...problem, [event.target.name]: event.target.value }))
   }
 
+  const handleDelete = event => {
+    setPrompt(true)
+    axios({
+      url: `${apiUrl}/problems/${props.match.params.id}`,
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      }
+    })
+      .then(() => {
+        props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
+        props.history.push('/problems')
+      })
+      .catch(() => {
+        props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
+      })
+  }
+
   const handleSubmit = event => {
     setPrompt(true)
     event.preventDefault()
@@ -65,6 +83,7 @@ const ProblemUpdate = (props) => {
       <ProblemForm
         props={props}
         problem={problem}
+        handleDelete={handleDelete}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath={`#home/${props.match.params.id}`}
