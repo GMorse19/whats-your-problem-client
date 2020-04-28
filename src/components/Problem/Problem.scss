@@ -179,6 +179,13 @@
   display: none;
 }
 
+.lower-buttons {
+  // float: right;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1000px) {
   .problem-title {
     font-size: 40px;
@@ -193,6 +200,12 @@
 @media screen and (max-width: 500px) {
   .form-field {
     width: 50vw;
+  }
+
+  .lower-buttons {
+    // float: left;
+    margin: 30px;
+    // display: flex;
   }
 
   .problem-title {
