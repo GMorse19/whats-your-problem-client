@@ -40,7 +40,7 @@ const Example = (props) => {
     <div>
       <ReactToPrint
         trigger={() => <Button
-          style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none', float: 'left' }}
+          style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none' }}
         >
           Print
         </Button>}
