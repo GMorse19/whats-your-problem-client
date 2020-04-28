@@ -49,23 +49,6 @@ const Problem = props => {
     }, [])
   }
 
-  // const handleDelete = event => {
-  //   axios({
-  //     url: `${apiUrl}/problems/${props.match.params.id}`,
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Authorization': `Token token=${props.user.token}`
-  //     }
-  //   })
-  //     .then(() => {
-  //       props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
-  //       props.history.push('/problems')
-  //     })
-  //     .catch(() => {
-  //       props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
-  //     })
-  // }
-
   const handleSubmit = event => {
     event.preventDefault()
 
@@ -214,8 +197,7 @@ const Problem = props => {
             </Form>
           </div>
         </div>
-      </div>
-      <div style={{ float: 'left' }}>
+
         <Button
           className='shadow'
           onClick={handleShow}
@@ -225,36 +207,43 @@ const Problem = props => {
         >
           Work-Space
         </Button>
+      </div>
+
+      <br />
+
+      <div className='lower-buttons'>
 
         <Tooltip title='share' arrow leaveDelay={200} TransitionComponent={Zoom}>
           <Button
             onClick={handleShare}
             style={{ margin: '10px', background: 'none', border: 'none' }}
-          >{image}</Button></Tooltip>
+          >{image}</Button>
+        </Tooltip>
 
-        {props.user &&
-      !flag &&
-      <Tooltip title='like' enterDelay={500} arrow>
-        <Button
-          style={{
-            background: 'none',
-            border: 'none' }}
-          onClick={handleLike}>{emptyHeart}</Button></Tooltip>}
-        {props.user &&
-      flag &&
-      <Tooltip title='unlike' enterDelay={500} arrow>
-        <Button
-          style={{
-            background: 'none',
-            border: 'none' }}
-          onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
+        {props.user && !flag &&
+        <Tooltip title='like' enterDelay={500} arrow>
+          <Button
+            style={{
+              background: 'none',
+              border: 'none' }}
+            onClick={handleLike}>{emptyHeart}</Button></Tooltip>}
+        {props.user && flag &&
+        <Tooltip title='unlike' enterDelay={500} arrow>
+          <Button
+            style={{
+              background: 'none',
+              border: 'none' }}
+            onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
+
+        <Print
+          className='lower-buttons'
+          props={props}
+          user={problem.user.email}
+          content={problem.content}
+          title={problem.name}
+        />
+
       </div>
-      <div><Print
-        props={props}
-        user={problem.user.email}
-        content={problem.content}
-        title={problem.name}
-      /></div>
 
       {share && <div>
         <Share
