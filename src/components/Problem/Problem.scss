@@ -180,9 +180,10 @@
 }
 
 .lower-buttons {
-  // float: left;
+  // float: right;
   margin: 30px;
   display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1000px) {
@@ -204,7 +205,7 @@
   .lower-buttons {
     // float: left;
     margin: 30px;
-    display: flex;
+    // display: flex;
   }
 
   .problem-title {
