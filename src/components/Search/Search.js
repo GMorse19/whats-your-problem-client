@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 const Search = props => {
   const [problems, setProblems] = useState([])
   const [filtered, setFiltered] = useState([])
@@ -38,15 +41,47 @@ const Search = props => {
     setFiltered(newList)
   }
 
+  const handleSubmit = event => {
+    console.log(filtered)
+    event.preventDefault()
+
+    // axios({
+    //   url: `${apiUrl}/problems/${props.match.params.id}`,
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Authorization': `Token token=${props.user.token}`
+    //   },
+    //   data: { problem }
+    // })
+    //   .then(response => {
+    //     props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
+    //     setUpdated(true)
+    //     props.history.push('/problems')
+    //   })
+    //   .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
+  }
+
   const mapArray = props.problems.map(problem => (
     problem.name
   ))
 
   return (
     <div>
-      <div>
-        <input type="text" onChange={handleChange} className="input" placeholder="Search..." />
-      </div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="">
+          <Form.Label className="" htmlFor="name">Search</Form.Label>
+          <Form.Control
+            type="text"
+            autoComplete='on'
+            placeholder="Search..."
+            name="search"
+            onChange={handleChange}
+            className=""
+            maxLength="33"
+          />
+        </Form.Group>
+        <Button className='submit-button' type="submit">Submit</Button>
+      </Form>
     </div>
   )
 }
