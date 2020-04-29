@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
+import Search from '../Search/Search'
+
 import './Problem.scss'
 
 const Problems = props => {
@@ -97,6 +99,9 @@ const Problems = props => {
 
   return (
     <div className="">
+      <Search
+        problems={problems}
+      />
       <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
         <Row className="justify-content-center">
