@@ -76,7 +76,7 @@ const Problems = props => {
             </div>
             <div className='problem-info'>
               <div className='user-email'>
-                <p>- {problem.user.email}</p>
+                <p>- {problem.user.username ? problem.user.username : problem.user.email}</p>
               </div>
               <div className='problem-category'>
                 <p>{problem.category}</p>
