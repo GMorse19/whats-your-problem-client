@@ -120,6 +120,7 @@ const Search = props => {
 
   const lowercasedFilter = filter
   console.log(lowercasedFilter)
+
   const filteredData = data.filter(item => {
     return Object.keys(item).some(key =>
       key.includes(lowercasedFilter)
