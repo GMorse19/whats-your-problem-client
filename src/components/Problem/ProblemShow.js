@@ -151,7 +151,7 @@ const Problem = props => {
 
         <div>
           <h1 className='problem-title'>{problem.name}</h1>
-          <p>Created by: {problem.user.email}</p>
+          <p>Created by: {problem.user.username ? problem.user.username : problem.user.email}</p>
           <p>Category: {problem.category}</p>
           <div className='question'>
             <div className='question2'>
