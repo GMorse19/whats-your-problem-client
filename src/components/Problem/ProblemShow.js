@@ -137,7 +137,7 @@ const Problem = props => {
           <Modal.Header closeButton>
             <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Sorry. Better luck next time!</Modal.Body>
+          <Modal.Body>Sorry. Better luck next time!!!</Modal.Body>
           <Modal.Footer>
             <Modal.Title>You can do it!</Modal.Title>
             <Button variant="secondary" onClick={handleLoss}>
