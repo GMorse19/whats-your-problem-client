@@ -91,7 +91,7 @@ const Problems = props => {
   if (!problems) {
     return (
       <div style={{ textAlign: 'center' }}>
-        <h1>Loading...</h1>
+        <h1>Problems Loading...</h1>
       </div>)
   }
 
