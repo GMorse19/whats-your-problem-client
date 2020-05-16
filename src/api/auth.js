@@ -64,7 +64,6 @@ export const updateUser = (credentials, user) => {
     },
     data: {
       credentials: {
-        password: credentials.password,
         email: credentials.email,
         username: credentials.username
       }
