@@ -14,7 +14,6 @@ class UpdateUser extends Component {
     super(props)
 
     this.state = {
-      password: '',
       email: this.props.user.email,
       username: this.props.user.username
     }
@@ -45,7 +44,7 @@ class UpdateUser extends Component {
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error)
-        this.setState({ password: '', email: '', username: '' })
+        this.setState({ email: '', username: '' })
         alert({
           heading: 'Update User Failed',
           message: messages.changeUserFailure,
@@ -55,25 +54,13 @@ class UpdateUser extends Component {
   }
 
   render () {
-    const { password, email, username } = this.state
+    const { email, username } = this.state
 
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
           <h3>Update Profile</h3>
           <Form onSubmit={this.onUpdateUser}>
-            <Form.Group controlId="password" className="mt-4">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                className="account-info password input"
-                name="password"
-                value={password}
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>New Email</Form.Label>
               <Form.Control
