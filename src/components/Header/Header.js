@@ -34,8 +34,10 @@ const Header = ({ user }) => (
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
+      <Nav>
         { user && <span style={{ color: '#000' }} className="navbar-text mr-2">Welcome, {user.username ? user.username : user.email}</span>}
+      </Nav>
+      <Nav className="ml-auto">
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
