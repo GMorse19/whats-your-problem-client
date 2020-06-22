@@ -127,6 +127,20 @@ const Search = props => {
     )
   })
 
+  Object.filter = (obj, predicate) =>
+    Object.keys(obj)
+      .filter(key => predicate(obj[key]))
+      .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {})
+
+  const fil = Object.filter(data, buddy => buddy.name.includes(lowercasedFilter))
+  // data.filter(item => {
+  //   return Object.keys(item).some(key =>
+  //     key.includes(lowercasedFilter)
+  //   )
+  // })
+
+  console.log(fil)
+
   return (
     <div>
       <input value={filter} onChange={handleChange} />
