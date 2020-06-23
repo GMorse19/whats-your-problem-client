@@ -1,137 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 
 const Search = props => {
   const [filter, setFilter] = useState('')
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    setData(props.problems)
-  })
-
-  // const choices = props.problems.map(problem => problem.name)
-
-  // useEffect(() => {
-  //   setData(choices)
-  // })
-  // const [problems, setProblems] = useState([])
-  // const [filtered, setFiltered] = useState([])
-  //
-  // const mapArray = props.problems.map(problem => (
-  //   <div key={problem.id}>
-  //     {problem.name}
-  //     {problem.id}
-  //   </div>
-  // ))
-  //
-  // listProblems = this.props.problems.map(problem => (
-  //   problem.name
-  // ))
-
-  //
-  // const handleChange = (e) => {
-  //   setProblems(listProblems)
-  //   // console.log(filtered)
-  //   // console.log(problems)
-  //   // Variable to hold the original version of the list
-  //   let currentList = []
-  //   // Variable to hold the filtered list before putting into state
-  //   let newList = []
-  //
-  //   // If the search bar isn't empty
-  //   if (e.target.value !== '') {
-  //     // Assign the original list to currentList
-  //     currentList = problems
-  //
-  //     // Use .filter() to determine which problems should be displayed
-  //     // based on the search terms
-  //     newList = currentList.filter(problem => {
-  //       // change current problem to lowercase
-  //       const lc = problem.toLowerCase()
-  //       // change search term to lowercase
-  //       const filter = e.target.value.toLowerCase()
-  //       // check to see if the current list problem includes the search term
-  //       // If it does, it will be added to newList. Using lowercase eliminates
-  //       // issues with capitalization in search terms and search content
-  //       return lc.includes(filter)
-  //     })
-  //   } else {
-  //     // If the search bar is empty, set newList to original task list
-  //     newList = problems
-  //   }
-  //   // Set the filtered state based on what our rules added to newList
-  //   setFiltered(newList)
-  // }
-  // console.log(filtered)
-  // console.log(problems)
-  // const handleSubmit = event => {
-  //   console.log(filtered)
-  //   event.preventDefault()
-
-  // axios({
-  //   url: `${apiUrl}/problems/${props.match.params.id}`,
-  //   method: 'PATCH',
-  //   headers: {
-  //     'Authorization': `Token token=${props.user.token}`
-  //   },
-  //   data: { problem }
-  // })
-  //   .then(response => {
-  //     props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
-  //     setUpdated(true)
-  //     props.history.push('/problems')
-  //   })
-  //   .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
-
-  // const mapArray = props.problems.map(problem => (
-  //   problem.name
-  // ))
-
-  //   return (
-  //     <div>
-  //       <Form onSubmit={handleSubmit}>
-  //         <Form.Group className="">
-  //           <Form.Label className="" htmlFor="name">Search</Form.Label>
-  //           <Form.Control
-  //             type="text"
-  //             autoComplete='on'
-  //             placeholder="Search..."
-  //             name="search"
-  //             onChange={handleChange}
-  //             className=""
-  //             maxLength="33"
-  //           />
-  //         </Form.Group>
-  //         <Button className='submit-button' type="submit">Submit</Button>
-  //       </Form>
-  //       <p>{filtered}</p>
-  //       <p>{mapArray}</p>
-  //     </div>
-  //   )
-  // }
-
-  // const handleChange = event => {
-  //   setFilter({ filter: event.target.value })
-  // }
 
   const handleChange = event => {
     event.persist()
     setFilter(event.target.value)
   }
 
-  console.log(data)
-  console.log(filter)
-
-  const lowercasedFilter = filter
-  console.log(lowercasedFilter)
-
-  // const fil = data.filter(item => {
-  //   return Object.keys(item).some(key =>
-  //     key.includes(lowercasedFilter)
-  //   )
-  // })
+  const lowercasedFilter = filter.toLowerCase()
 
   const fil = []
 
@@ -142,25 +22,12 @@ const Search = props => {
 
   // const filteredData = Object.filter(data, buddy => buddy.name.includes(lowercasedFilter))
   const nameData = props.problems.filter(problem => problem.name)
-  const filteredData = nameData.map(problem => problem.name.includes(lowercasedFilter))
+  const filteredData = nameData.map(problem => problem.name.toLowerCase().includes(lowercasedFilter))
   for (let i = 0; i < filteredData.length; i++) {
     if (filteredData[i] === true) {
       fil.push(nameData[i].name)
     }
   }
-  console.log(filteredData)
-
-  // const list = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, value]))
-  //
-  // console.log(list)
-  //
-  // const problemMap = new Map(Object.entries(data))
-  // console.log(problemMap.size)
-  // console.log(problemMap.has('1'))
-  // console.log(problemMap.get('2'))
-  // for (const entry of problemMap) {
-  //   console.log(entry)
-  // }
 
   return (
     <div>
