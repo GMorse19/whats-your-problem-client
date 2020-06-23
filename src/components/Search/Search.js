@@ -5,11 +5,17 @@ import React, { useState, useEffect } from 'react'
 
 const Search = props => {
   const [filter, setFilter] = useState('')
-  const [data, setData] = useState([{ id: '', name: '', answer: '' }])
+  const [data, setData] = useState([])
 
   useEffect(() => {
     setData(props.problems)
   })
+
+  // const choices = props.problems.map(problem => problem.name)
+
+  // useEffect(() => {
+  //   setData(choices)
+  // })
   // const [problems, setProblems] = useState([])
   // const [filtered, setFiltered] = useState([])
   //
@@ -132,17 +138,21 @@ const Search = props => {
       .filter(key => predicate(obj[key]))
       .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {})
 
-  const filteredData = Object.filter(data, buddy => buddy.name.includes(lowercasedFilter))
-
-  console.log(filteredData[0])
+  // const filteredData = Object.filter(data, buddy => buddy.name.includes(lowercasedFilter))
+  const filteredData = props.problems.map(problem => problem.name)
+  console.log(filteredData)
 
   // const list = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, value]))
   //
   // console.log(list)
-
-  const problemMap = new Map(Object.entries(filteredData))
-  console.log(problemMap)
-  console.log(problemMap.get('name'))
+  //
+  // const problemMap = new Map(Object.entries(data))
+  // console.log(problemMap.size)
+  // console.log(problemMap.has('1'))
+  // console.log(problemMap.get('2'))
+  // for (const entry of problemMap) {
+  //   console.log(entry)
+  // }
 
   return (
     <div>
