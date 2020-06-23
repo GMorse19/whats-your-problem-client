@@ -136,9 +136,13 @@ const Search = props => {
 
   console.log(filteredData[0])
 
-  const list = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, value]))
+  // const list = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, value]))
+  //
+  // console.log(list)
 
-  console.log(list)
+  const problemMap = new Map(Object.entries(filteredData))
+  console.log(problemMap)
+  console.log(problemMap.get('name'))
 
   return (
     <div>
@@ -146,7 +150,7 @@ const Search = props => {
       {fil.map(item => (
         <div key={item.id}>
           <div>
-            {item.name} - {item.id}
+            {item.name}
           </div>
         </div>
       ))}
