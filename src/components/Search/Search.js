@@ -127,11 +127,13 @@ const Search = props => {
   const lowercasedFilter = filter
   console.log(lowercasedFilter)
 
-  const fil = data.filter(item => {
-    return Object.keys(item).some(key =>
-      key.includes(lowercasedFilter)
-    )
-  })
+  // const fil = data.filter(item => {
+  //   return Object.keys(item).some(key =>
+  //     key.includes(lowercasedFilter)
+  //   )
+  // })
+
+  const fil = []
 
   Object.filter = (obj, predicate) =>
     Object.keys(obj)
@@ -143,7 +145,7 @@ const Search = props => {
   const filteredData = nameData.map(problem => problem.name.includes(lowercasedFilter))
   for (let i = 0; i < filteredData.length; i++) {
     if (filteredData[i] === true) {
-      console.log(nameData[i].name)
+      fil.push(nameData[i].name)
     }
   }
   console.log(filteredData)
@@ -164,9 +166,9 @@ const Search = props => {
     <div>
       <input value={filter} onChange={handleChange} />
       {fil.map(item => (
-        <div key={item.id}>
+        <div key={item}>
           <div>
-            {item.name}
+            {item}
           </div>
         </div>
       ))}
