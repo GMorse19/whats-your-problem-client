@@ -139,7 +139,13 @@ const Search = props => {
       .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {})
 
   // const filteredData = Object.filter(data, buddy => buddy.name.includes(lowercasedFilter))
-  const filteredData = props.problems.map(problem => problem.name)
+  const nameData = props.problems.filter(problem => problem.name)
+  const filteredData = nameData.map(problem => problem.name.includes(lowercasedFilter))
+  for (let i = 0; i < filteredData.length; i++) {
+    if (filteredData[i] === true) {
+      console.log(nameData[i].name)
+    }
+  }
   console.log(filteredData)
 
   // const list = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, value]))
