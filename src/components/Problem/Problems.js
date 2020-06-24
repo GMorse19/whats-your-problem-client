@@ -14,6 +14,11 @@ import './Problem.scss'
 
 const Problems = props => {
   const [problems, setProblems] = useState([])
+  const [fil, setFil] = useState(problems)
+
+  const find = (arr) => {
+    setFil(arr)
+  }
 
   useEffect(() => {
     axios({
@@ -25,6 +30,8 @@ const Problems = props => {
       })
       .catch(console.error)
   }, [])
+
+  console.log(fil)
 
   const division = <Image
     src='division.png'
@@ -51,7 +58,11 @@ const Problems = props => {
     width={ 250 }
   />
 
-  const problemsJsx = problems.map(problem => (
+  const filteredProblems = problems.filter(problem => fil.includes(problem.name))
+
+  console.log(filteredProblems)
+
+  const problemsJsx = filteredProblems.map(problem => (
     <div key={problem.id}>
       {<a
         style={{ textDecoration: 'none' }}
@@ -101,6 +112,8 @@ const Problems = props => {
     <div className="">
       <Search
         problems={problems}
+        fil={fil}
+        find={find}
       />
       <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
