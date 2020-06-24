@@ -6,11 +6,12 @@ import { withRouter } from 'react-router-dom'
 
 const Search = ({ find, problems }) => {
   const [filter, setFilter] = useState('')
+  // const [fil, setFil] = useState([])
 
   const handleChange = event => {
     event.persist()
-    setFilter(event.target.value)
     find(fil)
+    setFilter(event.target.value)
   }
 
   const lowercasedFilter = filter.toLowerCase()
