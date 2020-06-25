@@ -17,10 +17,6 @@ const Problems = props => {
   const [filter, setFilter] = useState('')
   const [fil, setFil] = useState([])
 
-  const find = (arr) => {
-    setFil(arr)
-  }
-
   useEffect(() => {
     axios({
       url: `${apiUrl}/problems`,
@@ -32,18 +28,28 @@ const Problems = props => {
       .catch(console.error)
   }, [])
 
+  // callback for setting filter for search query
+  const find = (arr) => {
+    setFil(arr)
+  }
+
+  // change search query to lower case
   const lowercasedFilter = filter.toLowerCase()
-
+  // filter names from problem object
   const nameData = problems.filter(problem => problem.name)
-
+  // map problem names to see if they match searc query
   const filteredData = nameData.map(problem => problem.name.toLowerCase().includes(lowercasedFilter))
-
+  // loop over queries and an create array for display
   for (let i = 0; i < filteredData.length; i++) {
     if (filteredData[i] === true) {
       fil.push(nameData[i].name)
     }
   }
 
+  // create an array of problem objects that match search query
+  const filteredProblems = problems.filter(problem => fil.includes(problem.name))
+
+  // images for problem categories
   const division = <Image
     src='division.png'
     width={ 250 }
@@ -69,11 +75,7 @@ const Problems = props => {
     width={ 250 }
   />
 
-  const filteredProblems = problems.filter(problem => fil.includes(problem.name))
-
-  console.log(filteredProblems)
-  console.log(problems)
-
+  // create display for problem cards
   const problemsJsx = filteredProblems.map(problem => (
     <div key={problem.id}>
       {<a
@@ -113,6 +115,7 @@ const Problems = props => {
     </div>
   ))
 
+  // check for problems before display
   if (!problems) {
     return (
       <div style={{ textAlign: 'center' }}>
@@ -123,8 +126,6 @@ const Problems = props => {
   return (
     <div className="">
       <Search
-        problems={problems}
-        fil={fil}
         find={find}
         setFilter={setFilter}
       />
