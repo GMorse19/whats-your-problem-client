@@ -14,7 +14,8 @@ import './Problem.scss'
 
 const Problems = props => {
   const [problems, setProblems] = useState([])
-  const [fil, setFil] = useState(problems)
+  const [filter, setFilter] = useState('')
+  const [fil, setFil] = useState([])
 
   const find = (arr) => {
     setFil(arr)
@@ -31,7 +32,17 @@ const Problems = props => {
       .catch(console.error)
   }, [])
 
-  console.log(fil)
+  const lowercasedFilter = filter.toLowerCase()
+
+  const nameData = problems.filter(problem => problem.name)
+
+  const filteredData = nameData.map(problem => problem.name.toLowerCase().includes(lowercasedFilter))
+
+  for (let i = 0; i < filteredData.length; i++) {
+    if (filteredData[i] === true) {
+      fil.push(nameData[i].name)
+    }
+  }
 
   const division = <Image
     src='division.png'
@@ -61,6 +72,7 @@ const Problems = props => {
   const filteredProblems = problems.filter(problem => fil.includes(problem.name))
 
   console.log(filteredProblems)
+  console.log(problems)
 
   const problemsJsx = filteredProblems.map(problem => (
     <div key={problem.id}>
@@ -114,6 +126,7 @@ const Problems = props => {
         problems={problems}
         fil={fil}
         find={find}
+        setFilter={setFilter}
       />
       <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
       <Container>
