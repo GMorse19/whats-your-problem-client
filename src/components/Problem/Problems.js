@@ -125,16 +125,20 @@ const Problems = props => {
 
   return (
     <div className="">
-      <Search
-        find={find}
-        setFilter={setFilter}
-      />
-      <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
-      <Container>
-        <Row className="justify-content-center">
-          {problemsJsx}
-        </Row>
-      </Container>
+      <div className='search-bar'>
+        <Search
+          find={find}
+          setFilter={setFilter}
+        />
+      </div>
+      <div className='top'>
+        <h1 style={{ textAlign: 'center', fontFamily: 'Righteous' }}>Select your Problem.</h1>
+        <Container>
+          <Row className="justify-content-center">
+            {problemsJsx}
+          </Row>
+        </Container>
+      </div>
     </div>
   )
 }

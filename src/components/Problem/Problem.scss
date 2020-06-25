@@ -75,7 +75,7 @@
   // }
 
   .popup {
-  z-index: 10;
+  // z-index: 10;
   background-color: #FFF;
   border-style: double;
   left: 50%;
@@ -89,6 +89,10 @@
 
 .shadow {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+.top {
+  padding-top: 10%;
 }
 
 .problem-title {
