@@ -16,6 +16,7 @@ const Problems = props => {
   const [problems, setProblems] = useState([])
   const [filter, setFilter] = useState('')
   const [fil, setFil] = useState([])
+  const [option, setOption] = useState(true)
 
   useEffect(() => {
     axios({
@@ -32,6 +33,8 @@ const Problems = props => {
   const find = (arr) => {
     setFil(arr)
   }
+
+  console.log(option)
 
   // change search query to lower case
   const lowercasedFilter = filter.toLowerCase()
@@ -129,6 +132,8 @@ const Problems = props => {
         <Search
           find={find}
           setFilter={setFilter}
+          setOption={setOption}
+          option={option}
         />
       </div>
       <div className='top'>

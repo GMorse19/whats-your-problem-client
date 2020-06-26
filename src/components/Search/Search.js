@@ -2,14 +2,19 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 import './Search.scss'
 
-const Search = ({ find, setFilter }) => {
+const Search = ({ find, setFilter, setOption, option }) => {
   const handleChange = event => {
     event.persist()
     find(fil)
     setFilter(event.target.value)
+  }
+
+  const handleClick = () => {
+    setOption(!option)
   }
 
   // empty array to set callback find()
@@ -17,6 +22,7 @@ const Search = ({ find, setFilter }) => {
 
   return (
     <div className='search-wrapper'>
+      <Button onClick={handleClick}>Search By</Button>
       <div style={{ display: 'flex', justifyContent: 'center', zIndex: '100' }}>
         <Form.Group style={{ width: '50vw' }}>
           <Form.Control
