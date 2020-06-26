@@ -38,19 +38,29 @@ const Problems = props => {
 
   // change search query to lower case
   const lowercasedFilter = filter.toLowerCase()
-  // filter names from problem object
+  // filter names or cateogories from problem object
   const nameData = problems.filter(problem => problem.name)
-  // map problem names to see if they match searc query
+  const catData = problems.filter(problem => problem.category)
+  // map problem names or categories to see if they match searc query
   const filteredData = nameData.map(problem => problem.name.toLowerCase().includes(lowercasedFilter))
+  const filteredCata = catData.map(problem => problem.category.toLowerCase().includes(lowercasedFilter))
   // loop over queries and an create array for display
-  for (let i = 0; i < filteredData.length; i++) {
-    if (filteredData[i] === true) {
-      fil.push(nameData[i].name)
+  if (option) {
+    for (let i = 0; i < filteredData.length; i++) {
+      if (filteredData[i] === true) {
+        fil.push(nameData[i].name)
+      }
+    }
+  } else {
+    for (let i = 0; i < filteredCata.length; i++) {
+      if (filteredCata[i] === true) {
+        fil.push(catData[i].category)
+      }
     }
   }
 
   // create an array of problem objects that match search query
-  const filteredProblems = problems.filter(problem => fil.includes(problem.name))
+  const filteredProblems = option ? problems.filter(problem => fil.includes(problem.name)) : problems.filter(problem => fil.includes(problem.category))
 
   // images for problem categories
   const division = <Image
