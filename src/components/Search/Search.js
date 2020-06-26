@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 
 import './Search.scss'
 
@@ -22,8 +22,8 @@ const Search = ({ find, setFilter, setOption, option }) => {
 
   return (
     <div className='search-wrapper'>
-      <Button onClick={handleClick}>Search By</Button>
       <div style={{ display: 'flex', justifyContent: 'center', zIndex: '100' }}>
+        <button className='search-button search-input' onClick={handleClick}>Search By</button>
         <Form.Group style={{ width: '50vw' }}>
           <Form.Control
             className='search-input search-info'
