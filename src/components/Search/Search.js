@@ -28,7 +28,7 @@ const Search = ({ find, setFilter, setOption, option }) => {
           <Form.Control
             className='search-input search-info'
             onChange={handleChange}
-            placeholder='search'
+            placeholder={option ? 'name' : 'category'}
           />
         </Form.Group>
       </div>

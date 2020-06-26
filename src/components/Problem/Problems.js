@@ -34,8 +34,6 @@ const Problems = props => {
     setFil(arr)
   }
 
-  console.log(option)
-
   // change search query to lower case
   const lowercasedFilter = filter.toLowerCase()
   // filter names or cateogories from problem object
