@@ -1,19 +1,37 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-const Search = ({ find, setFilter }) => {
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
+import './Search.scss'
+
+const Search = ({ find, setFilter, setOption, option }) => {
   const handleChange = event => {
     event.persist()
     find(fil)
     setFilter(event.target.value)
   }
 
+  const handleClick = () => {
+    setOption(!option)
+  }
+
   // empty array to set callback find()
   const fil = []
 
   return (
-    <div>
-      <input onChange={handleChange} />
+    <div className='search-wrapper'>
+      <Button onClick={handleClick}>Search By</Button>
+      <div style={{ display: 'flex', justifyContent: 'center', zIndex: '100' }}>
+        <Form.Group style={{ width: '50vw' }}>
+          <Form.Control
+            className='search-input search-info'
+            onChange={handleChange}
+            placeholder='search'
+          />
+        </Form.Group>
+      </div>
     </div>
   )
 }
