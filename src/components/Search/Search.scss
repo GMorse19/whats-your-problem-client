@@ -2,10 +2,11 @@
   background-color: rgb(194, 118, 11) !important;
   border: none !important;
   border-top-right-radius: 24px !important;
+  border-top-left-radius: 0px !important;
   border-bottom-right-radius: 24px !important;
+  border-bottom-left-radius: 0px !important;
   color: #000 !important;
   font-weight: 300 !important;
-  height: 40px;
   text-decoration: none !important;
   padding-left: 15px;
   :focus {
@@ -15,15 +16,18 @@
 }
 
 .search-input::-webkit-input-placeholder {
-    color: #915808 !important;
+    color: #000000 !important;
 }
 
 .search-button {
+  background-color: #000000 !important;
   border: none !important;
-  border-top-left-radius: 24px;
-  background-color: rgb(194, 100, 11);
-  border-bottom-left-radius: 24px;
-  height: 40px;
+  border-bottom-left-radius: 24px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-left-radius: 24px !important;
+  border-top-right-radius: 0px !important;
+  color: #ffffff;
+  height: 38px;
 }
 
 .search-button:focus {
