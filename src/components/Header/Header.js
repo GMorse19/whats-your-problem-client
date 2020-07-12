@@ -23,7 +23,6 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Music />
     <Nav.Link style={{ color: '#000' }} href="#/">Home</Nav.Link>
     <Nav.Link style={{ color: '#000' }} href="#problems">Problems</Nav.Link>
   </Fragment>
@@ -39,6 +38,7 @@ const Header = ({ user }) => (
       <Nav>
         { user && <span style={{ color: '#000' }} className="navbar-text mr-2">Welcome, {user.username ? user.username : user.email}</span>}
       </Nav>
+      <Music />
       <Nav className="ml-auto">
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
