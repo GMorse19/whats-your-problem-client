@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
 import './Header.scss'
+import Music from '../Music/Music'
 
 const authenticatedOptions = (
   <Fragment>
@@ -37,6 +38,7 @@ const Header = ({ user }) => (
       <Nav>
         { user && <span style={{ color: '#000' }} className="navbar-text mr-2">Welcome, {user.username ? user.username : user.email}</span>}
       </Nav>
+      <Music />
       <Nav className="ml-auto">
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
