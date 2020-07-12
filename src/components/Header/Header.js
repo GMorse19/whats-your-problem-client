@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
 import './Header.scss'
+import Music from '../Music/Music'
 
 const authenticatedOptions = (
   <Fragment>
@@ -22,6 +23,7 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
+    <Music />
     <Nav.Link style={{ color: '#000' }} href="#/">Home</Nav.Link>
     <Nav.Link style={{ color: '#000' }} href="#problems">Problems</Nav.Link>
   </Fragment>
