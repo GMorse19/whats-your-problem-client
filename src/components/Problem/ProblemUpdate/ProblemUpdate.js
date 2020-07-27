@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import apiUrl from '../../../apiConfig'
 import ProblemForm from './ProblemForm'
+import { showProblem } from '../../../api/problem'
 
 const ProblemUpdate = (props) => {
   const [prompt, setPrompt] = useState(false)
@@ -19,12 +20,7 @@ const ProblemUpdate = (props) => {
   const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'GET'
-    })
-      .then(res => setProblem(res.data.problem))
-      .catch(console.error)
+    showProblem(props.match.params.id, setProblem)
   }, [])
 
   const handleChange = event => {

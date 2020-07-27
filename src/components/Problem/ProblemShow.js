@@ -12,6 +12,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
+import { showProblem } from '../../api/problem'
 
 import Print from '../Print/Print'
 
@@ -27,12 +28,7 @@ const Problem = props => {
   const userId = props.user ? props.user.id : null
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'GET'
-    })
-      .then(res => setProblem(res.data.problem))
-      .catch(console.error)
+    showProblem(props.match.params.id, setProblem)
   }, [])
 
   if (props.user) {
@@ -104,11 +100,7 @@ const Problem = props => {
 
   const handleShare = () => setShare(prevState => (!prevState))
   const handleShow = () => setShow(prevState => (!prevState))
-  const handleShowWin = () => setShowWin(true)
-  const handleCloseWin = () => {
-    setShowWin(false)
-    setGuess({ answer: '' })
-  }
+  const handleShowWin = () => setShowWin(prevState => (!prevState))
   const handleLoss = () => setShowLoss(prevState => (!prevState))
 
   if (!problem) {
@@ -118,14 +110,14 @@ const Problem = props => {
   return (
     <div>
       <div className="problem-board">
-        <Modal dialogClassName="modal-50w" show={showWin} onHide={handleCloseWin}>
+        <Modal dialogClassName="modal-50w" show={showWin} onHide={handleShowWin}>
           <Modal.Header closeButton>
             <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
           </Modal.Header>
           <Modal.Body>You are on a roll! Try another</Modal.Body>
           <Modal.Footer>
             <Modal.Title>Good Job!</Modal.Title>
-            <Button variant="secondary" onClick={handleCloseWin}>
+            <Button variant="secondary" onClick={handleShowWin}>
               Close
             </Button>
             <Button variant="primary" as={'a'} href={'#/problems'}>
