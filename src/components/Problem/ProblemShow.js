@@ -7,14 +7,14 @@ import Row from 'react-bootstrap/Row'
 import { Tooltip } from '@material-ui/core'
 import Zoom from '@material-ui/core/Zoom'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
 
-import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
-import { showProblem } from '../../api/problem'
-
 import Print from '../Print/Print'
+import { showProblem } from '../../api/problem'
+import { showLikes, like, unlike } from '../../api/likes'
+import { emptyHeart, redHeart } from '../../images/hearts'
+import { imageShare } from '../../images/share'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -33,15 +33,7 @@ const Problem = props => {
 
   if (props.user) {
     useEffect(() => {
-      axios({
-        url: `${apiUrl}/problems/${props.match.params.id}/likes`,
-        method: 'GET',
-        headers: {
-          'Authorization': `Token token=${props.user.token}`
-        }
-      })
-        .then(res => setFlag(res.data[0]))
-        .catch(console.error)
+      showLikes(props.match.params.id, props.user.token, setFlag)
     }, [])
   }
 
@@ -63,40 +55,13 @@ const Problem = props => {
 
   const handleLike = event => {
     setFlag(true)
-    axios({
-      url: `${apiUrl}/problems/${problem.id}/like`,
-      method: 'PUT',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
+    like(event, problem.id, props.user.token)
   }
 
   const handleUnlike = event => {
     setFlag(false)
-    axios({
-      url: `${apiUrl}/problems/${problem.id}/unlike`,
-      method: 'PUT',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
+    unlike(event, problem.id, props.user.token)
   }
-
-  const image = <img
-    src='share-icon.png'
-    style={{ width: '20px' }}
-  />
-
-  const emptyHeart = <img
-    src='empty-heart.png'
-    style={{ width: '30px' }}
-  />
-
-  const redHeart = <img
-    src='red-heart.png'
-    style={{ width: '30px' }}
-  />
 
   const handleShare = () => setShare(prevState => (!prevState))
   const handleShow = () => setShow(prevState => (!prevState))
@@ -209,7 +174,7 @@ const Problem = props => {
           <Button
             onClick={handleShare}
             style={{ margin: '10px', background: 'none', border: 'none' }}
-          >{image}</Button>
+          >{imageShare}</Button>
         </Tooltip>
 
         {props.user && !flag &&
