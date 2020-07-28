@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter, Prompt } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 
-import apiUrl from '../../../apiConfig'
+// import apiUrl from '../../../apiConfig'
 import ProblemForm from './ProblemForm'
-import { showProblem } from '../../../api/problem'
+import { showProblem, patchProblem, deleteProblem } from '../../../api/problem'
 
 const ProblemUpdate = (props) => {
   const [prompt, setPrompt] = useState(false)
@@ -30,40 +30,13 @@ const ProblemUpdate = (props) => {
 
   const handleDelete = event => {
     setPrompt(true)
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-      .then(() => {
-        props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
-        props.history.push('/problems')
-      })
-      .catch(() => {
-        props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
-      })
+    deleteProblem(props)
   }
 
   const handleSubmit = event => {
     setPrompt(true)
     event.preventDefault()
-
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { problem }
-    })
-      .then(response => {
-        props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
-        setUpdated(true)
-        props.history.push('/problems')
-      })
-      .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
+    patchProblem(props, problem, setUpdated)
   }
 
   if (updated) {
