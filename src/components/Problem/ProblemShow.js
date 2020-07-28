@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-// import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { Tooltip } from '@material-ui/core'
@@ -16,7 +15,6 @@ import { showProblem } from '../../api/problem'
 import { showLikes, like, unlike } from '../../api/likes'
 import { emptyHeart, redHeart } from '../../images/hearts'
 import { imageShare } from '../../images/share'
-// import { setPrev } from '../../helpers/setPrev'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -69,7 +67,6 @@ const Problem = props => {
   const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(prevState => (!prevState))
   const handleLoss = () => setShowLoss(prevState => (!prevState))
-  // const handleSet = (x) => setPrev(x)
 
   if (!problem) {
     return <p>Loading...</p>
