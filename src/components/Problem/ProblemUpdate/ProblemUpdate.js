@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter, Prompt } from 'react-router-dom'
 
-import ProblemForm from './ProblemForm'
+import ProblemForm from '../ProblemForm/ProblemForm'
 import { showProblem, patchProblem, deleteProblem } from '../../../api/problem'
 
 const ProblemUpdate = (props) => {
@@ -15,6 +15,7 @@ const ProblemUpdate = (props) => {
     answer: '',
     rating: ''
   })
+
   const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const ProblemUpdate = (props) => {
     setProblem(problem => ({ ...problem, [event.target.name]: event.target.value }))
   }
 
-  const handleDelete = event => {
+  const handleDelete = () => {
     setPrompt(true)
     deleteProblem(props)
   }

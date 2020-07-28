@@ -4,9 +4,9 @@ import { withRouter, Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import './ProblemCreate.scss'
+import './ProblemForm.scss'
 
-const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
+const ProblemForm = ({ problem, handleDelete, handleSubmit, handleChange, cancelPath }) => (
   <div className='review-form'>
     <div className="review-scroll">
       <h1 className="main-header">Create a Problem.</h1>
@@ -136,6 +136,11 @@ const ProblemForm = ({ problem, handleSubmit, handleChange, cancelPath }) => (
         </Link>
         <Button className='submit-button' type="submit">Submit</Button>
       </Form>
+      {handleDelete && <Button
+        onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) handleDelete(e) }}
+        className="btn btn-danger">
+        delete
+      </Button>}
     </div>
   </div>
 )
