@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 import './ProblemUpdate.scss'
 
-const ProblemForm = ({ props, problem, handleDelete, handleSubmit, handleChange, cancelPath }) => (
+const ProblemForm = ({ problem, handleDelete, handleSubmit, handleChange }) => (
 
   <div className='review-form'>
     <div className="review-scroll">

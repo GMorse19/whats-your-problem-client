@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { withRouter, Prompt } from 'react-router-dom'
-import apiUrl from '../../../apiConfig'
+
+import { postProblem } from '../../../api/problem'
 import ProblemCreateForm from './ProblemCreateForm.js'
 
 import './ProblemCreate.scss'
@@ -16,6 +16,7 @@ const ProblemCreate = props => {
     category: '',
     answer: '',
     rating: '' })
+
   const handleChange = event => {
     event.persist()
     setProblem({ ...problem, [event.target.name]: event.target.value })
@@ -24,20 +25,7 @@ const ProblemCreate = props => {
   const handleSubmit = event => {
     setPrompt(true)
     event.preventDefault()
-
-    axios({
-      url: `${apiUrl}/problems`,
-      method: 'POST',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { problem }
-    })
-      .then(response => {
-        props.alert({ heading: 'Success', message: 'You created a problem', variant: 'success' })
-        props.history.push(`problems/${response.data.problem.id}`)
-      })
-      .catch(console.error)
+    postProblem(props, problem)
   }
 
   return (

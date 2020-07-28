@@ -25,6 +25,11 @@ const Problem = props => {
   const [show, setShow] = useState(false)
   const [share, setShare] = useState(false)
 
+  const handleShare = () => setShare(prevState => (!prevState))
+  const handleShow = () => setShow(prevState => (!prevState))
+  const handleShowWin = () => setShowWin(prevState => (!prevState))
+  const handleLoss = () => setShowLoss(prevState => (!prevState))
+
   const userId = props.user ? props.user.id : null
 
   useEffect(() => {
@@ -62,11 +67,6 @@ const Problem = props => {
     setFlag(false)
     unlike(event, problem.id, props.user.token)
   }
-
-  const handleShare = () => setShare(prevState => (!prevState))
-  const handleShow = () => setShow(prevState => (!prevState))
-  const handleShowWin = () => setShowWin(prevState => (!prevState))
-  const handleLoss = () => setShowLoss(prevState => (!prevState))
 
   if (!problem) {
     return <p>Loading...</p>
