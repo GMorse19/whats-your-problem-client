@@ -34,7 +34,7 @@ class ComponentToPrint extends React.Component {
   }
 }
 
-const Example = (props) => {
+const Print = (props) => {
   const componentRef = useRef()
   return (
     <div>
@@ -57,4 +57,4 @@ const Example = (props) => {
   )
 }
 
-export default Example
+export default Print
