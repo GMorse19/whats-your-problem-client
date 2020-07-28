@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
+// import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { Tooltip } from '@material-ui/core'
@@ -11,10 +11,12 @@ import { withRouter } from 'react-router-dom'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
 import Print from '../Print/Print'
+import ModalForm from '../ModalForm/ModalForm'
 import { showProblem } from '../../api/problem'
 import { showLikes, like, unlike } from '../../api/likes'
 import { emptyHeart, redHeart } from '../../images/hearts'
 import { imageShare } from '../../images/share'
+// import { setPrev } from '../../helpers/setPrev'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -67,6 +69,7 @@ const Problem = props => {
   const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(prevState => (!prevState))
   const handleLoss = () => setShowLoss(prevState => (!prevState))
+  // const handleSet = (x) => setPrev(x)
 
   if (!problem) {
     return <p>Loading...</p>
@@ -75,36 +78,28 @@ const Problem = props => {
   return (
     <div>
       <div className="problem-board">
-        <Modal dialogClassName="modal-50w" show={showWin} onHide={handleShowWin}>
-          <Modal.Header closeButton>
-            <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>You are on a roll! Try another</Modal.Body>
-          <Modal.Footer>
-            <Modal.Title>Good Job!</Modal.Title>
-            <Button variant="secondary" onClick={handleShowWin}>
-              Close
-            </Button>
-            <Button variant="primary" as={'a'} href={'#/problems'}>
-              Try Another
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <Modal dialogClassName="modal-50w" show={showLoss} onHide={handleLoss}>
-          <Modal.Header closeButton>
-            <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Sorry. Better luck next time!!!</Modal.Body>
-          <Modal.Footer>
-            <Modal.Title>You can do it!</Modal.Title>
-            <Button variant="secondary" onClick={handleLoss}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleLoss}>
-              Try Again
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <ModalForm
+          title={`You Won! The answer is ${problem.answer}`}
+          body={'You are on a roll! Try Another'}
+          footer={'Good Job!'}
+          show={showWin}
+          onHide={handleShowWin}
+          button='Close'
+          button2='Try Another'
+          onClick={handleShowWin}
+          href={'#/problems'}
+        />
+        <ModalForm
+          body='Sorry. Better luck next time!!!'
+          title='Sorry, You lost. Please try again.'
+          footer='You can do it!'
+          button='Close'
+          button2='Try Again'
+          show={showLoss}
+          onClick={handleLoss}
+          onClick2={handleLoss}
+          onHide={handleLoss}
+        />
 
         <div>
           <h1 className='problem-title'>{problem.name}</h1>
