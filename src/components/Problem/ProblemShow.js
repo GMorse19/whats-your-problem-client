@@ -12,7 +12,7 @@ import Share from '../Share/Share'
 import Print from '../Print/Print'
 import ModalForm from '../ModalForm/ModalForm'
 import { showProblem } from '../../api/problem'
-import { showLikes, like, unlike } from '../../api/likes'
+import { showLikes, like } from '../../api/likes'
 import { emptyHeart, redHeart } from '../../images/hearts'
 import { imageShare } from '../../images/share'
 
@@ -59,13 +59,14 @@ const Problem = props => {
   }
 
   const handleLike = event => {
-    setFlag(true)
-    like(event, problem.id, props.user.token)
-  }
-
-  const handleUnlike = event => {
-    setFlag(false)
-    unlike(event, problem.id, props.user.token)
+    let status = ''
+    setFlag(prevState => (!prevState))
+    if (flag) {
+      status = 'unlike'
+    } else {
+      status = 'like'
+    }
+    like(event, problem.id, props.user.token, status)
   }
 
   if (!problem) {
@@ -182,7 +183,7 @@ const Problem = props => {
             style={{
               background: 'none',
               border: 'none' }}
-            onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
+            onClick={handleLike}>{redHeart}</Button></Tooltip>}
 
         <Print
           className='lower-buttons'

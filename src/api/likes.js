@@ -13,19 +13,9 @@ export const showLikes = (id, token, setFlag) => {
     .catch(console.error)
 }
 
-export const like = (event, id, token) => {
+export const like = (event, id, token, status) => {
   axios({
-    url: `${apiUrl}/problems/${id}/like`,
-    method: 'PUT',
-    headers: {
-      'Authorization': `Token token=${token}`
-    }
-  })
-}
-
-export const unlike = (event, id, token) => {
-  axios({
-    url: `${apiUrl}/problems/${id}/unlike`,
+    url: `${apiUrl}/problems/${id}/${status}`,
     method: 'PUT',
     headers: {
       'Authorization': `Token token=${token}`

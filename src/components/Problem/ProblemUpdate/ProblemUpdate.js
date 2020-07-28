@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter, Prompt } from 'react-router-dom'
-// import axios from 'axios'
 
-// import apiUrl from '../../../apiConfig'
 import ProblemForm from './ProblemForm'
 import { showProblem, patchProblem, deleteProblem } from '../../../api/problem'
 
