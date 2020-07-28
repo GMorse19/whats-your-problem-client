@@ -3,18 +3,11 @@ import { Redirect, withRouter, Prompt } from 'react-router-dom'
 
 import ProblemForm from '../ProblemForm/ProblemForm'
 import { showProblem, patchProblem, deleteProblem } from '../../../api/problem'
+import { problemParams } from '../../../helpers/problemParams'
 
 const ProblemUpdate = (props) => {
   const [prompt, setPrompt] = useState(false)
-  const [problem, setProblem] = useState({
-    name: '',
-    content: '',
-    hint: '',
-    solution: '',
-    category: '',
-    answer: '',
-    rating: ''
-  })
+  const [problem, setProblem] = useState(problemParams)
 
   const [updated, setUpdated] = useState(false)
 
