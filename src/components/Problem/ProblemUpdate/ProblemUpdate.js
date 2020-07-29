@@ -1,30 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter, Prompt } from 'react-router-dom'
-import axios from 'axios'
 
-import apiUrl from '../../../apiConfig'
-import ProblemForm from './ProblemForm'
+import ProblemForm from '../ProblemForm/ProblemForm'
+import { showProblem, patchProblem, deleteProblem } from '../../../api/problem'
+import { problemParams } from '../../../helpers/problemParams'
 
 const ProblemUpdate = (props) => {
   const [prompt, setPrompt] = useState(false)
-  const [problem, setProblem] = useState({
-    name: '',
-    content: '',
-    hint: '',
-    solution: '',
-    category: '',
-    answer: '',
-    rating: ''
-  })
+  const [problem, setProblem] = useState(problemParams)
+
   const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'GET'
-    })
-      .then(res => setProblem(res.data.problem))
-      .catch(console.error)
+    showProblem(props.match.params.id, setProblem)
   }, [])
 
   const handleChange = event => {
@@ -32,42 +20,15 @@ const ProblemUpdate = (props) => {
     setProblem(problem => ({ ...problem, [event.target.name]: event.target.value }))
   }
 
-  const handleDelete = event => {
+  const handleDelete = () => {
     setPrompt(true)
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-      .then(() => {
-        props.alert({ heading: 'Success', message: 'You deleted a problem', variant: 'success' })
-        props.history.push('/problems')
-      })
-      .catch(() => {
-        props.alert({ heading: 'Uh Oh!', message: 'You did not delete a problem', variant: 'warning' })
-      })
+    deleteProblem(props)
   }
 
   const handleSubmit = event => {
     setPrompt(true)
     event.preventDefault()
-
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { problem }
-    })
-      .then(response => {
-        props.alert({ heading: 'Success', message: 'You updated a problem', variant: 'success' })
-        setUpdated(true)
-        props.history.push('/problems')
-      })
-      .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
+    patchProblem(props, problem, setUpdated)
   }
 
   if (updated) {

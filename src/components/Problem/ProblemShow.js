@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { Tooltip } from '@material-ui/core'
 import Zoom from '@material-ui/core/Zoom'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
 
-import apiUrl from '../../apiConfig'
 import Frame from '../Calculator/Frame'
 import Share from '../Share/Share'
-
 import Print from '../Print/Print'
+import ModalForm from '../ModalForm/ModalForm'
+import { showProblem } from '../../api/problem'
+import { showLikes, like } from '../../api/likes'
+import { emptyHeart, redHeart } from '../../images/hearts'
+import { imageShare } from '../../images/share'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -24,28 +25,20 @@ const Problem = props => {
   const [show, setShow] = useState(false)
   const [share, setShare] = useState(false)
 
+  const handleShare = () => setShare(prevState => (!prevState))
+  const handleShow = () => setShow(prevState => (!prevState))
+  const handleShowWin = () => setShowWin(prevState => (!prevState))
+  const handleLoss = () => setShowLoss(prevState => (!prevState))
+
   const userId = props.user ? props.user.id : null
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/problems/${props.match.params.id}`,
-      method: 'GET'
-    })
-      .then(res => setProblem(res.data.problem))
-      .catch(console.error)
+    showProblem(props.match.params.id, setProblem)
   }, [])
 
   if (props.user) {
     useEffect(() => {
-      axios({
-        url: `${apiUrl}/problems/${props.match.params.id}/likes`,
-        method: 'GET',
-        headers: {
-          'Authorization': `Token token=${props.user.token}`
-        }
-      })
-        .then(res => setFlag(res.data[0]))
-        .catch(console.error)
+      showLikes(props.match.params.id, props.user.token, setFlag)
     }, [])
   }
 
@@ -66,50 +59,15 @@ const Problem = props => {
   }
 
   const handleLike = event => {
-    setFlag(true)
-    axios({
-      url: `${apiUrl}/problems/${problem.id}/like`,
-      method: 'PUT',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
+    let status = ''
+    setFlag(prevState => (!prevState))
+    if (flag) {
+      status = 'unlike'
+    } else {
+      status = 'like'
+    }
+    like(event, problem.id, props.user.token, status)
   }
-
-  const handleUnlike = event => {
-    setFlag(false)
-    axios({
-      url: `${apiUrl}/problems/${problem.id}/unlike`,
-      method: 'PUT',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-  }
-
-  const image = <img
-    src='share-icon.png'
-    style={{ width: '20px' }}
-  />
-
-  const emptyHeart = <img
-    src='empty-heart.png'
-    style={{ width: '30px' }}
-  />
-
-  const redHeart = <img
-    src='red-heart.png'
-    style={{ width: '30px' }}
-  />
-
-  const handleShare = () => setShare(prevState => (!prevState))
-  const handleShow = () => setShow(prevState => (!prevState))
-  const handleShowWin = () => setShowWin(true)
-  const handleCloseWin = () => {
-    setShowWin(false)
-    setGuess({ answer: '' })
-  }
-  const handleLoss = () => setShowLoss(prevState => (!prevState))
 
   if (!problem) {
     return <p>Loading...</p>
@@ -118,36 +76,28 @@ const Problem = props => {
   return (
     <div>
       <div className="problem-board">
-        <Modal dialogClassName="modal-50w" show={showWin} onHide={handleCloseWin}>
-          <Modal.Header closeButton>
-            <Modal.Title>You Won! The answer is {problem.answer}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>You are on a roll! Try another</Modal.Body>
-          <Modal.Footer>
-            <Modal.Title>Good Job!</Modal.Title>
-            <Button variant="secondary" onClick={handleCloseWin}>
-              Close
-            </Button>
-            <Button variant="primary" as={'a'} href={'#/problems'}>
-              Try Another
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <Modal dialogClassName="modal-50w" show={showLoss} onHide={handleLoss}>
-          <Modal.Header closeButton>
-            <Modal.Title>Sorry, You lost. Please try again.</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Sorry. Better luck next time!!!</Modal.Body>
-          <Modal.Footer>
-            <Modal.Title>You can do it!</Modal.Title>
-            <Button variant="secondary" onClick={handleLoss}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleLoss}>
-              Try Again
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <ModalForm
+          title={`You Won! The answer is ${problem.answer}`}
+          body={'You are on a roll! Try Another'}
+          footer={'Good Job!'}
+          show={showWin}
+          onHide={handleShowWin}
+          button='Close'
+          button2='Try Another'
+          onClick={handleShowWin}
+          href={'#/problems'}
+        />
+        <ModalForm
+          body='Sorry. Better luck next time!!!'
+          title='Sorry, You lost. Please try again.'
+          footer='You can do it!'
+          button='Close'
+          button2='Try Again'
+          show={showLoss}
+          onClick={handleLoss}
+          onClick2={handleLoss}
+          onHide={handleLoss}
+        />
 
         <div>
           <h1 className='problem-title'>{problem.name}</h1>
@@ -217,23 +167,16 @@ const Problem = props => {
           <Button
             onClick={handleShare}
             style={{ margin: '10px', background: 'none', border: 'none' }}
-          >{image}</Button>
+          >{imageShare}</Button>
         </Tooltip>
 
-        {props.user && !flag &&
-        <Tooltip title='like' enterDelay={500} arrow>
+        {props.user &&
+        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={500} arrow>
           <Button
             style={{
               background: 'none',
               border: 'none' }}
-            onClick={handleLike}>{emptyHeart}</Button></Tooltip>}
-        {props.user && flag &&
-        <Tooltip title='unlike' enterDelay={500} arrow>
-          <Button
-            style={{
-              background: 'none',
-              border: 'none' }}
-            onClick={handleUnlike}>{redHeart}</Button></Tooltip>}
+            onClick={handleLike}>{flag ? redHeart : emptyHeart}</Button></Tooltip>}
 
         <Print
           className='lower-buttons'

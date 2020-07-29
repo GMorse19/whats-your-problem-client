@@ -1,21 +1,14 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { withRouter, Prompt } from 'react-router-dom'
-import apiUrl from '../../../apiConfig'
-import ProblemCreateForm from './ProblemCreateForm.js'
 
-import './ProblemCreate.scss'
+import { postProblem } from '../../../api/problem'
+import { problemParams } from '../../../helpers/problemParams'
+import ProblemForm from '../ProblemForm/ProblemForm'
 
 const ProblemCreate = props => {
   const [prompt, setPrompt] = useState(false)
-  const [problem, setProblem] = useState({
-    name: '',
-    content: '',
-    hint: '',
-    solution: '',
-    category: '',
-    answer: '',
-    rating: '' })
+  const [problem, setProblem] = useState(problemParams)
+
   const handleChange = event => {
     event.persist()
     setProblem({ ...problem, [event.target.name]: event.target.value })
@@ -24,20 +17,7 @@ const ProblemCreate = props => {
   const handleSubmit = event => {
     setPrompt(true)
     event.preventDefault()
-
-    axios({
-      url: `${apiUrl}/problems`,
-      method: 'POST',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { problem }
-    })
-      .then(response => {
-        props.alert({ heading: 'Success', message: 'You created a problem', variant: 'success' })
-        props.history.push(`problems/${response.data.problem.id}`)
-      })
-      .catch(console.error)
+    postProblem(props, problem)
   }
 
   return (
@@ -46,7 +26,7 @@ const ProblemCreate = props => {
         when={!prompt}
         message="Are you sure you want to leave?"
       />
-      <ProblemCreateForm
+      <ProblemForm
         problem={problem}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
