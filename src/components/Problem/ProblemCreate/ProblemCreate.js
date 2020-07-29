@@ -2,20 +2,12 @@ import React, { useState } from 'react'
 import { withRouter, Prompt } from 'react-router-dom'
 
 import { postProblem } from '../../../api/problem'
-import ProblemCreateForm from './ProblemCreateForm.js'
-
-import './ProblemCreate.scss'
+import { problemParams } from '../../../helpers/problemParams'
+import ProblemForm from '../ProblemForm/ProblemForm'
 
 const ProblemCreate = props => {
   const [prompt, setPrompt] = useState(false)
-  const [problem, setProblem] = useState({
-    name: '',
-    content: '',
-    hint: '',
-    solution: '',
-    category: '',
-    answer: '',
-    rating: '' })
+  const [problem, setProblem] = useState(problemParams)
 
   const handleChange = event => {
     event.persist()
@@ -34,7 +26,7 @@ const ProblemCreate = props => {
         when={!prompt}
         message="Are you sure you want to leave?"
       />
-      <ProblemCreateForm
+      <ProblemForm
         problem={problem}
         handleChange={handleChange}
         handleSubmit={handleSubmit}

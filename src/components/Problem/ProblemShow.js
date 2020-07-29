@@ -170,20 +170,13 @@ const Problem = props => {
           >{imageShare}</Button>
         </Tooltip>
 
-        {props.user && !flag &&
-        <Tooltip title='like' enterDelay={500} arrow>
+        {props.user &&
+        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={500} arrow>
           <Button
             style={{
               background: 'none',
               border: 'none' }}
-            onClick={handleLike}>{emptyHeart}</Button></Tooltip>}
-        {props.user && flag &&
-        <Tooltip title='unlike' enterDelay={500} arrow>
-          <Button
-            style={{
-              background: 'none',
-              border: 'none' }}
-            onClick={handleLike}>{redHeart}</Button></Tooltip>}
+            onClick={handleLike}>{flag ? redHeart : emptyHeart}</Button></Tooltip>}
 
         <Print
           className='lower-buttons'

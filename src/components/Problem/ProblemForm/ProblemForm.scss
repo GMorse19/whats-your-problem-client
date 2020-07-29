@@ -23,18 +23,6 @@
     font-weight: bold;
 }
 
-// .close-window-white {
-//   background-color: rgba(194, 118, 11, .40);
-//   border: none;
-//   font-size: 17px;
-//   position: absolute;
-//   top: 15px;
-//   right: 15px;
-//   img {
-//     background: rgba(194, 118, 11, .40) !important;
-//   }
-// }
-
 .form-check {
   padding: 0px !important;
 }
@@ -46,8 +34,6 @@
 .main-header {
   align-items: center;
   color: #000;
-  // font-size: 16px;
-  // font-style: normal;
   font-weight: 300;
   justify-content: center;
   line-height: 150%;
@@ -165,42 +151,3 @@
     background-color: #915808 !important;
   }
 }
-
-
-// Stars CSS
-// .stars {
-//   font-size: 40px;
-//   height: auto;
-//   margin: 0 auto;
-//   text-align: center;
-// }
-//
-// .dv-star-rating-star {
-//   margin: 0rem !important;
-//   padding: 0rem !important;
-//   i {
-//     // color: #FFCC47 !important;
-//   }
-// }
-
-// @media only screen
-//   and (min-device-width: 320px)
-//   and (max-device-width: 568px)
-//   and (-webkit-min-device-pixel-ratio: 2) {
-//
-//   .checkbox-toolbar label {
-//     font-size: 13px;
-//   }
-//
-//   .main-header {
-//     font-size: 12px;
-//   }
-//
-//   .radio-toolbar label {
-//     font-size: 13px;
-//   }
-//
-//   .review-form {
-//     width: 320px;
-//   }
-// }
