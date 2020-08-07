@@ -3,15 +3,10 @@
 // You can find it at this link
 // https://codeburst.io/a-simple-calculator-app-using-react-and-node-42c9b0ea1df8
 import React, { Component } from 'react'
-import Screen from './Screen'
-import Buttons from './Buttons'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
-import WorkSpace from '../WorkSpace/WorkSpace'
+import Calculator from './Calculator'
 
 import './Calculator.scss'
 
@@ -78,50 +73,11 @@ class Frame extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ backgroundColor: '#edbe6d' }}>
-            <Container>
-              <Row className="justify-content-md-center">
-                <Col className="box"><WorkSpace /></Col>
-                <Col className="box">
-                  <div className="frame">
-                    <div>
-                      <div className="calculator-title">
-                      </div>
-                      <Screen question={this.state.question} answer={this.state.answer}/>
-                      <div className="button-row keys">
-                        <Buttons label={'1'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'2'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'3'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'-'} handleClick={this.handleClick} type='action' />
-                      </div>
-                      <div className="button-row keys">
-                        <Buttons label={'4'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'5'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'6'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'+'} handleClick={this.handleClick} type='action' />
-                      </div>
-                      <div className="button-row keys">
-                        <Buttons label={'7'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'8'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'9'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'*'} handleClick={this.handleClick} type='action' />
-                      </div>
-                      <div className="button-row keys">
-                        <Buttons label={'.'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={'0'} handleClick={this.handleClick} type='input' />
-                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
-                        <Buttons label={'/'} handleClick={this.handleClick} type='action' />
-                      </div>
-                      <div className="button-row keys">
-                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
-                        <Buttons label={' '} handleClick={this.handleClick} type='input'/>
-                        <Buttons label={'Cls'} handleClick={this.handleClick} type='action' />
-                        <Buttons label={'='} handleClick={this.handleClick} type='action' />
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+            <Calculator
+              question={this.state.question}
+              answer={this.state.answer}
+              handleClick={this.handleClick}
+            />
           </Modal.Body>
           <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
             <Modal.Title></Modal.Title>
