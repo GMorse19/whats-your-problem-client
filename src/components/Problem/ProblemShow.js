@@ -163,7 +163,7 @@ const Problem = props => {
 
       <div className='lower-buttons'>
 
-        <Tooltip title='share' arrow leaveDelay={200} TransitionComponent={Zoom}>
+        <Tooltip title='share' arrow enterDelay={900} leaveDelay={200} TransitionComponent={Zoom}>
           <Button
             onClick={handleShare}
             style={{ margin: '10px', background: 'none', border: 'none' }}
@@ -171,7 +171,7 @@ const Problem = props => {
         </Tooltip>
 
         {props.user &&
-        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={500} arrow>
+        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={900} arrow>
           <Button
             style={{
               background: 'none',
