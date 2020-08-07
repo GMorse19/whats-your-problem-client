@@ -1,0 +1,13 @@
+:root {
+  --display-calc: '';
+  --display-scratch: 'none';
+}
+
+@media screen and (max-width: 500px) {
+  .scratch-pad {
+    display: var(--display-scratch);
+  }
+  .calculator {
+    display: var(--display-calc);
+  }
+}

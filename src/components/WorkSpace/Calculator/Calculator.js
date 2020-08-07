@@ -5,9 +5,11 @@ import Col from 'react-bootstrap/Col'
 import Screen from './Screen'
 import Buttons from './Buttons'
 
+import './Calculator.scss'
+
 export const Calculator = ({ question, answer, handleClick }) => {
   return (
-    <Col className="box">
+    <Col className="box calculator">
       <div className="frame">
         <div>
           <div className="calculator-title">

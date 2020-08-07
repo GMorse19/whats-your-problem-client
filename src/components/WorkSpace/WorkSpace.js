@@ -12,7 +12,7 @@ import { Calculator } from './Calculator/Calculator'
 import ScratchPad from './ScratchPad/ScratchPad'
 import { Hint } from './Hint/Hint'
 
-import './Calculator/Calculator.scss'
+import './WorkSpace.scss'
 
 class WorkSpace extends Component {
   constructor (props) {
@@ -21,13 +21,29 @@ class WorkSpace extends Component {
       question: '',
       answer: '',
       show: true,
-      showHint: false
+      showHint: false,
+      switch: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   hint = () => {
     this.setState({ showHint: true })
+  }
+
+  switch = () => {
+    this.setState({ switch: !this.state.switch })
+    let calc = ''
+    let scratch = 'none'
+    if (this.state.switch === true) {
+      calc = 'none'
+      scratch = ''
+    } else {
+      calc = ''
+      scratch = 'none'
+    }
+    document.documentElement.style.setProperty('--display-calc', calc)
+    document.documentElement.style.setProperty('--display-scratch', scratch)
   }
 
   handleCloseHint = () => {
@@ -64,16 +80,23 @@ class WorkSpace extends Component {
           <Modal.Body style={{ backgroundColor: '#edbe6d' }}>
             <Container>
               <Row className="justify-content-md-center">
+
                 <ScratchPad />
+
                 <Calculator
                   question={this.state.question}
                   answer={this.state.answer}
                   handleClick={this.handleClick}
                 />
+
               </Row>
             </Container>
           </Modal.Body>
           <Modal.Footer style={{ backgroundColor: '#c2760b' }}>
+            <Button
+              className='switch'
+              onClick={this.switch}
+            >Switch</Button>
             <Button
               variant="success"
               onClick={this.hint}
