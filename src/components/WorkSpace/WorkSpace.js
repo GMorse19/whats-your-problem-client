@@ -112,5 +112,4 @@ class WorkSpace extends Component {
   }
 }
 
-// export our frame component. To be used in our client/index.js file
 export default WorkSpace
