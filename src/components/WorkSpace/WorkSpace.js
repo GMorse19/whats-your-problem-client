@@ -61,7 +61,7 @@ class WorkSpace extends Component {
     document.documentElement.style.setProperty('--display-scratch', this.scratch)
 
     return (
-      <div>
+      <div className=''>
         {this.state.showHint &&
           <Hint
             hint={this.props.problem.hint}
@@ -70,7 +70,7 @@ class WorkSpace extends Component {
           />}
 
         <Modal
-          dialogClassName="modal-90w"
+          dialogClassName="modal-90w workspace-modal"
           style={{ marginTop: '10vh', paddingBottom: '70px' }}
           show={this.state.show}
           onHide={this.props.handleClose}
@@ -102,7 +102,8 @@ class WorkSpace extends Component {
             <Button
               className='switch'
               onClick={this.switch}
-            >Switch</Button>
+              style={{ backgroundColor: '#FF9933' }}
+            >{this.state.switch ? 'Scratch Pad' : 'Calculator'}</Button>
             <Button
               variant="success"
               onClick={this.hint}
