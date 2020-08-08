@@ -31,19 +31,11 @@ class WorkSpace extends Component {
     this.setState({ showHint: true })
   }
 
+  calc = ''
+  scratch = 'none'
+
   switch = () => {
     this.setState({ switch: !this.state.switch })
-    let calc = ''
-    let scratch = 'none'
-    if (this.state.switch === true) {
-      calc = 'none'
-      scratch = ''
-    } else {
-      calc = ''
-      scratch = 'none'
-    }
-    document.documentElement.style.setProperty('--display-calc', calc)
-    document.documentElement.style.setProperty('--display-scratch', scratch)
   }
 
   handleCloseHint = () => {
@@ -54,6 +46,18 @@ class WorkSpace extends Component {
     if (!this.props.problem.hint) {
       this.props.problem.hint = 'Sorry, there is no hint for you!'
     }
+
+    if (this.state.switch) {
+      this.calc = ''
+      this.scratch = 'none'
+    } else {
+      this.calc = 'none'
+      this.scratch = ''
+    }
+
+    document.documentElement.style.setProperty('--display-calc', this.calc)
+    document.documentElement.style.setProperty('--display-scratch', this.scratch)
+
     return (
       <div>
         {this.state.showHint &&
