@@ -1,4 +1,4 @@
-import React from 'react' // Import react module
+import React from 'react'
 import ScreenRow from './ScreenRow'
 import PropTypes from 'prop-types'
 

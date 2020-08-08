@@ -9,7 +9,7 @@
 
 .frame {
         background-color: #303030;
-        height: 350px;
+        height: 400px;
         width: 250px;
         border-radius: 10px;
         // position: relative;
@@ -110,11 +110,6 @@
     width: 90vw;    /* Occupy the 90% of the screen width */
     max-width: 90vw;
 }
-
-// .modal-70w {
-// width: 70vw;    /* Occupy the 70% of the screen width */
-// max-width: 70vw;
-// }
 
 @media screen and (max-width: 500px) {
   .calc-problem-content {

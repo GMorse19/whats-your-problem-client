@@ -7,7 +7,7 @@ import { Tooltip } from '@material-ui/core'
 import Zoom from '@material-ui/core/Zoom'
 import { withRouter } from 'react-router-dom'
 
-import Frame from '../Calculator/Frame'
+import WorkSpace from '../WorkSpace/WorkSpace'
 import Share from '../Share/Share'
 import Print from '../Print/Print'
 import ModalForm from '../ModalForm/ModalForm'
@@ -163,7 +163,7 @@ const Problem = props => {
 
       <div className='lower-buttons'>
 
-        <Tooltip title='share' arrow leaveDelay={200} TransitionComponent={Zoom}>
+        <Tooltip title='share' arrow enterDelay={900} leaveDelay={200} TransitionComponent={Zoom}>
           <Button
             onClick={handleShare}
             style={{ margin: '10px', background: 'none', border: 'none' }}
@@ -171,7 +171,7 @@ const Problem = props => {
         </Tooltip>
 
         {props.user &&
-        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={500} arrow>
+        <Tooltip title={flag ? 'unlike' : 'like'} enterDelay={900} arrow>
           <Button
             style={{
               background: 'none',
@@ -195,7 +195,7 @@ const Problem = props => {
       </div>}
 
       {show && <div>
-        <Frame
+        <WorkSpace
           props={props}
           problem={problem}
           handleClose={handleShow}
