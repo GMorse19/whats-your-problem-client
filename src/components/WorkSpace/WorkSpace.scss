@@ -3,11 +3,20 @@
   --display-scratch: 'none';
 }
 
+.switch {
+  display: none;
+}
+
 @media screen and (max-width: 500px) {
+  .calculator {
+    display: var(--display-calc);
+  }
+
   .scratch-pad {
     display: var(--display-scratch);
   }
-  .calculator {
-    display: var(--display-calc);
+
+  .switch {
+    display: block;
   }
 }

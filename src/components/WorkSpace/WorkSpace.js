@@ -26,27 +26,29 @@ class WorkSpace extends Component {
     }
     this.handleClick = this.handleClick.bind(this)
   }
-
+  // Show or hide 'Hint' modal
   hint = () => {
     this.setState({ showHint: true })
-  }
-
-  calc = ''
-  scratch = 'none'
-
-  switch = () => {
-    this.setState({ switch: !this.state.switch })
   }
 
   handleCloseHint = () => {
     this.setState({ showHint: false })
   }
 
+  // Set the variables for the switch button classes
+  calc = ''
+  scratch = 'none'
+  // Switch between calculator and ScratchPad when 'Switch' button is pressed
+  switch = () => {
+    this.setState({ switch: !this.state.switch })
+  }
+
   render () {
     if (!this.props.problem.hint) {
       this.props.problem.hint = 'Sorry, there is no hint for you!'
     }
-
+    // Check the state of switch to determine whether
+    // to show calculator or ScratchPad
     if (this.state.switch) {
       this.calc = ''
       this.scratch = 'none'
@@ -54,7 +56,7 @@ class WorkSpace extends Component {
       this.calc = 'none'
       this.scratch = ''
     }
-
+    // Set the SCSS variable of the classes for switch button
     document.documentElement.style.setProperty('--display-calc', this.calc)
     document.documentElement.style.setProperty('--display-scratch', this.scratch)
 

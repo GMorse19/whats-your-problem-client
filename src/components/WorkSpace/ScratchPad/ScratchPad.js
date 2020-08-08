@@ -20,7 +20,7 @@ class ScratchPad extends Component {
   render () {
     return (
       <Col className="box scratch-pad">
-        <div style={{ width: '250px', backgroundColor: '#303030', borderRadius: '10px', textAlign: 'center' }}>
+        <div style={{ height: '400px', width: '250px', backgroundColor: '#303030', borderRadius: '10px', textAlign: 'center' }}>
           <Container>
             <Form>
               <Form.Group>
