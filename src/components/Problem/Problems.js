@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
 
 import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
@@ -9,6 +7,8 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
 import Search from '../Search/Search'
+import { getProblems } from '../../api/problem'
+import { changeSearch } from '../../helpers/changeSearch'
 
 import './Problem.scss'
 
@@ -19,14 +19,7 @@ const Problems = props => {
   const [option, setOption] = useState(true)
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/problems`,
-      method: 'GET'
-    })
-      .then(response => {
-        setProblems(response.data.problems)
-      })
-      .catch(console.error)
+    getProblems(setProblems)
   }, [])
 
   // callback for setting filter for search query
@@ -34,27 +27,10 @@ const Problems = props => {
     setFil(arr)
   }
 
-  // change search query to lower case
-  const lowercasedFilter = filter.toLowerCase()
-  // filter names or cateogories from problem object
-  const nameData = problems.filter(problem => problem.name)
-  const catData = problems.filter(problem => problem.category)
-  // map problem names or categories to see if they match searc query
-  const filteredData = nameData.map(problem => problem.name.toLowerCase().includes(lowercasedFilter))
-  const filteredCata = catData.map(problem => problem.category.toLowerCase().includes(lowercasedFilter))
-  // loop over queries and an create array for display
   if (option) {
-    for (let i = 0; i < filteredData.length; i++) {
-      if (filteredData[i] === true) {
-        fil.push(nameData[i].name)
-      }
-    }
+    changeSearch('name', fil, problems, filter)
   } else {
-    for (let i = 0; i < filteredCata.length; i++) {
-      if (filteredCata[i] === true) {
-        fil.push(catData[i].category)
-      }
-    }
+    changeSearch('category', fil, problems, filter)
   }
 
   // create an array of problem objects that match search query

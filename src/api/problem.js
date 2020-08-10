@@ -1,6 +1,17 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
+export const getProblems = (setProblems) => {
+  axios({
+    url: `${apiUrl}/problems`,
+    method: 'GET'
+  })
+    .then(response => {
+      setProblems(response.data.problems)
+    })
+    .catch(console.error)
+}
+
 export const showProblem = (id, setProblem) => {
   return axios({
     url: `${apiUrl}/problems/${id}`,
