@@ -3,31 +3,8 @@ import React from 'react'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
-// images for problem categories
-const division = <Image
-  src='division.png'
-  width={ 250 }
-/>
+import { mathImages } from './mathImages'
 
-const addition = <Image
-  src='addition.png'
-  width={ 250 }
-/>
-
-const subtraction = <Image
-  src='subtraction.png'
-  width={ 250 }
-/>
-
-const times = <Image
-  src='times.png'
-  width={ 250 }
-/>
-
-const other = <Image
-  src='symbols.png'
-  width={ 250 }
-/>
 // create display for problem cards
 export const problemsJsx = (arr) => {
   return (
@@ -41,15 +18,15 @@ export const problemsJsx = (arr) => {
           <Col>
             <div className="popup problems-list">
               <div className='category-image'>
-                {(problem.category === 'division') && division}
-                {(problem.category === 'addition') && addition}
-                {(problem.category === 'subtraction') && subtraction}
-                {(problem.category === 'multiplication') && times}
+                {(problem.category === 'division') && <Image width={250} src={mathImages[1]} />}
+                {(problem.category === 'addition') && <Image width={250} src={mathImages[0]} />}
+                {(problem.category === 'subtraction') && <Image width={250} src={mathImages[2]} />}
+                {(problem.category === 'multiplication') && <Image width={250} src={mathImages[3]} />}
                 {(problem.category !== 'division') &&
                 (problem.category !== 'addition') &&
                 (problem.category !== 'subtraction') &&
                 (problem.category !== 'multiplication') &&
-                other}
+                <Image width={250} src={mathImages[4]} />}
               </div>
               <div className='title-box'>
                 <h2 className='title'>
