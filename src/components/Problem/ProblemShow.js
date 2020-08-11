@@ -44,12 +44,7 @@ const Problem = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-
-    if (guess.answer === problem.answer) {
-      handleShowWin()
-    } else {
-      handleLoss()
-    }
+    guess.answer === problem.answer ? handleShowWin() : handleLoss()
     setGuess({ answer: '' })
   }
 
