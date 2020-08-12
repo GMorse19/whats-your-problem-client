@@ -70,7 +70,7 @@ const Problem = props => {
     <div>
       <div className="problem-board">
         <ModalForm
-          title={messages.winTitle + problem.answer}
+          title={random(messages.winTitle) + problem.answer}
           body={random(messages.winBody)}
           footer={random(messages.winFooter)}
           show={showWin}
@@ -81,9 +81,9 @@ const Problem = props => {
           href={'#/problems'}
         />
         <ModalForm
-          body={messages.loseTitle}
-          title={messages.loseBody}
-          footer={messages.loseFooter}
+          body={random(messages.loseTitle)}
+          title={random(messages.loseBody)}
+          footer={random(messages.loseFooter)}
           button='Close'
           button2='Try Again'
           show={showLoss}
