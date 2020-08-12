@@ -56,11 +56,7 @@ const Problem = props => {
   const handleLike = event => {
     let status = ''
     setFlag(prevState => (!prevState))
-    if (flag) {
-      status = 'unlike'
-    } else {
-      status = 'like'
-    }
+    flag ? status = 'unlike' : status = 'like'
     like(event, problem.id, props.user.token, status)
   }
 
