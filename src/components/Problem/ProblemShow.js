@@ -44,12 +44,7 @@ const Problem = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-
-    if (guess.answer === problem.answer) {
-      handleShowWin()
-    } else {
-      handleLoss()
-    }
+    guess.answer === problem.answer ? handleShowWin() : handleLoss()
     setGuess({ answer: '' })
   }
 
@@ -61,11 +56,7 @@ const Problem = props => {
   const handleLike = event => {
     let status = ''
     setFlag(prevState => (!prevState))
-    if (flag) {
-      status = 'unlike'
-    } else {
-      status = 'like'
-    }
+    flag ? status = 'unlike' : status = 'like'
     like(event, problem.id, props.user.token, status)
   }
 
