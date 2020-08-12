@@ -15,6 +15,8 @@ import { showProblem } from '../../api/problem'
 import { showLikes, like } from '../../api/likes'
 import { emptyHeart, redHeart } from '../../images/hearts'
 import { imageShare } from '../../images/share'
+import { random } from '../../helpers/random'
+import messages from '../ModalForm/messages'
 
 const Problem = props => {
   const [problem, setProblem] = useState(null)
@@ -68,9 +70,9 @@ const Problem = props => {
     <div>
       <div className="problem-board">
         <ModalForm
-          title={`You Won! The answer is ${problem.answer}`}
-          body={'You are on a roll! Try Another'}
-          footer={'Good Job!'}
+          title={random(messages.winTitle) + problem.answer}
+          body={random(messages.winBody)}
+          footer={random(messages.winFooter)}
           show={showWin}
           onHide={handleShowWin}
           button='Close'
@@ -79,9 +81,9 @@ const Problem = props => {
           href={'#/problems'}
         />
         <ModalForm
-          body='Sorry. Better luck next time!!!'
-          title='Sorry, You lost. Please try again.'
-          footer='You can do it!'
+          body={random(messages.loseTitle)}
+          title={random(messages.loseBody)}
+          footer={random(messages.loseFooter)}
           button='Close'
           button2='Try Again'
           show={showLoss}
