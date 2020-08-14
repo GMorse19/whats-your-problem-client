@@ -81,8 +81,8 @@ const Problem = props => {
           href={'#/problems'}
         />
         <ModalForm
-          body={random(messages.loseTitle)}
-          title={random(messages.loseBody)}
+          title={random(messages.loseTitle)}
+          body={random(messages.loseBody)}
           footer={random(messages.loseFooter)}
           button='Close'
           button2='Try Again'
