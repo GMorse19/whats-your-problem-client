@@ -22,22 +22,28 @@ const Problem = props => {
   const [problem, setProblem] = useState(null)
   const [flag, setFlag] = useState(null)
   const [guess, setGuess] = useState({ answer: '' })
+
+  // Set state for modals
   const [showWin, setShowWin] = useState(false)
   const [showLoss, setShowLoss] = useState(false)
   const [show, setShow] = useState(false)
   const [share, setShare] = useState(false)
 
+  // Open and close functions for modals
   const handleShare = () => setShare(prevState => (!prevState))
   const handleShow = () => setShow(prevState => (!prevState))
   const handleShowWin = () => setShowWin(prevState => (!prevState))
   const handleLoss = () => setShowLoss(prevState => (!prevState))
 
+  // Set ID of user if user exists
   const userId = props.user ? props.user.id : null
 
+  // API to GET problem by ID
   useEffect(() => {
     showProblem(props.match.params.id, setProblem)
   }, [])
 
+  // API call to find like status of problem by user
   if (props.user) {
     useEffect(() => {
       showLikes(props.match.params.id, props.user.token, setFlag)
@@ -46,6 +52,7 @@ const Problem = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    // Determine which modal to display upon answer given
     guess.answer === problem.answer ? handleShowWin() : handleLoss()
     setGuess({ answer: '' })
   }
@@ -55,6 +62,7 @@ const Problem = props => {
     setGuess({ ...guess, [event.target.name]: event.target.value })
   }
 
+  // Change status of 'Like'
   const handleLike = event => {
     let status = ''
     setFlag(prevState => (!prevState))
