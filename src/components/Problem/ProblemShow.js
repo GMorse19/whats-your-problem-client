@@ -15,6 +15,7 @@ import { showProblem } from '../../api/problem'
 import { showLikes, like } from '../../api/likes'
 import { emptyHeart, redHeart } from '../../images/hearts'
 import { imageShare } from '../../images/share'
+import { calculator } from '../../images/calculator'
 import { random } from '../../helpers/random'
 import messages from '../ModalForm/messages'
 
@@ -154,9 +155,9 @@ const Problem = props => {
           onClick={handleShow}
           props={props}
           problem={problem}
-          style={{ margin: '10px', backgroundColor: '#4a4a4a', border: 'none', float: 'left' }}
+          style={{ margin: '10px', background: 'none', border: 'none', float: 'left' }}
         >
-          Work-Space
+          {calculator}
         </Button>
       </div>
 
