@@ -6,25 +6,63 @@ import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import update from 'immutability-helper'
+import $ from 'jquery'
+import { run, ruleRunner } from './Validation/ruleRunner.js'
+import { required, mustMatch, minLength } from './Validation/rules.js'
 
 import './Signup.scss'
+
+const fieldValidations = [
+  ruleRunner('firstName', 'First Name', required),
+  ruleRunner('emailAddress', 'Email Address', required),
+  ruleRunner('password1', 'Password', required, minLength(6)),
+  ruleRunner('password2', 'Password Confirmation', mustMatch('password1', 'Password'))
+]
 
 class SignUp extends Component {
   constructor () {
     super()
+    this.handleFieldChanged = this.handleFieldChanged.bind(this)
+    this.handleSubmitClicked = this.handleSubmitClicked.bind(this)
+    this.errorFor = this.errorFor.bind(this)
 
     this.state = {
       email: '',
       username: '',
       identifier: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      showErrors: false,
+      validationErrors: { }
     }
   }
 
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
+
+  errorFor (field) {
+    return this.state.validationErrors[field] || ''
+  }
+
+  handleFieldChanged (field) {
+    return (e) => {
+      // update() is provided by React Immutability Helpers
+      // https://facebook.github.io/react/docs/update.html
+      const newState = update(this.state, {
+        [field]: { $set: e.target.value }
+      })
+      newState.validationErrors = run(newState, fieldValidations)
+      this.setState(newState)
+    }
+  }
+
+  handleSubmitClicked () {
+    this.setState({ showErrors: true })
+    if ($.isEmptyObject(this.state.validationErrors) === false) return null
+    return this.props.onCreateAccount(this.state)
+  }
 
   onSignUp = event => {
     event.preventDefault()
@@ -72,6 +110,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
+              <Form.Text>Valid Email Required</Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
@@ -85,6 +124,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
+              <Form.Text></Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
@@ -98,6 +138,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
+              <Form.Text></Form.Text>
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
               <Form.Label>Password Confirmation</Form.Label>
@@ -110,6 +151,7 @@ class SignUp extends Component {
                 placeholder="Confirm Password"
                 onChange={this.handleChange}
               />
+              <Form.Text></Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
               Cancel
