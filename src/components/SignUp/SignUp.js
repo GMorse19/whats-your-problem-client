@@ -14,21 +14,37 @@ class SignUp extends Component {
     super()
 
     this.state = {
-      email: '',
-      username: '',
+      email: {
+        value: '',
+        valid: false
+      },
+      username: {
+        value: '',
+        valid: false
+      },
       identifier: '',
-      password: '',
-      passwordConfirmation: ''
+      password: {
+        value: '',
+        valid: false
+      },
+      passwordConfirmation: {
+        value: '',
+        valid: false
+      }
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => {
+    this.setState({
+    // [event.target.name]: event.target.value
+      [event.target.name]: { value: event.target.value, valid: !!event.target.value }
+    })
+    console.log(this.state)
+  }
 
   onSignUp = event => {
     event.preventDefault()
-    this.setState({ identifier: this.state.email })
+    this.setState({ identifier: this.state.email.value })
     const { alert, history, setUser } = this.props
 
     signUp(this.state)
@@ -42,7 +58,7 @@ class SignUp extends Component {
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
+        this.setState({ email: { value: '' }, password: { value: '' }, passwordConfirmation: { value: '' } })
         alert({
           heading: 'Sign Up Failed',
           message: messages.signUpFailure,
@@ -53,7 +69,8 @@ class SignUp extends Component {
 
   render () {
     const { email, username, password, passwordConfirmation } = this.state
-
+    const errorMessage = 'Please fill out correctly!'
+    const noMessage = ''
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
@@ -67,11 +84,16 @@ class SignUp extends Component {
                 className="account-info input"
                 type="email"
                 name="email"
-                value={email}
+                value={email.value}
                 placeholder="Email"
                 onChange={this.handleChange}
                 maxLength="35"
               />
+              <Form.Text
+                className={email.valid ? 'is-valid' : 'is-invalid'}
+              >
+                {email.valid ? errorMessage : noMessage }
+              </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
