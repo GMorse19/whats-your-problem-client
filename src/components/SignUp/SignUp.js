@@ -14,8 +14,8 @@ import { required, mustMatch, minLength } from './Validation/rules.js'
 import './Signup.scss'
 
 const fieldValidations = [
-  ruleRunner('firstName', 'First Name', required),
-  ruleRunner('emailAddress', 'Email Address', required),
+  ruleRunner('username', 'User Name', required),
+  ruleRunner('email', 'Email', required),
   ruleRunner('password1', 'Password', required, minLength(6)),
   ruleRunner('password2', 'Password Confirmation', mustMatch('password1', 'Password'))
 ]
@@ -38,9 +38,15 @@ class SignUp extends Component {
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+    const newState = this.state
+    newState.validationErrors = run(newState, fieldValidations)
+    // this.setState(newState)
+    console.log(newState)
+  }
 
   errorFor (field) {
     return this.state.validationErrors[field] || ''
@@ -109,6 +115,7 @@ class SignUp extends Component {
                 placeholder="Email"
                 onChange={this.handleChange}
                 maxLength="35"
+                errorText={this.errorFor('email')}
               />
               <Form.Text>Valid Email Required</Form.Text>
             </Form.Group>
