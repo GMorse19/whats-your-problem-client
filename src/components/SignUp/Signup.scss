@@ -59,6 +59,15 @@
   }
 }
 
+.is-valid {
+  display: none;
+  color: red;
+}
+
+.is-invalid {
+  color: green;
+}
+
 .link {
   color: inherit;
   text-decoration: none;
