@@ -3,19 +3,12 @@ import { withRouter, Link } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
+import signUpMessages from './signUpMessages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 import './Signup.scss'
-
-const errorMessages = {
-  email: 'fix your email',
-  username: 'must be 8 characters long',
-  password: 'password must be 8 characters long!',
-  passwordConfirmation: 'must match password',
-  isRequired: 'This field is required.'
-}
 
 class SignUp extends Component {
   constructor () {
@@ -36,30 +29,35 @@ class SignUp extends Component {
   }
 
   checkValid = () => {
+    console.log(this.state.password)
+    const re = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$!%&*(),.?":{}|<>^+=])(.{8,15})$/
     if (this.state.email.includes('@')) {
       this.setState({ emailVal: true })
     }
     if (this.state.username.length >= 6) {
       this.setState({ usernameVal: true })
     }
-    if (this.state.password.length >= 8) {
+    if (re.test(this.state.password)) {
       this.setState({ passwordVal: true })
     }
     if (this.state.passwordConfirmation === this.state.password) {
       this.setState({ passwordConfirmationVal: true })
     }
-    console.log(this.state)
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  handleChange = event => this.setState({
+    [event.target.name]: event.target.value
+  })
 
   onSignUp = event => {
     event.preventDefault()
-    this.setState({ identifier: this.state.email, submit: true })
+    this.setState({
+      identifier: this.state.email,
+      submit: true,
+      emailVal: false,
+      usernameVal: false,
+      passwordVal: false,
+      passwordConfirmationVal: false })
     this.checkValid()
     const { alert, history, setUser } = this.props
 
@@ -84,7 +82,7 @@ class SignUp extends Component {
 
   render () {
     const { email, username, password, passwordConfirmation, submit, emailVal, usernameVal, passwordVal, passwordConfirmationVal } = this.state
-
+    console.log(this.state.password)
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
@@ -106,7 +104,7 @@ class SignUp extends Component {
               <Form.Text
                 className={email.valid ? 'is-invalid' : 'is-valid'}
               >
-                {submit && !emailVal && errorMessages.email}
+                {submit && !emailVal && signUpMessages.email}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
@@ -124,7 +122,7 @@ class SignUp extends Component {
               <Form.Text
                 className={username.valid ? 'is-invalid' : 'is-valid'}
               >
-                {submit && !usernameVal && errorMessages.username }
+                {submit && !usernameVal && signUpMessages.username }
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
@@ -142,7 +140,7 @@ class SignUp extends Component {
               <Form.Text
                 className={password.valid ? 'is-invalid' : 'is-valid'}
               >
-                {submit && !passwordVal && errorMessages.password }
+                {submit && !passwordVal && signUpMessages.password }
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
@@ -159,7 +157,7 @@ class SignUp extends Component {
               <Form.Text
                 className={passwordConfirmation.valid ? 'is-invalid' : 'is-valid'}
               >
-                {submit && !passwordConfirmationVal && errorMessages.passwordConfirmation }
+                {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
               </Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
