@@ -10,6 +10,7 @@ import {
   passwordTest,
   passwordLength,
   passwordCapital,
+  passwordLower,
   passwordSpecial,
   passwordNumber,
   passwordConfirmationTest
@@ -35,6 +36,7 @@ class SignUp extends Component {
       passwordVal: false,
       passwordLength: false,
       passwordCapital: false,
+      passwordLower: false,
       passwordSpecial: false,
       passwordNumber: false,
       passwordConfirmation: '',
@@ -48,6 +50,7 @@ class SignUp extends Component {
     this.setState({ passwordVal: passwordTest(this.state.password) })
     this.setState({ passwordLength: passwordLength(this.state.password) })
     this.setState({ passwordCapital: passwordCapital(this.state.password) })
+    this.setState({ passwordLower: passwordLower(this.state.password) })
     this.setState({ passwordSpecial: passwordSpecial(this.state.password) })
     this.setState({ passwordNumber: passwordNumber(this.state.password) })
     this.setState({ passwordConfirmationVal: passwordConfirmationTest(this.state.password, this.state.passwordConfirmation) })
@@ -159,6 +162,9 @@ class SignUp extends Component {
               </Form.Text>
               <Form.Text className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordVal && signUpMessages.passwordSpecial }
+              </Form.Text>
+              <Form.Text className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>
+                {submit && !passwordVal && signUpMessages.passwordLower }
               </Form.Text>
               <Form.Text className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordVal && signUpMessages.passwordNumber }

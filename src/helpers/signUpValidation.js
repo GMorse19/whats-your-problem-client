@@ -12,6 +12,10 @@ export const passwordCapital = (password) => {
   const re = /^(?=.*[A-Z])/
   return re.test(password)
 }
+export const passwordLower = (password) => {
+  const re = /^(?=.*[a-z])/
+  return re.test(password)
+}
 export const passwordSpecial = (password) => {
   const re = /^(?=.*[@#$!%&*(),.?":{}|<>^+=])/
   return re.test(password)
