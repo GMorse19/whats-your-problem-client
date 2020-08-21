@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
+import { emailTest, usernameTest, passwordTest, passwordConfirmationTest } from '../../helpers/signUpValidation'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -29,25 +30,17 @@ class SignUp extends Component {
   }
 
   checkValid = () => {
-    console.log(this.state.password)
-    const re = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$!%&*(),.?":{}|<>^+=])(.{8,15})$/
-    if (this.state.email.includes('@')) {
-      this.setState({ emailVal: true })
-    }
-    if (this.state.username.length >= 6) {
-      this.setState({ usernameVal: true })
-    }
-    if (re.test(this.state.password)) {
-      this.setState({ passwordVal: true })
-    }
-    if (this.state.passwordConfirmation === this.state.password) {
-      this.setState({ passwordConfirmationVal: true })
-    }
+    this.setState({ emailVal: emailTest(this.state.email) })
+    this.setState({ usernameVal: usernameTest(this.state.username) })
+    this.setState({ passwordVal: passwordTest(this.state.password) })
+    this.setState({ passwordConfirmationVal: passwordConfirmationTest(this.state.password, this.state.passwordConfirmation) })
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    }, () => { this.checkValid() })
+  }
 
   onSignUp = event => {
     event.preventDefault()
@@ -82,7 +75,7 @@ class SignUp extends Component {
 
   render () {
     const { email, username, password, passwordConfirmation, submit, emailVal, usernameVal, passwordVal, passwordConfirmationVal } = this.state
-    console.log(this.state.password)
+
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
