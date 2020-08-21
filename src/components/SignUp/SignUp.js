@@ -4,7 +4,16 @@ import { withRouter, Link } from 'react-router-dom'
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
-import { emailTest, usernameTest, passwordTest, passwordConfirmationTest } from '../../helpers/signUpValidation'
+import {
+  emailTest,
+  usernameTest,
+  passwordTest,
+  passwordLength,
+  passwordCapital,
+  passwordSpecial,
+  passwordNumber,
+  passwordConfirmationTest
+} from '../../helpers/signUpValidation'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -24,6 +33,10 @@ class SignUp extends Component {
       submit: false,
       password: '',
       passwordVal: false,
+      passwordLength: false,
+      passwordCapital: false,
+      passwordSpecial: false,
+      passwordNumber: false,
       passwordConfirmation: '',
       passwordConfirmationVal: false
     }
@@ -33,6 +46,10 @@ class SignUp extends Component {
     this.setState({ emailVal: emailTest(this.state.email) })
     this.setState({ usernameVal: usernameTest(this.state.username) })
     this.setState({ passwordVal: passwordTest(this.state.password) })
+    this.setState({ passwordLength: passwordLength(this.state.password) })
+    this.setState({ passwordCapital: passwordCapital(this.state.password) })
+    this.setState({ passwordSpecial: passwordSpecial(this.state.password) })
+    this.setState({ passwordNumber: passwordNumber(this.state.password) })
     this.setState({ passwordConfirmationVal: passwordConfirmationTest(this.state.password, this.state.passwordConfirmation) })
   }
 
@@ -46,11 +63,7 @@ class SignUp extends Component {
     event.preventDefault()
     this.setState({
       identifier: this.state.email,
-      submit: true,
-      emailVal: false,
-      usernameVal: false,
-      passwordVal: false,
-      passwordConfirmationVal: false })
+      submit: true })
     this.checkValid()
     const { alert, history, setUser } = this.props
 
@@ -74,7 +87,17 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, username, password, passwordConfirmation, submit, emailVal, usernameVal, passwordVal, passwordConfirmationVal } = this.state
+    const {
+      email,
+      username,
+      password,
+      passwordConfirmation,
+      submit,
+      emailVal,
+      usernameVal,
+      passwordVal,
+      passwordConfirmationVal
+    } = this.state
 
     return (
       <div className="popup2">
@@ -94,10 +117,9 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
-              <Form.Text
-                className={email.valid ? 'is-invalid' : 'is-valid'}
-              >
+              <Form.Text className={!emailVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.email}
+                {submit && emailVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
@@ -112,10 +134,9 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
-              <Form.Text
-                className={username.valid ? 'is-invalid' : 'is-valid'}
-              >
+              <Form.Text className={!usernameVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !usernameVal && signUpMessages.username }
+                {submit && usernameVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
@@ -130,10 +151,18 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
-              <Form.Text
-                className={password.valid ? 'is-invalid' : 'is-valid'}
-              >
-                {submit && !passwordVal && signUpMessages.password }
+              <Form.Text className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>
+                {submit && !passwordVal && signUpMessages.passwordLength }
+              </Form.Text>
+              <Form.Text className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>
+                {submit && !passwordVal && signUpMessages.passwordCapital }
+              </Form.Text>
+              <Form.Text className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>
+                {submit && !passwordVal && signUpMessages.passwordSpecial }
+              </Form.Text>
+              <Form.Text className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>
+                {submit && !passwordVal && signUpMessages.passwordNumber }
+                {submit && passwordVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
@@ -147,10 +176,9 @@ class SignUp extends Component {
                 placeholder="Confirm Password"
                 onChange={this.handleChange}
               />
-              <Form.Text
-                className={passwordConfirmation.valid ? 'is-invalid' : 'is-valid'}
-              >
+              <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
+                {submit && passwordConfirmationVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
