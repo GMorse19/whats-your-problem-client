@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
@@ -154,20 +155,20 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
-              <Form.Text className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordLength }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordCapital }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordSpecial }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordLower }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordNumber }
+              <Form.Text>
+                {submit && !passwordVal &&
+                  <Dropdown>
+                    <Dropdown.Toggle variant={!passwordVal ? 'danger' : 'success'} id="dropdown-basic">
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}</Dropdown.Item>
+                      <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }</Dropdown.Item>
+                      <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }</Dropdown.Item>
+                      <Dropdown.Item className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLower}</Dropdown.Item>
+                      <Dropdown.Item className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordNumber }</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown> }
                 {submit && passwordVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>

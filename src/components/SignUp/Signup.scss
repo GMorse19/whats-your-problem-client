@@ -39,11 +39,11 @@
 
 .is-valid {
   display: none;
-  color: green;
+  color: green !important;
 }
 
 .is-invalid {
-  color: red;
+  color: red !important;
 }
 
 .link {
