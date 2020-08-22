@@ -112,7 +112,7 @@ class SignUp extends Component {
               <Form.Control
                 required
                 autoComplete='off'
-                className="account-info input"
+                className="account-info input input-email"
                 type="email"
                 name="email"
                 value={email.value}
