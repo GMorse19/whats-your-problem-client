@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default {
   email: 'Must be a valid email.',
   username: 'Username must contain 6 characters.',
@@ -8,5 +10,5 @@ export default {
   passwordNumber: 'Password must contain one number.',
   passwordConfirmation: 'Passwords do not match',
   isRequired: 'This field is required.',
-  checked: 'Good to go!'
+  checked: <img src='green-check.png' width='30px'/>
 }
