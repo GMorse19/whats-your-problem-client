@@ -69,6 +69,7 @@ class SignUp extends Component {
       identifier: this.state.email,
       submit: true })
     this.checkValid()
+    document.documentElement.style.setProperty('--border-show', 'solid')
     const { alert, history, setUser } = this.props
 
     signUp(this.state)
@@ -113,7 +114,7 @@ class SignUp extends Component {
               <Form.Control
                 required
                 autoComplete='off'
-                className="account-info input input-email"
+                className={!emailVal ? 'account-info-signup-red email input' : 'account-info-signup email input'}
                 type="email"
                 name="email"
                 value={email.value}
@@ -130,7 +131,7 @@ class SignUp extends Component {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 required
-                className="account-info username input"
+                className={!usernameVal ? 'account-info-signup-red username input' : 'account-info-signup username input'}
                 name="username"
                 value={username.value}
                 type="username"
@@ -147,7 +148,7 @@ class SignUp extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
-                className="account-info password input"
+                className={!passwordVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
                 name="password"
                 value={password.value}
                 type="password"
@@ -176,7 +177,7 @@ class SignUp extends Component {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 required
-                className="account-info password input"
+                className={!passwordConfirmationVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
                 name="passwordConfirmation"
                 value={passwordConfirmation.value}
                 type="password"
