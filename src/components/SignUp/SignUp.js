@@ -41,7 +41,8 @@ class SignUp extends Component {
       passwordSpecial: false,
       passwordNumber: false,
       passwordConfirmation: '',
-      passwordConfirmationVal: false
+      passwordConfirmationVal: false,
+      property: document.documentElement.style.setProperty('--border-show', 'none')
     }
   }
 
@@ -69,7 +70,8 @@ class SignUp extends Component {
       identifier: this.state.email,
       submit: true })
     this.checkValid()
-    document.documentElement.style.setProperty('--border-show', 'solid')
+    this.setState({ property: document.documentElement.style.setProperty('--border-show', 'solid') })
+    // document.documentElement.style.setProperty('--border-show', 'solid')
     const { alert, history, setUser } = this.props
 
     signUp(this.state)
