@@ -1,5 +1,4 @@
 :root {
-  --border-color: green;
   --border-show: none;
 }
 
@@ -31,11 +30,9 @@
   };
 }
 
-.account-info-signup.password {
-  :focus {
+.account-info-signup-red.password {
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
-  }
 }
 
 .input::-webkit-input-placeholder {
