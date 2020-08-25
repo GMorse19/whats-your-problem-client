@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
+import Dropdown from 'react-bootstrap/Dropdown'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
@@ -40,7 +42,8 @@ class SignUp extends Component {
       passwordSpecial: false,
       passwordNumber: false,
       passwordConfirmation: '',
-      passwordConfirmationVal: false
+      passwordConfirmationVal: false,
+      property: document.documentElement.style.setProperty('--border-show', 'none')
     }
   }
 
@@ -68,6 +71,7 @@ class SignUp extends Component {
       identifier: this.state.email,
       submit: true })
     this.checkValid()
+    this.setState({ property: document.documentElement.style.setProperty('--border-show', 'solid') })
     const { alert, history, setUser } = this.props
 
     signUp(this.state)
@@ -112,7 +116,7 @@ class SignUp extends Component {
               <Form.Control
                 required
                 autoComplete='off'
-                className="account-info input input-email"
+                className={!emailVal ? 'account-info-signup-red email input' : 'account-info-signup email input'}
                 type="email"
                 name="email"
                 value={email.value}
@@ -129,7 +133,7 @@ class SignUp extends Component {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 required
-                className="account-info username input"
+                className={!usernameVal ? 'account-info-signup-red username input' : 'account-info-signup username input'}
                 name="username"
                 value={username.value}
                 type="username"
@@ -144,38 +148,39 @@ class SignUp extends Component {
             </Form.Group>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                className="account-info password input"
-                name="password"
-                value={password.value}
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-                maxLength="20"
-              />
-              <Form.Text className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordLength }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordCapital }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordSpecial }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordLower }
-              </Form.Text>
-              <Form.Text className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>
-                {submit && !passwordVal && signUpMessages.passwordNumber }
-                {submit && passwordVal && signUpMessages.checked}
-              </Form.Text>
+              <InputGroup>
+                <Form.Control
+                  required
+                  className={submit && !passwordVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
+                  name="password"
+                  value={password.value}
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  maxLength="20"
+                />
+                <InputGroup.Append>{submit && !passwordVal &&
+                <Dropdown>
+                  <Dropdown.Toggle style={{ borderRadius: '0px 24px 24px 0px' }} variant={!passwordVal ? 'danger' : 'success'} id="dropdown-basic">
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLower}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordNumber }</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                }
+                </InputGroup.Append>
+              </InputGroup>
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 required
-                className="account-info password input"
+                className={!passwordConfirmationVal ? 'account-info-signup-red input' : 'account-info-signup input'}
                 name="passwordConfirmation"
                 value={passwordConfirmation.value}
                 type="password"
