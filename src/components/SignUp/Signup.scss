@@ -35,6 +35,13 @@
     border-bottom-right-radius: 0px !important;
 }
 
+.drop-menu {
+  font-size: 14px !important;
+  border-radius: 24px !important;
+  width: 350px !important;
+  overflow: scroll;
+}
+
 .input::-webkit-input-placeholder {
     color: #915808 !important;
 }
@@ -60,10 +67,12 @@
 .is-valid {
   display: none;
   color: green !important;
+  border-radius: 24px !important;
 }
 
 .is-invalid {
   color: red !important;
+  border-radius: 24px !important;
 }
 
 .link {

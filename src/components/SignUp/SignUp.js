@@ -126,7 +126,6 @@ class SignUp extends Component {
               />
               <Form.Text className={!emailVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.email}
-                {submit && emailVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
@@ -143,7 +142,6 @@ class SignUp extends Component {
               />
               <Form.Text className={!usernameVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !usernameVal && signUpMessages.username }
-                {submit && usernameVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
@@ -164,7 +162,7 @@ class SignUp extends Component {
                   <Dropdown.Toggle style={{ borderRadius: '0px 24px 24px 0px' }} variant={!passwordVal ? 'danger' : 'success'} id="dropdown-basic">
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu alignRight className='drop-menu'>
                     <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}</Dropdown.Item>
                     <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }</Dropdown.Item>
                     <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }</Dropdown.Item>
@@ -189,7 +187,6 @@ class SignUp extends Component {
               />
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
-                {submit && passwordConfirmationVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
