@@ -1,20 +1,11 @@
+:root {
+  --border-show: none;
+}
 
-// h1 {
-//   font-size: 23px;
-//   font-weight: 300;
-//   text-align: center !important;
-// }
-
-// h2 {
-//   font-family: Roboto;
-//   font-size: 17px;
-//   font-weight: 300;
-//   text-align: center;
-// }
-
-.account-info {
+.account-info-signup {
   background-color: rgba(194, 118, 11, .40) !important;
-  border: none !important;
+  border: var(--border-show) !important;
+  border-color: green !important;
   border-radius: 24px !important;
   color: #000 !important;
   font-weight: 300 !important;
@@ -25,25 +16,39 @@
   };
 }
 
-.account-info.password {
+.account-info-signup-red {
+  background-color: rgba(194, 118, 11, .40) !important;
+  border: var(--border-show) !important;
+  border-color: red !important;
+  border-radius: 24px !important;
+  color: #000 !important;
+  font-weight: 300 !important;
+  text-decoration: none !important;
   :focus {
+    border-radius: 24px !important;
+    border: 1px solid #000 !important;
+  };
+}
+
+.account-info-signup-red.password {
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
-  }
+}
+
+.drop-menu {
+  font-size: 14px !important;
+  border-radius: 24px !important;
+  width: 350px !important;
+  overflow: scroll;
 }
 
 .input::-webkit-input-placeholder {
     color: #915808 !important;
 }
-// .close-window-blue {
-//   background-color: #FFF;
-//   border: none;
-//   float: right;
-//   margin-right: 0px;
-//   img {
-//     background-color: #FFFFFF;
-//   }
-// }
+
+.input-email {
+  border: green;
+}
 
 .cancel-button {
   color: #222222;
@@ -57,6 +62,17 @@
   :hover {
     color:rgb(194, 118, 11) !important;
   }
+}
+
+.is-valid {
+  display: none;
+  color: green !important;
+  border-radius: 24px !important;
+}
+
+.is-invalid {
+  color: red !important;
+  border-radius: 24px !important;
 }
 
 .link {
