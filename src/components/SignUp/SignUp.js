@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-import { signUp, signIn } from '../../api/auth'
+import { signUp, signIn, checkname } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
 import {
@@ -67,6 +67,7 @@ class SignUp extends Component {
 
   onSignUp = event => {
     event.preventDefault()
+    checkname(this.state.username)
     this.setState({
       identifier: this.state.email,
       submit: true })

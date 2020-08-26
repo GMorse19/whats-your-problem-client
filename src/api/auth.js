@@ -70,3 +70,17 @@ export const updateUser = (credentials, user) => {
     }
   })
 }
+
+export const checkname = (name) => {
+  return axios({
+    url: apiUrl + '/checkname',
+    method: 'GET',
+    params: {
+      username: name
+    }
+  })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(console.error)
+}
