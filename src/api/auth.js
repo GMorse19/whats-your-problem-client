@@ -79,8 +79,4 @@ export const checkname = (name) => {
       username: name
     }
   })
-    .then(response => {
-      console.log(response.data)
-    })
-    .catch(console.error)
 }
