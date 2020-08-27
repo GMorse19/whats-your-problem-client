@@ -3,12 +3,13 @@ import { withRouter, Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-import { signUp, signIn } from '../../api/auth'
+import { signUp, signIn, checkname } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
 import {
   emailTest,
   usernameTest,
+  usernameLength,
   passwordTest,
   passwordLength,
   passwordCapital,
@@ -32,6 +33,8 @@ class SignUp extends Component {
       emailVal: false,
       username: '',
       usernameVal: false,
+      usernameLength: false,
+      usernameTaken: false,
       identifier: '',
       submit: false,
       password: '',
@@ -49,7 +52,8 @@ class SignUp extends Component {
 
   checkValid = () => {
     this.setState({ emailVal: emailTest(this.state.email) })
-    this.setState({ usernameVal: usernameTest(this.state.username) })
+    this.setState({ usernameVal: usernameTest(this.state.username, this.state.usernameTaken) })
+    this.setState({ usernameLength: usernameLength(this.state.username) })
     this.setState({ passwordVal: passwordTest(this.state.password) })
     this.setState({ passwordLength: passwordLength(this.state.password) })
     this.setState({ passwordCapital: passwordCapital(this.state.password) })
@@ -60,9 +64,17 @@ class SignUp extends Component {
   }
 
   handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    }, () => { this.checkValid() })
+    if (event.target.name === 'username') {
+      this.setState({
+        [event.target.name]: event.target.value
+      }, () => checkname(this.state.username)
+        .then(res => this.setState({ usernameTaken: res.data }))
+        .then(() => { this.checkValid() }))
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value
+      }, () => { this.checkValid() })
+    }
   }
 
   onSignUp = event => {
@@ -97,15 +109,17 @@ class SignUp extends Component {
     const {
       email,
       username,
+      usernameLength,
       password,
       passwordConfirmation,
       submit,
       emailVal,
       usernameVal,
+      usernameTaken,
       passwordVal,
       passwordConfirmationVal
     } = this.state
-
+    console.log(usernameTaken)
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
@@ -140,8 +154,11 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
-              <Form.Text className={!usernameVal ? 'is-invalid' : 'is-valid'}>
+              <Form.Text className={!usernameLength ? 'is-invalid' : 'is-valid'}>
                 {submit && !usernameVal && signUpMessages.username }
+              </Form.Text>
+              <Form.Text className={usernameTaken ? 'is-invalid' : 'is-valid'}>
+                {submit && !usernameVal && signUpMessages.usernameTaken}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
