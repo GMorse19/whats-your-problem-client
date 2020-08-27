@@ -2,6 +2,7 @@ import React from 'react'
 
 export default {
   email: 'Must be a valid email.',
+  emailAvail: 'This email already has an account',
   username: 'Username must contain 6 characters.',
   usernameTaken: 'User name is taken. Please Choose another.',
   passwordLength: 'Password must be 8 characters long.',
