@@ -1,8 +1,10 @@
-export const emailTest = (email) => {
+export const emailTest = (email, emailAvail) => {
+  return email.includes('@') && !emailAvail
+}
+export const emailValid = (email) => {
   return email.includes('@')
 }
 export const usernameTest = (username, usernameTaken) => {
-  console.log(!usernameTaken)
   return username.length >= 6 && !usernameTaken
 }
 export const usernameLength = (username) => {

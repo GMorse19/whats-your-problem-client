@@ -3,11 +3,12 @@ import { withRouter, Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-import { signUp, signIn, checkname } from '../../api/auth'
+import { signUp, signIn, checkname, checkemail } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
 import {
   emailTest,
+  emailValid,
   usernameTest,
   usernameLength,
   passwordTest,
@@ -30,6 +31,8 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
+      emailAvail: false,
+      emailValid: false,
       emailVal: false,
       username: '',
       usernameVal: false,
@@ -51,7 +54,8 @@ class SignUp extends Component {
   }
 
   checkValid = () => {
-    this.setState({ emailVal: emailTest(this.state.email) })
+    this.setState({ emailVal: emailTest(this.state.email, this.state.emailAvail) })
+    this.setState({ emailValid: emailValid(this.state.email) })
     this.setState({ usernameVal: usernameTest(this.state.username, this.state.usernameTaken) })
     this.setState({ usernameLength: usernameLength(this.state.username) })
     this.setState({ passwordVal: passwordTest(this.state.password) })
@@ -69,6 +73,12 @@ class SignUp extends Component {
         [event.target.name]: event.target.value
       }, () => checkname(this.state.username)
         .then(res => this.setState({ usernameTaken: res.data }))
+        .then(() => { this.checkValid() }))
+    } else if (event.target.name === 'email') {
+      this.setState({
+        [event.target.name]: event.target.value
+      }, () => checkemail(this.state.email)
+        .then(res => this.setState({ emailAvail: res.data }))
         .then(() => { this.checkValid() }))
     } else {
       this.setState({
@@ -108,6 +118,8 @@ class SignUp extends Component {
   render () {
     const {
       email,
+      emailAvail,
+      emailValid,
       username,
       usernameLength,
       password,
@@ -119,7 +131,6 @@ class SignUp extends Component {
       passwordVal,
       passwordConfirmationVal
     } = this.state
-    console.log(usernameTaken)
     return (
       <div className="popup2">
         <div className="mt-3 p-4">
@@ -138,8 +149,11 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
-              <Form.Text className={!emailVal ? 'is-invalid' : 'is-valid'}>
+              <Form.Text className={!emailValid ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.email}
+              </Form.Text>
+              <Form.Text className={emailAvail ? 'is-invalid' : 'is-valid'}>
+                {submit && !emailVal && signUpMessages.emailAvail}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
