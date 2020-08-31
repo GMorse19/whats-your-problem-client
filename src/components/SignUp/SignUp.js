@@ -151,9 +151,11 @@ class SignUp extends Component {
               />
               <Form.Text className={!emailValid ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.email}
+                {submit && !usernameVal && emailValid && signUpMessages.checked}
               </Form.Text>
               <Form.Text className={emailAvail ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.emailAvail}
+                {submit && !usernameVal && !emailAvail && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="username">
@@ -169,10 +171,12 @@ class SignUp extends Component {
                 maxLength="20"
               />
               <Form.Text className={!usernameLength ? 'is-invalid' : 'is-valid'}>
-                {submit && !usernameVal && signUpMessages.username }
+                {submit && !usernameVal && signUpMessages.username}
+                {submit && !usernameVal && usernameLength && signUpMessages.checked}
               </Form.Text>
               <Form.Text className={usernameTaken ? 'is-invalid' : 'is-valid'}>
                 {submit && !usernameVal && signUpMessages.usernameTaken}
+                {submit && !usernameVal && !usernameTaken && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
@@ -194,11 +198,11 @@ class SignUp extends Component {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu alignRight className='drop-menu'>
-                    <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLower}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordNumber }</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}{this.state.passwordLength && signUpMessages.checked}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }{this.state.passwordCapital && signUpMessages.checked}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }{this.state.passwordSpecial && signUpMessages.checked}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLower}{this.state.passwordLower && signUpMessages.checked}</Dropdown.Item>
+                    <Dropdown.Item className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordNumber}{this.state.passwordNumber && signUpMessages.checked}</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 }
@@ -218,6 +222,7 @@ class SignUp extends Component {
               />
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
+                {submit && passwordConfirmationVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
