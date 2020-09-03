@@ -31,6 +31,7 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
+      open: false,
       emailAvail: false,
       emailValid: false,
       emailVal: false,
@@ -87,6 +88,10 @@ class SignUp extends Component {
     }
   }
 
+  onHover = (prevState) => {
+    setTimeout(() => this.setState({ open: !prevState }), 1000)
+  }
+
   onSignUp = event => {
     event.preventDefault()
     this.setState({
@@ -118,6 +123,7 @@ class SignUp extends Component {
   render () {
     const {
       email,
+      open,
       emailAvail,
       emailValid,
       username,
@@ -137,7 +143,7 @@ class SignUp extends Component {
           <h3>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
             <Form.Group controlId="email" className="mt-4">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email address</Form.Label><br />
               <Form.Control
                 required
                 autoComplete='off'
@@ -149,6 +155,15 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
+
+              <img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={() => this.onHover(this.state.open)}
+                onMouseLeave={() => this.onHover(this.state.open)}
+              />
+              {open && <div>Hello</div>}
+
               <Form.Text className={!emailValid ? 'is-invalid' : 'is-valid'}>
                 {submit && !emailVal && signUpMessages.email}
                 {submit && (emailValid ? signUpMessages.checked : signUpMessages.redX)}
@@ -170,6 +185,9 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="20"
               />
+
+              <img src='red-x.svg' className='red-x'/>
+
               <Form.Text className={!usernameLength ? 'is-invalid' : 'is-valid'}>
                 {submit && !usernameVal && signUpMessages.username}
                 {submit && !usernameVal && (usernameLength ? signUpMessages.checked : signUpMessages.redX)}
@@ -192,6 +210,9 @@ class SignUp extends Component {
                   onChange={this.handleChange}
                   maxLength="20"
                 />
+
+                <img src='red-x.svg' className='red-x'/>
+
                 <InputGroup.Append>{submit && !passwordVal &&
                 <Dropdown>
                   <Dropdown.Toggle style={{ borderRadius: '0px 24px 24px 0px' }} variant={!passwordVal ? 'danger' : 'success'} id="dropdown-basic">
@@ -220,6 +241,9 @@ class SignUp extends Component {
                 placeholder="Confirm Password"
                 onChange={this.handleChange}
               />
+
+              <img src='red-x.svg' className='red-x'/>
+
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
                 {submit && passwordConfirmationVal && signUpMessages.checked}
