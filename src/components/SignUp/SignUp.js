@@ -88,6 +88,13 @@ class SignUp extends Component {
     }
   }
 
+  redX = <img
+    src='red-x.svg'
+    className='red-x'
+    onMouseEnter={() => this.onHover(this.state.open)}
+    onMouseLeave={() => this.onHover(this.state.open)}
+  />
+
   onHover = (prevState) => {
     setTimeout(() => this.setState({ open: !prevState }), 1000)
   }
@@ -156,22 +163,16 @@ class SignUp extends Component {
                 maxLength="35"
               />
 
-              <img
+              {submit && !emailVal && <img
                 src='red-x.svg'
                 className='red-x'
                 onMouseEnter={() => this.onHover(this.state.open)}
                 onMouseLeave={() => this.onHover(this.state.open)}
-              />
-              {open && <div>Hello</div>}
-
-              <Form.Text className={!emailValid ? 'is-invalid' : 'is-valid'}>
-                {submit && !emailVal && signUpMessages.email}
-                {submit && (emailValid ? signUpMessages.checked : signUpMessages.redX)}
-              </Form.Text>
-              <Form.Text className={emailAvail ? 'is-invalid' : 'is-valid'}>
-                {submit && !emailVal && signUpMessages.emailAvail}
-                {submit && (!emailAvail ? signUpMessages.checked : signUpMessages.redX)}
-              </Form.Text>
+              />}
+              {open && <div>
+                {submit && !emailVal && !emailValid && signUpMessages.email}
+                {submit && !emailVal && emailAvail && signUpMessages.emailAvail}
+              </div>}
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
