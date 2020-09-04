@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import Dropdown from 'react-bootstrap/Dropdown'
-import InputGroup from 'react-bootstrap/InputGroup'
+// import Dropdown from 'react-bootstrap/Dropdown'
+// import InputGroup from 'react-bootstrap/InputGroup'
 
 import { signUp, signIn, checkname, checkemail } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
@@ -169,7 +169,7 @@ class SignUp extends Component {
                 onMouseEnter={() => this.onHover(this.state.open)}
                 onMouseLeave={() => this.onHover(this.state.open)}
               />}
-              {open && <div>
+              {open && <div className='error-message-div'>
                 {submit && !emailVal && !emailValid && signUpMessages.email}
                 {submit && !emailVal && emailAvail && signUpMessages.emailAvail}
               </div>}
@@ -187,49 +187,45 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              <img src='red-x.svg' className='red-x'/>
+              {submit && !usernameVal && <img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={() => this.onHover(this.state.open)}
+                onMouseLeave={() => this.onHover(this.state.open)}
+              />}
+              {open && <div className='error-message-div'>
+                {submit && !usernameVal && !usernameLength && signUpMessages.username}
+                {submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}
+              </div>}
 
-              <Form.Text className={!usernameLength ? 'is-invalid' : 'is-valid'}>
-                {submit && !usernameVal && signUpMessages.username}
-                {submit && !usernameVal && (usernameLength ? signUpMessages.checked : signUpMessages.redX)}
-              </Form.Text>
-              <Form.Text className={usernameTaken ? 'is-invalid' : 'is-valid'}>
-                {submit && !usernameVal && signUpMessages.usernameTaken}
-                {submit && !usernameVal && (!usernameTaken ? signUpMessages.checked : signUpMessages.redX)}
-              </Form.Text>
             </Form.Group>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
-              <InputGroup>
-                <Form.Control
-                  required
-                  className={submit && !passwordVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
-                  name="password"
-                  value={password.value}
-                  type="password"
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                  maxLength="20"
-                />
+              <Form.Control
+                required
+                className={submit && !passwordVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
+                name="password"
+                value={password.value}
+                type="password"
+                placeholder="Password"
+                onChange={this.handleChange}
+                maxLength="20"
+              />
 
-                <img src='red-x.svg' className='red-x'/>
+              {submit && !passwordVal && <img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={() => this.onHover(this.state.open)}
+                onMouseLeave={() => this.onHover(this.state.open)}
+              />}
+              {open && <div className='error-message-div'>
+                <div>{submit && !passwordVal && !this.state.passwordLength && signUpMessages.passwordLength}</div>
+                <div>{submit && !passwordVal && !this.state.passwordCapital && signUpMessages.passwordCapital}</div>
+                <div>{submit && !passwordVal && !this.state.passwordSpecial && signUpMessages.passwordSpecial}</div>
+                <div>{submit && !passwordVal && !this.state.passwordLower && signUpMessages.passwordLower}</div>
+                <div>{submit && !passwordVal && !this.state.passwordNumber && signUpMessages.passwordNumber}</div>
+              </div>}
 
-                <InputGroup.Append>{submit && !passwordVal &&
-                <Dropdown>
-                  <Dropdown.Toggle style={{ borderRadius: '0px 24px 24px 0px' }} variant={!passwordVal ? 'danger' : 'success'} id="dropdown-basic">
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu alignRight className='drop-menu'>
-                    <Dropdown.Item className={!this.state.passwordLength ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLength}{this.state.passwordLength ? signUpMessages.checked : signUpMessages.redX}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordCapital ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordCapital }{this.state.passwordCapital ? signUpMessages.checked : signUpMessages.redX}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordSpecial ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordSpecial }{this.state.passwordSpecial ? signUpMessages.checked : signUpMessages.redX}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordLower ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordLower}{this.state.passwordLower ? signUpMessages.checked : signUpMessages.redX}</Dropdown.Item>
-                    <Dropdown.Item className={!this.state.passwordNumber ? 'is-invalid' : 'is-valid'}>{!passwordVal && signUpMessages.passwordNumber}{this.state.passwordNumber ? signUpMessages.checked : signUpMessages.redX}</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                }
-                </InputGroup.Append>
-              </InputGroup>
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
               <Form.Label>Password Confirmation</Form.Label>
@@ -243,11 +239,13 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
 
-              <img src='red-x.svg' className='red-x'/>
+              {submit && !passwordConfirmationVal && <img
+                src='red-x.svg'
+                className='red-x'
+              />}
 
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
-                {submit && passwordConfirmationVal && signUpMessages.checked}
               </Form.Text>
             </Form.Group>
             <Link to='/' className="cancel-button" onClick={this.closeWindow}>
