@@ -13,5 +13,5 @@ export default {
   passwordConfirmation: 'Passwords do not match',
   isRequired: 'This field is required.',
   checked: <img src='green-check.png' width='30px'/>,
-  redX: <img src='redX.png' width='30px'/>
+  redX: <img src='red-x.svg'/>
 }
