@@ -95,6 +95,11 @@ class SignUp extends Component {
     onMouseLeave={() => this.onHover(this.state.open)}
   />
 
+  greenCheck = <img
+    src='green-check.png'
+    className='green-check'
+  />
+
   onHover = (prevState) => {
     setTimeout(() => this.setState({ open: !prevState }), 1000)
   }
@@ -163,9 +168,9 @@ class SignUp extends Component {
                 maxLength="35"
               />
 
-              {submit && !emailVal && <img
-                src='red-x.svg'
-                className='red-x'
+              {submit && <img
+                src={!emailVal ? 'red-x.svg' : 'green-check.png'}
+                className={!emailVal ? 'red-x' : 'green-check'}
                 onMouseEnter={() => this.onHover(this.state.open)}
                 onMouseLeave={() => this.onHover(this.state.open)}
               />}
@@ -187,9 +192,9 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && !usernameVal && <img
-                src='red-x.svg'
-                className='red-x'
+              {submit && <img
+                src={!usernameVal ? 'red-x.svg' : 'green-check.png'}
+                className={!usernameVal ? 'red-x' : 'green-check'}
                 onMouseEnter={() => this.onHover(this.state.open)}
                 onMouseLeave={() => this.onHover(this.state.open)}
               />}
@@ -203,7 +208,7 @@ class SignUp extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
-                className={submit && !passwordVal ? 'account-info-signup-red password input' : 'account-info-signup password input'}
+                className={submit && !passwordVal ? 'account-info-signup-red input' : 'account-info-signup input'}
                 name="password"
                 value={password.value}
                 type="password"
@@ -212,9 +217,9 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && !passwordVal && <img
-                src='red-x.svg'
-                className='red-x'
+              {submit && <img
+                src={!passwordVal ? 'red-x.svg' : 'green-check.png'}
+                className={!passwordVal ? 'red-x' : 'green-check'}
                 onMouseEnter={() => this.onHover(this.state.open)}
                 onMouseLeave={() => this.onHover(this.state.open)}
               />}
@@ -239,9 +244,9 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
 
-              {submit && !passwordConfirmationVal && <img
-                src='red-x.svg'
-                className='red-x'
+              {submit && <img
+                src={!passwordConfirmationVal ? 'red-x.svg' : 'green-check.png'}
+                className={!passwordConfirmationVal ? 'red-x' : 'green-check'}
               />}
 
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
