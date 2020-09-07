@@ -156,28 +156,29 @@ class SignUp extends Component {
           <Form onSubmit={this.onSignUp}>
             <Form.Group controlId="email" className="mt-4">
               <Form.Label>Email address</Form.Label><br />
-              <Form.Control
-                required
-                autoComplete='off'
-                className={!emailVal ? 'account-info-signup-red email input' : 'account-info-signup email input'}
-                type="email"
-                name="email"
-                value={email.value}
-                placeholder="Email"
-                onChange={this.handleChange}
-                maxLength="35"
-              />
+              <div className='valid-div'>
+                <Form.Control
+                  required
+                  autoComplete='off'
+                  className={!emailVal ? 'account-info-signup-red email input' : 'account-info-signup email input'}
+                  type="email"
+                  name="email"
+                  value={email.value}
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                  maxLength="35"
+                />
 
-              {submit && <img
-                src={!emailVal ? 'red-x.svg' : 'green-check.png'}
-                className={!emailVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.open)}
-                onMouseLeave={() => this.onHover(this.state.open)}
-              />}
-              {open && <div className='error-message-div'>
-                {submit && !emailVal && !emailValid && signUpMessages.email}
-                {submit && !emailVal && emailAvail && signUpMessages.emailAvail}
-              </div>}
+                {submit && <div className='image-div'><img
+                  src={!emailVal ? 'red-x.svg' : 'green-check.png'}
+                  className={!emailVal ? 'red-x' : 'green-check'}
+                  onMouseEnter={() => this.onHover(this.state.open)}
+                  onMouseLeave={() => this.onHover(this.state.open)}
+                /></div>}
+                {open && <div className='error-message-div'>
+                  <div>{submit && !emailVal && !emailValid && signUpMessages.email}</div>
+                  <div>{submit && !emailVal && emailAvail && signUpMessages.emailAvail}</div>
+                </div>}</div>
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
@@ -199,8 +200,8 @@ class SignUp extends Component {
                 onMouseLeave={() => this.onHover(this.state.open)}
               />}
               {open && <div className='error-message-div'>
-                {submit && !usernameVal && !usernameLength && signUpMessages.username}
-                {submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}
+                <div>{submit && !usernameVal && !usernameLength && signUpMessages.username}</div>
+                <div>{submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}</div>
               </div>}
 
             </Form.Group>
