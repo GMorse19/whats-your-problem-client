@@ -19,13 +19,25 @@
 }
 
 .error-message-div {
-  width: 200px;
   align-items: center;
   border-radius: 6px;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.25);
   background-color: white;
   font-size: 9px;
   line-height: 150%;
+  padding: 8px;
+  // width: 80%;
+  // margin-top: 18px;
+  margin-right: 15%;
+  margin-left: 25%;
+  z-index: 20;
+  position: absolute;
+}
+
+.image-div {
+  position: relative;
+  display: inline-flex;
+  margin-left: 10px;
 }
 
 .red-x {

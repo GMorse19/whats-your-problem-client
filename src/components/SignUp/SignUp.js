@@ -31,7 +31,9 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
-      open: false,
+      openEmail: false,
+      openPass: false,
+      openUser: false,
       emailAvail: false,
       emailValid: false,
       emailVal: false,
@@ -100,8 +102,14 @@ class SignUp extends Component {
     className='green-check'
   />
 
-  onHover = (prevState) => {
-    setTimeout(() => this.setState({ open: !prevState }), 1000)
+  onHover = (prevState, state) => {
+    if (state === 'openEmail') {
+      setTimeout(() => this.setState({ openEmail: !prevState }), 1000)
+    } else if (state === 'openPass') {
+      setTimeout(() => this.setState({ openPass: !prevState }), 1000)
+    } else if (state === 'openUser') {
+      setTimeout(() => this.setState({ openUser: !prevState }), 1000)
+    }
   }
 
   onSignUp = event => {
@@ -135,7 +143,9 @@ class SignUp extends Component {
   render () {
     const {
       email,
-      open,
+      openPass,
+      openUser,
+      openEmail,
       emailAvail,
       emailValid,
       username,
@@ -156,6 +166,7 @@ class SignUp extends Component {
           <Form onSubmit={this.onSignUp}>
             <Form.Group controlId="email" className="mt-4">
               <Form.Label>Email address</Form.Label><br />
+
               <Form.Control
                 required
                 autoComplete='off'
@@ -167,16 +178,15 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
-
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!emailVal ? 'red-x.svg' : 'green-check.png'}
                 className={!emailVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.open)}
-                onMouseLeave={() => this.onHover(this.state.open)}
-              />}
-              {open && <div className='error-message-div'>
-                {submit && !emailVal && !emailValid && signUpMessages.email}
-                {submit && !emailVal && emailAvail && signUpMessages.emailAvail}
+                onMouseEnter={() => this.onHover(this.state.openEmail, 'openEmail')}
+                onMouseLeave={() => this.onHover(this.state.openEmail, 'openEmail')}
+              /></div>}
+              {openEmail && <div className='error-message-div'>
+                <div>{submit && !emailVal && !emailValid && signUpMessages.email}</div>
+                <div>{submit && !emailVal && emailAvail && signUpMessages.emailAvail}</div>
               </div>}
             </Form.Group>
             <Form.Group controlId="username">
@@ -192,15 +202,15 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!usernameVal ? 'red-x.svg' : 'green-check.png'}
                 className={!usernameVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.open)}
-                onMouseLeave={() => this.onHover(this.state.open)}
-              />}
-              {open && <div className='error-message-div'>
-                {submit && !usernameVal && !usernameLength && signUpMessages.username}
-                {submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}
+                onMouseEnter={() => this.onHover(this.state.openUser, 'openUser')}
+                onMouseLeave={() => this.onHover(this.state.openUser, 'openUser')}
+              /></div>}
+              {openUser && <div className='error-message-div'>
+                <div>{submit && !usernameVal && !usernameLength && signUpMessages.username}</div>
+                <div>{submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}</div>
               </div>}
 
             </Form.Group>
@@ -217,13 +227,13 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!passwordVal ? 'red-x.svg' : 'green-check.png'}
                 className={!passwordVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.open)}
-                onMouseLeave={() => this.onHover(this.state.open)}
-              />}
-              {open && <div className='error-message-div'>
+                onMouseEnter={() => this.onHover(this.state.openPass, 'openPass')}
+                onMouseLeave={() => this.onHover(this.state.openPass, 'openPass')}
+              /></div>}
+              {openPass && <div className='error-message-div'>
                 <div>{submit && !passwordVal && !this.state.passwordLength && signUpMessages.passwordLength}</div>
                 <div>{submit && !passwordVal && !this.state.passwordCapital && signUpMessages.passwordCapital}</div>
                 <div>{submit && !passwordVal && !this.state.passwordSpecial && signUpMessages.passwordSpecial}</div>
@@ -244,10 +254,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!passwordConfirmationVal ? 'red-x.svg' : 'green-check.png'}
                 className={!passwordConfirmationVal ? 'red-x' : 'green-check'}
-              />}
+              /></div>}
 
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
