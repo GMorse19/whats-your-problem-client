@@ -104,11 +104,11 @@ class SignUp extends Component {
 
   onHover = (prevState, state) => {
     if (state === 'openEmail') {
-      setTimeout(() => this.setState({ openEmail: !prevState }), 1000)
+      this.setState({ openEmail: !prevState })
     } else if (state === 'openPass') {
-      setTimeout(() => this.setState({ openPass: !prevState }), 1000)
+      this.setState({ openPass: !prevState })
     } else if (state === 'openUser') {
-      setTimeout(() => this.setState({ openUser: !prevState }), 1000)
+      this.setState({ openUser: !prevState })
     }
   }
 
@@ -181,8 +181,8 @@ class SignUp extends Component {
               {submit && <div className='image-div'><img
                 src={!emailVal ? 'red-x.svg' : 'green-check.png'}
                 className={!emailVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.openEmail, 'openEmail')}
-                onMouseLeave={() => this.onHover(this.state.openEmail, 'openEmail')}
+                onMouseEnter={!emailVal ? () => this.onHover(this.state.openEmail, 'openEmail') : undefined}
+                onMouseLeave={!emailVal ? () => this.onHover(this.state.openEmail, 'openEmail') : undefined}
               /></div>}
               {openEmail && <div className='error-message-div'>
                 <div>{submit && !emailVal && !emailValid && signUpMessages.email}</div>
@@ -205,8 +205,8 @@ class SignUp extends Component {
               {submit && <div className='image-div'><img
                 src={!usernameVal ? 'red-x.svg' : 'green-check.png'}
                 className={!usernameVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.openUser, 'openUser')}
-                onMouseLeave={() => this.onHover(this.state.openUser, 'openUser')}
+                onMouseEnter={!usernameVal ? () => this.onHover(this.state.openUser, 'openUser') : undefined}
+                onMouseLeave={!usernameVal ? () => this.onHover(this.state.openUser, 'openUser') : undefined}
               /></div>}
               {openUser && <div className='error-message-div'>
                 <div>{submit && !usernameVal && !usernameLength && signUpMessages.username}</div>
@@ -230,8 +230,8 @@ class SignUp extends Component {
               {submit && <div className='image-div'><img
                 src={!passwordVal ? 'red-x.svg' : 'green-check.png'}
                 className={!passwordVal ? 'red-x' : 'green-check'}
-                onMouseEnter={() => this.onHover(this.state.openPass, 'openPass')}
-                onMouseLeave={() => this.onHover(this.state.openPass, 'openPass')}
+                onMouseEnter={!passwordVal ? () => this.onHover(this.state.openPass, 'openPass') : undefined}
+                onMouseLeave={!passwordVal ? () => this.onHover(this.state.openPass, 'openPass') : undefined}
               /></div>}
               {openPass && <div className='error-message-div'>
                 <div>{submit && !passwordVal && !this.state.passwordLength && signUpMessages.passwordLength}</div>
