@@ -202,12 +202,12 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!usernameVal ? 'red-x.svg' : 'green-check.png'}
                 className={!usernameVal ? 'red-x' : 'green-check'}
                 onMouseEnter={() => this.onHover(this.state.openUser, 'openUser')}
                 onMouseLeave={() => this.onHover(this.state.openUser, 'openUser')}
-              />}
+              /></div>}
               {openUser && <div className='error-message-div'>
                 <div>{submit && !usernameVal && !usernameLength && signUpMessages.username}</div>
                 <div>{submit && !usernameVal && usernameTaken && signUpMessages.usernameTaken}</div>
@@ -227,12 +227,12 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!passwordVal ? 'red-x.svg' : 'green-check.png'}
                 className={!passwordVal ? 'red-x' : 'green-check'}
                 onMouseEnter={() => this.onHover(this.state.openPass, 'openPass')}
                 onMouseLeave={() => this.onHover(this.state.openPass, 'openPass')}
-              />}
+              /></div>}
               {openPass && <div className='error-message-div'>
                 <div>{submit && !passwordVal && !this.state.passwordLength && signUpMessages.passwordLength}</div>
                 <div>{submit && !passwordVal && !this.state.passwordCapital && signUpMessages.passwordCapital}</div>
@@ -254,10 +254,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
 
-              {submit && <img
+              {submit && <div className='image-div'><img
                 src={!passwordConfirmationVal ? 'red-x.svg' : 'green-check.png'}
                 className={!passwordConfirmationVal ? 'red-x' : 'green-check'}
-              />}
+              /></div>}
 
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
                 {submit && !passwordConfirmationVal && signUpMessages.passwordConfirmation }
