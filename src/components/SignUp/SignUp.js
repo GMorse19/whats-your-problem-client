@@ -92,13 +92,7 @@ class SignUp extends Component {
   />
 
   onHover = (prevState, state) => {
-    if (state === 'openEmail') {
-      this.setState({ openEmail: !prevState })
-    } else if (state === 'openPass') {
-      this.setState({ openPass: !prevState })
-    } else if (state === 'openUser') {
-      this.setState({ openUser: !prevState })
-    }
+    this.setState({ [`${state}`]: !prevState })
   }
 
   onSignUp = event => {
@@ -167,11 +161,11 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
-              {submit && <div className='image-div'><img
-                src={!emailVal ? 'red-x.svg' : 'green-check.png'}
-                className={!emailVal ? 'red-x' : 'green-check'}
-                onMouseEnter={!emailVal ? () => this.onHover(this.state.openEmail, 'openEmail') : undefined}
-                onMouseLeave={!emailVal ? () => this.onHover(this.state.openEmail, 'openEmail') : undefined}
+              {submit && !emailVal && <div className='image-div'><img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={!emailVal ? () => this.onHover(openEmail, 'openEmail') : undefined}
+                onMouseLeave={!emailVal ? () => this.onHover(openEmail, 'openEmail') : undefined}
               /></div>}
               {openEmail && <div className='error-message-div'>
                 <div>{submit && !emailVal && !emailValid && signUpMessages.email}</div>
@@ -191,11 +185,11 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <div className='image-div'><img
-                src={!usernameVal ? 'red-x.svg' : 'green-check.png'}
-                className={!usernameVal ? 'red-x' : 'green-check'}
-                onMouseEnter={!usernameVal ? () => this.onHover(this.state.openUser, 'openUser') : undefined}
-                onMouseLeave={!usernameVal ? () => this.onHover(this.state.openUser, 'openUser') : undefined}
+              {submit && !usernameVal && <div className='image-div'><img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={!usernameVal ? () => this.onHover(openUser, 'openUser') : undefined}
+                onMouseLeave={!usernameVal ? () => this.onHover(openUser, 'openUser') : undefined}
               /></div>}
               {openUser && <div className='error-message-div'>
                 <div>{submit && !usernameVal && !usernameLength && signUpMessages.username}</div>
@@ -216,11 +210,11 @@ class SignUp extends Component {
                 maxLength="20"
               />
 
-              {submit && <div className='image-div'><img
-                src={!passwordVal ? 'red-x.svg' : 'green-check.png'}
-                className={!passwordVal ? 'red-x' : 'green-check'}
-                onMouseEnter={!passwordVal ? () => this.onHover(this.state.openPass, 'openPass') : undefined}
-                onMouseLeave={!passwordVal ? () => this.onHover(this.state.openPass, 'openPass') : undefined}
+              {submit && !passwordVal && <div className='image-div'><img
+                src='red-x.svg'
+                className='red-x'
+                onMouseEnter={!passwordVal ? () => this.onHover(openPass, 'openPass') : undefined}
+                onMouseLeave={!passwordVal ? () => this.onHover(openPass, 'openPass') : undefined}
               /></div>}
               {openPass && <div className='error-message-div'>
                 <div>{submit && !passwordVal && !this.state.passwordLength && signUpMessages.passwordLength}</div>
@@ -243,9 +237,9 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
 
-              {submit && <div className='image-div'><img
-                src={!passwordConfirmationVal ? 'red-x.svg' : 'green-check.png'}
-                className={!passwordConfirmationVal ? 'red-x' : 'green-check'}
+              {submit && !passwordConfirmationVal && <div className='image-div'><img
+                src='red-x.svg'
+                className='red-x'
               /></div>}
 
               <Form.Text className={!passwordConfirmationVal ? 'is-invalid' : 'is-valid'}>
