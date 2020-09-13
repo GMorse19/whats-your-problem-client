@@ -4,19 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { signUp, signIn, checkInfo } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
-import {
-  emailTest,
-  emailValid,
-  usernameTest,
-  usernameLength,
-  passwordTest,
-  passwordLength,
-  passwordCapital,
-  passwordLower,
-  passwordSpecial,
-  passwordNumber,
-  passwordConfirmationTest
-} from '../../helpers/signUpValidation'
+import * as validations from '../../helpers/signUpValidation'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -55,17 +43,17 @@ class SignUp extends Component {
   }
 
   checkValid = () => {
-    this.setState({ emailVal: emailTest(this.state.email, this.state.emailAvail) })
-    this.setState({ emailValid: emailValid(this.state.email) })
-    this.setState({ usernameVal: usernameTest(this.state.username, this.state.usernameAvail) })
-    this.setState({ usernameLength: usernameLength(this.state.username) })
-    this.setState({ passwordVal: passwordTest(this.state.password) })
-    this.setState({ passwordLength: passwordLength(this.state.password) })
-    this.setState({ passwordCapital: passwordCapital(this.state.password) })
-    this.setState({ passwordLower: passwordLower(this.state.password) })
-    this.setState({ passwordSpecial: passwordSpecial(this.state.password) })
-    this.setState({ passwordNumber: passwordNumber(this.state.password) })
-    this.setState({ passwordConfirmationVal: passwordConfirmationTest(this.state.password, this.state.passwordConfirmation) })
+    this.setState({ emailVal: validations.emailTest(this.state.email, this.state.emailAvail) })
+    this.setState({ emailValid: validations.emailValid(this.state.email) })
+    this.setState({ usernameVal: validations.usernameTest(this.state.username, this.state.usernameAvail) })
+    this.setState({ usernameLength: validations.usernameLength(this.state.username) })
+    this.setState({ passwordVal: validations.passwordTest(this.state.password) })
+    this.setState({ passwordLength: validations.passwordLength(this.state.password) })
+    this.setState({ passwordCapital: validations.passwordCapital(this.state.password) })
+    this.setState({ passwordLower: validations.passwordLower(this.state.password) })
+    this.setState({ passwordSpecial: validations.passwordSpecial(this.state.password) })
+    this.setState({ passwordNumber: validations.passwordNumber(this.state.password) })
+    this.setState({ passwordConfirmationVal: validations.passwordConfirmationTest(this.state.password, this.state.passwordConfirmation) })
   }
 
   handleChange = event => {
@@ -78,18 +66,6 @@ class SignUp extends Component {
           .then(() => { this.checkValid() })
           .catch(error => { console.error(error) }) : () => { this.checkValid() })
   }
-
-  redX = <img
-    src='red-x.svg'
-    className='red-x'
-    onMouseEnter={() => this.onHover(this.state.open)}
-    onMouseLeave={() => this.onHover(this.state.open)}
-  />
-
-  greenCheck = <img
-    src='green-check.png'
-    className='green-check'
-  />
 
   onHover = (prevState, state) => {
     this.setState({ [`${state}`]: !prevState })
