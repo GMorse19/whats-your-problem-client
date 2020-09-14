@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { signUp, signIn, checkInfo } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import signUpMessages from './signUpMessages'
+
 import * as validations from '../../helpers/signUpValidation'
 
 import Form from 'react-bootstrap/Form'
@@ -17,9 +18,6 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
-      openEmail: false,
-      openPass: false,
-      openUser: false,
       emailAvail: false,
       emailValid: false,
       emailVal: false,
@@ -75,7 +73,8 @@ class SignUp extends Component {
     event.preventDefault()
     this.setState({
       identifier: this.state.email,
-      submit: true })
+      submit: true
+    })
     this.checkValid()
     this.setState({ property: document.documentElement.style.setProperty('--border-show', 'solid') })
     const { alert, history, setUser } = this.props
@@ -137,6 +136,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
                 maxLength="35"
               />
+
               {submit && !emailVal && <div className='image-div'><img
                 src='red-x.svg'
                 className='red-x'
@@ -147,6 +147,7 @@ class SignUp extends Component {
                 <div>{submit && !emailVal && !emailValid && signUpMessages.email}</div>
                 <div>{submit && !emailVal && emailAvail && signUpMessages.emailAvail}</div>
               </div>}
+
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
